@@ -1,393 +1,394 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mark Valles Portfolio</title>
-    <meta name="description" content="Mark Valles portfolio">
-    <meta name="keywords" content="Mark Valles">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Mark Valles Portfolio</title>
+      <meta name="description" content="Mark Valles portfolio">
+      <meta name="keywords" content="Mark Valles">
       <!-- Facebook Opengraph integration: https://developers.facebook.com/docs/sharing/opengraph -->
-    <meta property="og:title" content="Mark Valles">
-    <meta property="og:image" content="">
-    <meta property="og:url" content="">
-    <meta property="og:site_name" content="">
-    <meta property="og:description" content="">
-
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/animate.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <!-- Particle jS File -->
-  <link href="particles.js-master/css/style.css" rel="stylesheet">
-
-    <style media="screen">
-    #project-table{
-      background-color: #fff;
-    }
-      #particles-js{
-        width: 100%;
-        height: 77%;
-        background-color: transparent;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        z-index: 1;
-      }
-      #resume_button:hover{
-        background-color: #fff;
-      }
-      .cert:hover{
-        cursor: pointer;
-        box-shadow: 4px 4px #777;
-      }
-      .modal-body{
-       max-height: 0px;
-      }
-      .modal-content{
-      
-       max-height: 0px;
-       box-shadow: none;
-       border:none;
-       margin-top: 25%;
-      }
-      #video_form{
-        width: 0px;
-        height: 0px;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        z-index: 55555;
-        background:rgba(0,0,0,0.9);
-        visibility: hidden;
-      }
-      #video_form:target{
-        width: 100%;
-        height: 100vh;
-        visibility: visible;
-        overflow-y:hidden;
-        animation: vid1;
-        animation-duration: 2s;
-      }
-      @webkit-keyframes vid1 {
-        from {background:rgba(0,0,0,0);}
-        to {background:rgba(0,0,0,0.9);}
-      }
-      @keyframes vid1 {
-        from {background:rgba(0,0,0,0);}
-        to {background:rgba(0,0,0,0.9);}
-      }
-    </style>
-  </head>
-  <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60" onload="myFunction()">
-
-<div id="video_form" class="section-padding">
-  <div class="container" >
-    <div class="row" >
-    <a href=""><span style="font-size:25px;color:#fff;z-index:555555;position:relative;"><i class="pull-right fa fa-close"> close</i></span></a>
-    <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden" frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/x7ushww" width="100%" height="100%" allowfullscreen > </iframe>
-    </div>
-</div>
-
-</div>
-    <div id="particles-js">
-    </div>
-  <div class="header">
-      <div class="bg-color" id="bgCLr">
-        <header id="main-header">
-        <nav class="navbar navbar-default navbar-fixed-top">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#MarkMenu">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#"></a>
+      <meta property="og:title" content="Mark Valles">
+      <meta property="og:image" content="">
+      <meta property="og:url" content="">
+      <meta property="og:site_name" content="">
+      <meta property="og:description" content="">
+      <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="css/animate.css">
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+      <!-- Particle jS File -->
+      <link href="particles.js-master/css/style.css" rel="stylesheet">
+      <style media="screen">
+         #project-table{
+         background-color: #fff;
+         }
+         #particles-js{
+         width: 100%;
+         height: 77%;
+         background-color: transparent;
+         position: absolute;
+         top: 0px;
+         left: 0px;
+         z-index: 1;
+         }
+         #resume_button:hover{
+         background-color: #fff;
+         }
+         .cert:hover{
+         cursor: pointer;
+         box-shadow: 4px 4px #777;
+         }
+         .modal-body{
+         max-height: 0px;
+         }
+         .modal-content{
+         max-height: 0px;
+         box-shadow: none;
+         border:none;
+         margin-top: 25%;
+         }
+         #video_form{
+         width: 0px;
+         height: 0px;
+         position: absolute;
+         top: 0px;
+         left: 0px;
+         z-index: 55555;
+         background:rgba(0,0,0,0.9);
+         visibility: hidden;
+         }
+         #video_form:target{
+         width: 100%;
+         height: 100vh;
+         visibility: visible;
+         overflow-y:hidden;
+         animation: vid1;
+         animation-duration: 2s;
+         }
+         @webkit-keyframes vid1 {
+         from {background:rgba(0,0,0,0);}
+         to {background:rgba(0,0,0,0.9);}
+         }
+         @keyframes vid1 {
+         from {background:rgba(0,0,0,0);}
+         to {background:rgba(0,0,0,0.9);}
+         }
+      </style>
+   </head>
+   <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60" onload="myFunction()">
+      <div id="video_form" class="section-padding">
+         <div class="container" >
+            <div class="row" >
+               <a href=""><span style="font-size:25px;color:#fff;z-index:555555;position:relative;"><i class="pull-right fa fa-close"> close</i></span></a>
+               <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden" frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/x7ushww" width="100%" height="100%" allowfullscreen > </iframe>
             </div>
-            <div class="collapse navbar-collapse" id="MarkMenu">
-              <ul class="nav navbar-nav navbar-right navbar-border">
-                <li><a href="https://cabael.github.io/markvalles.github.io/Resume/Mark_Valles.pdf" target="_blank"><button id="resume" class="btn btn-sm btn-primary"><i class="fa fa-book"></i> View Resume</button></a></li>
-
-              <li class="active"><a href="#main-header">Home</a></li>
-<li><a href="#about">About me</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-
-              </ul>
+         </div>
+      </div>
+      <div id="particles-js">
+      </div>
+      <div class="header">
+         <div class="bg-color" id="bgCLr">
+            <header id="main-header">
+               <nav class="navbar navbar-default navbar-fixed-top">
+                  <div class="container">
+                     <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#MarkMenu">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"></a>
+                     </div>
+                     <div class="collapse navbar-collapse" id="MarkMenu">
+                        <ul class="nav navbar-nav navbar-right navbar-border">
+                           <li><a href="https://cabael.github.io/markvalles.github.io/Resume/Mark_Valles.pdf" target="_blank"><button id="resume" class="btn btn-sm btn-primary"><i class="fa fa-book"></i> View Resume</button></a></li>
+                           <li class="active"><a href="#main-header">Home</a></li>
+                           <li><a href="#about">About me</a></li>
+                           <li><a href="#portfolio">Portfolio</a></li>
+                           <li><a href="#contact">Contact</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </nav>
+            </header>
+            <div class="wrapper" >
+               <div class="container" >
+                  <div class="row" >
+                     <div class="col-md-12 wow fadeIn delay-05s">
+                        <div class="banner-text">
+                           <center>
+                              <img src="img/me.jpg" style="width:250px;height:305px;border-radius:250%;border:solid 1px #ace;" alt="">
+                              <br/>
+                              <h2 style=" text-shadow: 2px 2px #ace;" id="anim">MARK VALLES</h2>
+                              <i>Web Developer</i><br/>
+                           </center>
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </div>
-          </div>
-        </nav>
-        </header>
-        <div class="wrapper" >
-        <div class="container" >
-          <div class="row" >
-            <div class="col-md-12 wow fadeIn delay-05s">
-              <div class="banner-text">
-                <center>
-                <img src="img/me.jpg" style="width:250px;height:305px;border-radius:250%;border:solid 1px #ace;" alt="">
-                <br/><h2 style=" text-shadow: 2px 2px #ace;" id="anim">MARK VALLES</h2>
-                <i>Web Developer</i><br/>
-              </center>
-              </div>
+         </div>
+      </div>
+      <section id="about" class="section-padding wow fadeIn delay-05s">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-6 text-left">
+                  <h2 class="title-text">
+                     WORK EXPERIENCES
+                  </h2>
+                  <br/>
+                  <br/>
+                  <br/>
+                  7rivers Frontend Developer (Project Based)<br/>
+                  July 8, 2020 – Aug 31, 2020
+                  <br/>
+                  <br/>
+                  Healthcare representative BPO (TaskUs)<br/>
+                  June 19, 2019 – Dec 31, 2019
+                  <br/>
+                  <br/>
+                  PNP CAMP BAGONG DIWA (WAIS) Developer Outsourced.<br/>
 
+                  Oct 12, 2018 – Dec 15, 2018
+                  <br/>
+                  <br/>
+                  DOST (DEPARTMENT OF SCIENCE AND TECHNOLGY) - PCIEERD INTERN.<br/>
+                  June 30, 2017 – Aug 31, 2017
+                  <br/>
+                  <br/>
+                  Freelance Web-developer since 2017
+                  <br/>
+                  <br/>
+               </div>
+               <div class="col-md-6 text-left">
+                  <div class="about-text">
+                     <p>
+                        Full Name: Mark Valles<br/>
+                        Age:22<br/>
+                        Gender: Male<br/>
+                        Hobbies/interest: Web designing,Song Writing,multimedia editing
+                        <br/>
+                        Career lvl: Freelance Web dev since 2017
+                        <br/>
+                        <br/>
+                        <br/>
+                     <ul class="abt-list">
+                        <li>Skilled and able to work with the ff.</li>
+                        - Basic PC troubleshooting<br/>
+                        - PC formatting and setup<br/>
+                        - Multimedia editing (Adobe premiere,Adobe audition,audacity,Adobe photoshop,Adobe Encoder)<br/>
+                        <br/>
+                        - PHP,HTML,CSS,JS,JQUERY PLUGINS</br>
+                        - Laravel(beginner) <br/>
+                        - VUE/Vuetify(beginner) <br/>
+                        - GIT <br/>
+                        - Bootstrap studio </br>
+                        - FTP via winSCP<br/>
+                        - Web hosting<br/>
+                        - Web app host and client connection local server setup<br/>
+                        - wired and wireless pc networking</br>
+                        - Testcase creating(My thesis is all about testing so I learned that testing is a very crucial part of development)
+                     </ul>
+                     <br/>
+                     <br/>
+                     <br/>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I believe that education is the ability to listen to almost everything without losing your temper or your self-confidence.
+                     I know that there is always a lesson and knowledge waiting for me to acquire, so I'll keep exploring and do the best that I can, and learn in every step of the way.
+                     </p>
+                     <p>&nbsp;</p>
+                  </div>
+               </div>
             </div>
-          </div>
-          </div>
-        </div>
-        </div>
-      </div>
-  <section id="about" class="section-padding wow fadeIn delay-05s">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 text-right">
-          <h2 class="title-text">
-            <br>
-            <img src="img/aboutimg.jpg" style="width:100%;height:auto;">
-
-            </video>
-          </h2>
-        </div>
-        <div class="col-md-6 text-left">
-          <div class="about-text">
-            <p>
-              Full Name: Mark Valles<br/>
-              Age:21<br/>
-              Gender: Male<br/>
-              Hobbies/interest: Web designing,Song Writing,multimedia editing
-              <br/>
-              Career lvl: Fresh Graduate
-              <br/>
-              <br/>
-              <br/>
-
-              <ul class="abt-list">
-                <li>Skilled and able to work with the ff.</li>
-                - Basic PC troubleshooting<br/>
-                - PC formatting and setup<br/>
-                - Multimedia editing (Adobe premiere,Adobe audition,audacity,Adobe photoshop,Adobe Encoder)<br/>
-              <br/>
-                - PHP,HTML,CSS,JS,JQUERY PLUGINS</br>
-                - Laravel(beginner) <br/>
-                - VUE/Vuetify(beginner) <br/>
-                - GIT <br/>
-                - Bootstrap studio </br>
-                - FTP via winSCP<br/>
-                - Web hosting<br/>
-                - Web app host and client connection local server setup<br/>
-                - wired and wireless pc networking</br>
-                - Testcase creating(My thesis is all about testing so I learned that testing is a very crucial part of development)
-
-              </ul>
-<br/>
-<br/>
-<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I believe that education is the ability to listen to almost everything without losing your temper or your self-confidence.
-I know that there is always a lesson and knowledge waiting for me to acquire, so I'll keep exploring and do the best that I can, and learn in every step of the way.
-
-            </p>
-            <p>&nbsp;</p>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="portfolio" class="section-padding wow fadeInUp delay-05s">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-</div>
-        <div class="col-md-12">
-
-          <div class="col-md-4 col-sm-4 padding-right-zero">
-            <a href="img/portfolio01.jpg" data-toggle="lightbox"><img src="img/portfolio01.jpg" class="img-responsive cert" ></a>
-          </div>
-
-          <div class="col-md-4 col-sm-4 padding-right-zero">
-            <a href="img/port01.jpg" data-toggle="lightbox"><img src="img/port01.jpg" class="img-responsive cert" alt="cert1"></a>
-          </div>
-
-          <div class="col-md-4 col-sm-4 padding-right-zero">
-            <a href="img/port02.jpg" data-toggle="lightbox"><img src="img/port02.jpg" class="img-responsive cert" ></a>
-          </div>
-
-          <div class="col-md-4 col-sm-4 padding-right-zero">
-            <a href="img/port03.jpg" data-toggle="lightbox"><img src="img/port03.jpg" class="img-responsive cert" ></a>
-          </div>
-
-          <div class="col-md-4 col-sm-4 padding-right-zero">
-            <a href="img/port04.jpg" data-toggle="lightbox"><img src="img/port04.jpg" class="img-responsive cert" ></a>
-          </div>
-
-
-          <div class="col-md-4 col-sm-4 padding-right-zero">
-            <a href="img/careerpath.jpg" data-toggle="lightbox"><img src="img/careerpath.jpg" class="img-responsive cert" ></a>
-          </div>
-          <div class="col-md-4 col-sm-4 padding-right-zero">
-            <a href="img/pcieerd.jpg" data-toggle="lightbox"><img src="img/pcieerd.jpg" class="img-responsive cert" ></a>
-          </div>
-
-          <div class="col-md-4 col-sm-4 padding-right-zero">
-            <a href="img/7rivers.jpg" data-toggle="lightbox"><img src="img/7rivers.jpg" class="img-responsive cert" ></a>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!--PROJECTS EXP SECTION-->
-  <section id="projects" class="section-padding wow fadeIn delay-05s">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-        <center><span style="color:#fff;font-size:20px;">Top Project Experiences</span></center></br>
-        <div class="row" style="overflow-x:scroll;">
-          <table id="project-table" class="table" style="text-align:center;">
-            <thead style="font-weight:bold;background-color:#777;color:#fff;">
-              <tr>
-                <td>Project Type</td>
-                <td>Project Name</td>
-                <td>Project Description</td>
-                <td><center>---</center></td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Testing tool</td>
-                <td>WTSK - WEB TESTING STARTER KIT</td>
-                <td>This is our thesis project I am the main Developer and the concept creator, made with PHP and selenium PHP plugin.</td>
-                <td><a href="projects/THESIS_WTSK.pdf">THESIS_WTSK.pdf</a></td>
-              </tr>
-              <tr>
-                <td>Inventory Management</td>
-                <td>WAIS - WAREHOUSE AUTOMATED INVENTORY SYSTEM </td>
-                <td>This is my biggest full stack outsourced project so far for PNP SMS OFFICE.</td>
-                <td><a href="projects/WAIS_MANUAL.pdf">WAIS_MANUAL.pdf</a></td>
-              </tr>
-              <tr>
-                <td>Record Management</td>
-                <td>Record Office Application Solution</td>
-                <td>this is a subject requirement and it's successfully implemented created for record office sector of Taguig City Hall.
-                the video attached is presented by my co-dev and groupmate Mr. Rasdi Kasim</td>
-                <td><a href="#video_form"><i class="fa fa-eye"></i> Watch demo Video</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        </div>
-      </div>
-      </div>
-  </section>
-
-  <section id="contact" class="section-padding wow fadeIn delay-05s">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="contact-sec text-center">
-            <h2>Want To <span class="deco">Hire</span> Me?</h2>
-            <p></p>
-          </div>
-        </div>
-
-        <div class="col-md-8 col-md-push-2">
-          <center style="color:#fff;">
-          email: <a style="color:#00f7ff;" href = "mailto: vallesmark15@gmail.com">Click here</a><br/>
-          contact number: <span style="color:#00f7ff;">09564433716</span>
-        </center>
-        </div>
-
-      </div>
-    </div>
-  </section>
-  <footer class="footer-2 text-center-xs bg--white"  style="background-color:#fff;">
-    <div class="container">
-      <!--end row-->
-      <div class="row" >
-          <div class="col-md-6">
-              <div class="footer">
-                    <div class="credits">
-                    </br>
-                      <center>  Designed by <a href="">Mark Valles</center></a>
-                    </div>
-              </div>
-          </div>
-          <div class="col-md-6 text-right">
-              <ul class="social-list">
-                <center>
-                  <li><h3>Powered by:</h3> </li>
-                  <li>&nbsp; </li>
-                  <li>
-                      <a href="#">
-                          <img src="img/html.svg" class="footerimg" alt="">
-                      </a>
-                  </li>
-                  <li>
-                      <a href="#">
-                          <img src="img/JQuery.webp" class="footerimg" alt="">
-                      </a>
-                  </li>
-                  <li>
-                      <a href="#">
-                          <img src="img/js.png" class="footerimg" alt="">
-                      </a>
-                  </li>
-                  <li>
-                      <a href="#">
-                          <img src="img/bootstrap.png" class="footerimg" alt="">
-                      </a>
-                  </li>
-                </center>
-              </ul>
-          </div>
-
-      </div>
-      <!--end row-->
-    </div>
-  </footer>
-
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.easing.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.bxslider.min.js"></script>
-    <script src="js/wow.js"></script>
-    <script src="js/custom.js"></script>
-    <script src="contactform/contactform.js"></script>
-    <!-- scripts -->
-    <script src="particles.js-master/particles.js"></script>
-    <script src="particles.js-master/js/app.js"></script>
-
-    <!-- stats.js -->
-    <script src="particles.js-master/js/lib/stats.js"></script>
-    <script type="text/javascript">
-    function image(img) {
-        var src = img.src;
-        window.open(src);
-    }
-    $("#resume").attr('title', 'finger cross :)');
-
-    </script>
-<script src="lightbox-master/dist/ekko-lightbox.js"></script>
-<script type="text/javascript">
-$(document).on('click', '[data-toggle="lightbox"]', function(event) {
-  event.preventDefault();
-  $(this).ekkoLightbox();
-});
-
-myFunction();
-function myFunction() {
-  var x = document.getElementById("video_form");
-  if (window.getComputedStyle(x).visibility === "hidden") {
-
-  }
-  else{
-
-    document.getElementById("myPage").style.overflowY = "hidden";
-
-  }
-}
-</script>
-
-  </body>
+         </div>
+      </section>
+      <section id="portfolio" class="section-padding wow fadeInUp delay-05s">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+               </div>
+               <div class="col-md-12">
+                  <div class="col-md-4 col-sm-4 padding-right-zero">
+                     <a href="img/portfolio01.jpg" data-toggle="lightbox"><img src="img/portfolio01.jpg" class="img-responsive cert" ></a>
+                  </div>
+                  <div class="col-md-4 col-sm-4 padding-right-zero">
+                     <a href="img/port01.jpg" data-toggle="lightbox"><img src="img/port01.jpg" class="img-responsive cert" alt="cert1"></a>
+                  </div>
+                  <div class="col-md-4 col-sm-4 padding-right-zero">
+                     <a href="img/port02.jpg" data-toggle="lightbox"><img src="img/port02.jpg" class="img-responsive cert" ></a>
+                  </div>
+                  <div class="col-md-4 col-sm-4 padding-right-zero">
+                     <a href="img/port03.jpg" data-toggle="lightbox"><img src="img/port03.jpg" class="img-responsive cert" ></a>
+                  </div>
+                  <div class="col-md-4 col-sm-4 padding-right-zero">
+                     <a href="img/port04.jpg" data-toggle="lightbox"><img src="img/port04.jpg" class="img-responsive cert" ></a>
+                  </div>
+                  <div class="col-md-4 col-sm-4 padding-right-zero">
+                     <a href="img/careerpath.jpg" data-toggle="lightbox"><img src="img/careerpath.jpg" class="img-responsive cert" ></a>
+                  </div>
+                  <div class="col-md-4 col-sm-4 padding-right-zero">
+                     <a href="img/pcieerd.jpg" data-toggle="lightbox"><img src="img/pcieerd.jpg" class="img-responsive cert" ></a>
+                  </div>
+                  <div class="col-md-4 col-sm-4 padding-right-zero">
+                     <a href="img/7rivers.jpg" data-toggle="lightbox"><img src="img/7rivers.jpg" class="img-responsive cert" ></a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!--PROJECTS EXP SECTION-->
+      <section id="projects" class="section-padding wow fadeIn delay-05s">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <center><span style="color:#fff;font-size:20px;">Top Project Experiences</span></center>
+                  </br>
+                  <div class="row" style="overflow-x:scroll;">
+                     <table id="project-table" class="table" style="text-align:center;">
+                        <thead style="font-weight:bold;background-color:#777;color:#fff;">
+                           <tr>
+                              <td>Project Type</td>
+                              <td>Project Name</td>
+                              <td>Project Description</td>
+                              <td>
+                                 <center>---</center>
+                              </td>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>Testing tool</td>
+                              <td>WTSK - WEB TESTING STARTER KIT</td>
+                              <td>This is our thesis project I am the main Developer and the concept creator, made with PHP and selenium PHP plugin.</td>
+                              <td><a href="projects/THESIS_WTSK.pdf">THESIS_WTSK.pdf</a></td>
+                           </tr>
+                           <tr>
+                              <td>Inventory Management</td>
+                              <td>WAIS - WAREHOUSE AUTOMATED INVENTORY SYSTEM </td>
+                              <td>This is my biggest full stack outsourced project so far for PNP SMS OFFICE.</td>
+                              <td><a href="projects/WAIS_MANUAL.pdf">WAIS_MANUAL.pdf</a></td>
+                           </tr>
+                           <tr>
+                              <td>Record Management</td>
+                              <td>Record Office Application Solution</td>
+                              <td>this is a subject requirement and it's successfully implemented created for record office sector of Taguig City Hall.
+                                 the video attached is presented by my co-dev and groupmate Mr. Rasdi Kasim
+                              </td>
+                              <td><a href="#video_form"><i class="fa fa-eye"></i> Watch demo Video</a></td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <section id="contact" class="section-padding wow fadeIn delay-05s">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="contact-sec text-center">
+                     <h2>Want To <span class="deco">Hire</span> Me?</h2>
+                     <p></p>
+                  </div>
+               </div>
+               <div class="col-md-8 col-md-push-2">
+                  <center style="color:#fff;">
+                     email: <a style="color:#00f7ff;" href = "mailto: vallesmark15@gmail.com">Click here</a><br/>
+                     contact number: <span style="color:#00f7ff;">09564433716</span>
+                  </center>
+               </div>
+            </div>
+         </div>
+      </section>
+      <footer class="footer-2 text-center-xs bg--white"  style="background-color:#fff;">
+         <div class="container">
+            <!--end row-->
+            <div class="row" >
+               <div class="col-md-6">
+                  <div class="footer">
+                     <div class="credits">
+                        </br>
+                        <center>  Designed by <a href="">Mark Valles</center>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6 text-right">
+                  <ul class="social-list">
+                     <center>
+                        <li>
+                           <h3>Powered by:</h3>
+                        </li>
+                        <li>&nbsp; </li>
+                        <li>
+                           <a href="#">
+                           <img src="img/html.svg" class="footerimg" alt="">
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                           <img src="img/JQuery.webp" class="footerimg" alt="">
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                           <img src="img/js.png" class="footerimg" alt="">
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                           <img src="img/bootstrap.png" class="footerimg" alt="">
+                           </a>
+                        </li>
+                     </center>
+                  </ul>
+               </div>
+            </div>
+            <!--end row-->
+         </div>
+      </footer>
+      <script src="js/jquery.min.js"></script>
+      <script src="js/jquery.easing.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script src="js/jquery.bxslider.min.js"></script>
+      <script src="js/wow.js"></script>
+      <script src="js/custom.js"></script>
+      <script src="contactform/contactform.js"></script>
+      <!-- scripts -->
+      <script src="particles.js-master/particles.js"></script>
+      <script src="particles.js-master/js/app.js"></script>
+      <!-- stats.js -->
+      <script src="particles.js-master/js/lib/stats.js"></script>
+      <script type="text/javascript">
+         function image(img) {
+             var src = img.src;
+             window.open(src);
+         }
+         $("#resume").attr('title', 'finger cross :)');
+         
+      </script>
+      <script src="lightbox-master/dist/ekko-lightbox.js"></script>
+      <script type="text/javascript">
+         $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+           event.preventDefault();
+           $(this).ekkoLightbox();
+         });
+         
+         myFunction();
+         function myFunction() {
+           var x = document.getElementById("video_form");
+           if (window.getComputedStyle(x).visibility === "hidden") {
+         
+           }
+           else{
+         
+             document.getElementById("myPage").style.overflowY = "hidden";
+         
+           }
+         }
+      </script>
+   </body>
 </html>
+
