@@ -1,17 +1,17 @@
 <html>
 
     <head>
-        
+        <meta name="google-signin-client_id" content="758502627690-2ia895lps1j552rce9bgr04j2iuel7lo.apps.googleusercontent.com">
     </head>
 
     <body>
-        
+        <div class="g-signin2" data-longtitle="true" data-onsuccess="Google_signIn" data-theme="light" data-width="200"></div>
         <input type="email" id="email" />
         <input type="password" id="password" />
         <input type="submit" value="submit" id="submit" />
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
         
         <script>
 
@@ -22,15 +22,33 @@
                 $.ajax({
                     method: "POST",
                     url: "process.php",
+                    dataType:'json',
                     data: { email: $('#email').val(), password: $('#password').val() }
                     })
-                .done(function( response ) {
+                .done(function( response ){
                     console.log(response);
                 });                
 
             });
 
         }); 
+
+        function Google_signIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId());
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail());
+        //pass information to server to insert or update the user record
+        //update_user_data(profile);
+        }
+
+        function signOut() {
+var auth2 = gapi.auth2.getAuthInstance();
+auth2.signOut().then(function () {
+console.log('User signed out.');
+});
+}
 
         </script>
     </body>
