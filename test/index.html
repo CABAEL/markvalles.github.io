@@ -3,9 +3,36 @@
     <head>
         
     </head>
-    
+
     <body>
         
+        <input type="email" id="email" />
+        <input type="password" id="password" />
+        <input type="submit" value="submit" id="submit" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+        
+        <script>
+
+        $(document).ready(function(){
+
+            $( "#submit" ).click(function() {
+
+                $.ajax({
+                    method: "POST",
+                    url: "process.php",
+                    data: { email: $('#email').val(), password: $('#password').val() }
+                    })
+                .done(function( response ) {
+                    console.log(response);
+                });                
+
+            });
+
+        }); 
+
+        </script>
     </body>
 
 </html>
