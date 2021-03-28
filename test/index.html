@@ -6,14 +6,15 @@
     </head>
 
     <body>
-        <div class="g-signin2" data-longtitle="true" data-onsuccess="Google_signIn" data-theme="light" data-width="200"></div>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
         <input type="email" id="email" />
         <input type="password" id="password" />
         <input type="submit" value="submit" id="submit" />
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+       
         <script src="https://apis.google.com/js/platform.js" async defer></script>
-        
+
         <script>
 
         $(document).ready(function(){
@@ -34,7 +35,29 @@
 
         }); 
 
+
+        function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
+
+
+
+
         </script>
+<a href="#" onclick="signOut();">Sign out</a>
+<script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+</script>
+
     </body>
 
 </html>
