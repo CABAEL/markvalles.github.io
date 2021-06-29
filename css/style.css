@@ -13,7 +13,7 @@
 	background-color: #fff;
 	color:#444;
 }
-#anim {
+.anim {
 color: #95effc;
 	animation:anim1 infinite;
   animation-duration: 1s;
