@@ -14,9 +14,10 @@
 	color:#444;
 }
 .anim {
-color: #95effc;
+color: #555;
+font-family: tahoma;
 	animation:anim1 infinite;
-  animation-duration: 1s;
+  animation-duration: 2s;
 }
 @webkit-keyframes anim1 {
   from {text-shadow:1px 1px #95effc;}
@@ -107,7 +108,7 @@ Responsive media queries
 }
 
 .bg-color{
-background-image: linear-gradient(#444, #ace,#fff,#ace, #444,#000);
+background-image: linear-gradient(#444, #777,#fff,#ddd, #fff,#fff);
 	min-height: 650px;
 }
 .navbar-border{

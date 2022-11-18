@@ -121,10 +121,13 @@
                      <div class="col-md-12 wow fadeIn delay-05s">
                         <div class="banner-text">
                            <center>
-                              <img src="img/me.jpg" style="object-fit:cover;width:250px;height:305px;border-radius:250%;border:solid 1px #000;" alt="">
+                              <img src="img/me.jpg" style="object-fit:cover;width:250px;height:305px;border-radius:5%;border:solid 1px #777;" alt="">
+                              <br/>
                               <br/>
                               <h2 style=" text-shadow: 2px 2px #ace;" class="anim">MARK VALLES</h2>
-                              Web Developer<br/>
+                              <br>
+                              <span style="color:#888;"><u>Information System Analyst & Web Developer</u></span>
+                              <br/>
                            </center>
                         </div>
                      </div>
@@ -184,9 +187,9 @@
                   <div class="about-text">
                      <p>
                         Full Name: Mark Valles<br/>
-                        Age:23<br/>
+                        <span id="age"></span><br/>
                         Gender: Male<br/>
-                        Hobbies/interest: Web designing,Song Writing,multimedia editing
+                        Hobbies/interest: Web Designing/Programming,Song Writing,Multimedia Editing
 
                         <br/>
                         <br/>
@@ -347,6 +350,15 @@
                               </td>
                               <td><a href="#video_form" target="blank_"><i class="fa fa-eye"></i> Watch demo Video</a></td>
                            </tr>
+                           <tr>
+
+                              <td>DOST-PCIEERD Agency Target Tracker</td>
+                              <td>Strategic Performance Management System</td>
+                              <td>An agency system which indicates their target and progress, it can generate report every after semester which reflects the council 
+                                 productivity.
+                              </td>
+                              <td style="color:red;"><i class="fa fa-warning"></i> hosted under private domain</td>
+                           </tr>
                         </tbody>
                      </table>
                   </div>
@@ -455,6 +467,12 @@
            event.preventDefault();
            $(this).ekkoLightbox();
          });
+
+         dob = new Date("1998/09/15");
+         var today = new Date();
+         var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
+         $('#age').text("Age: "+age);
+
 
          myFunction();
          function myFunction() {

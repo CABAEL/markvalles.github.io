@@ -16,20 +16,20 @@ particlesJS('particles-js',
   {
     "particles": {
       "number": {
-        "value": 45,
+        "value": 20,
         "density": {
           "enable": true,
           "value_area": 800
         }
       },
       "color": {
-        "value": "#ace"
+        "value": "#999"
       },
       "shape": {
         "type": "triangle",
         "stroke": {
           "width": 0,
-          "color": "#000000"
+          "color": "#444"
         },
         "polygon": {
           "nb_sides": 5
