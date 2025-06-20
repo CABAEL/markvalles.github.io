@@ -1,0 +1,32 @@
+.certification-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2px;
+  }
+  
+  .box {
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+
+  }
+  
+  .box img {
+    margin: 0.5vh;
+    height: 8vh;
+    object-fit: contain;
+    filter: opacity(0.7);
+    
+  }
+  
+  .scale{
+    transition: transform 0.3s ease; /* Smooth scaling */
+    cursor: pointer;
+  }
+
+  .scale:hover{
+    transform: scale(1.5); /* Scale the image on hover */
+  }
+  
+
+
