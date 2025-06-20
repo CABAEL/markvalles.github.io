@@ -1,0 +1,65 @@
+<html>
+
+    <head>
+        <meta name="google-site-verification" content="ECgYyHsJKr_2PYhIjFN0f87QR1VgAmRcL0b9DFL8m4Y" />
+        <meta name="google-signin-client_id" content="758502627690-b7nc4vk61gvsmjd687s9odrt68lit7sg.apps.googleusercontent.com">
+    </head>
+
+    <body>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <input type="email" id="email" />
+        <input type="password" id="password" />
+        <button id="submit" onclick="onSignIn(googleUser)">submit</button>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+       
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+        <script>
+
+        $(document).ready(function(){
+
+            /*$( "#submit" ).click(function() {
+                alert("js!");
+               
+                /*$.ajax({
+                    method: "POST",
+                    url: "process.php",
+                    dataType:'json',
+                    data: { email: $('#email').val(), password: $('#password').val() }
+                    })
+                .done(function( response ){
+                    console.log(response);
+                });                
+
+            });*/
+
+        }); 
+
+
+        function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        }
+
+
+
+
+        </script>
+<a href="#" onclick="signOut();">Sign out</a>
+<script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+</script>
+
+    </body>
+
+</html>
