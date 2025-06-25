@@ -135,7 +135,7 @@ function App() {
             container
             spacing={0}
           >
-            <Grid size={{ xs: 12, md: 12, lg: 5 }} pt={8} pb={{xs:5}} pl={0}>
+            <Grid size={{ xs: 12, md: 12, lg: 5 }} pt={8} pb={{ xs: 5 }} pl={0}>
               <Box color="white" textAlign="center">
                 <NameCard dimmed={dimmed} />
                 <CertificationBoard dimmed={dimmed} />
@@ -178,9 +178,9 @@ function App() {
 
 
             <Grid container spacing={0}>
-              <Grid size={{ xs: 12, lg:6  }}>
+              <Grid size={{ xs: 12, lg: 6 }}>
                 <Grid item >
-                  <ProjectsSection/>                  
+                  <ProjectsSection />
                 </Grid>
               </Grid>
               <Grid size={{ xs: 12, lg: 6 }}>
@@ -209,7 +209,7 @@ function App() {
               alt="WALK WITH ME"
             />
 
-              <Footer/>
+            <Footer />
           </Grid>
 
         </>
