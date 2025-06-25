@@ -177,21 +177,18 @@ function App() {
             </Grid>
 
 
-
-            <Grid container spacing={4}>
-              <Grid size={{ xs: 12, lg: 5 }}>
-                <Grid item pl={{lg:12}}>
-                  <ProjectsSection />
-                  
+            <Grid container spacing={0}>
+              <Grid size={{ xs: 12, lg:6  }}>
+                <Grid item >
+                  <ProjectsSection/>                  
                 </Grid>
               </Grid>
-              <Grid size={{ xs: 12, lg: 7 }}>
+              <Grid size={{ xs: 12, lg: 6 }}>
                 <Grid item>
                   <Gallery />
                 </Grid>
               </Grid>
             </Grid>
-
 
 
             <Box

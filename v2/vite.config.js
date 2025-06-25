@@ -4,5 +4,8 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/markvalles.github.io/'
+  base: '/markvalles.github.io/',
+    build: {
+    outDir: '../public'
+  }
 })
