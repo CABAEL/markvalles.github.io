@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   base: '/markvalles.github.io/',
     build: {
-    outDir: '../public'
+    outDir: '../public',
+    emptyOutDir: true,
   }
 })
