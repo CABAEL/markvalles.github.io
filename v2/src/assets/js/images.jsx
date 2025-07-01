@@ -5,7 +5,12 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
 
-import blockchain1 from '../img/blockchain/1.jpg'
+import it_o1 from '../img/it_olympics/1.jpg' 
+import it_o2 from '../img/it_olympics/2.jpg' 
+import it_o3 from '../img/it_olympics/3.jpg' 
+
+import opt1 from '../img/Optimo/1.jpg'
+
 import blockchain2 from '../img/blockchain/2.jpg'
 import blockchain3 from '../img/blockchain/3.jpg'
 import blockchain4 from '../img/blockchain/4.jpg'
@@ -14,16 +19,10 @@ import blockchain5 from '../img/blockchain/5.jpg'
 import spms1 from '../img/trainings/1.jpg'
 import spms2 from '../img/trainings/2.jpg'
 import spms3 from '../img/trainings/3.jpg'
-import spms4 from '../img/trainings/4.jpg'
 import spms5 from '../img/trainings/5.jpg'
-import spms6 from '../img/trainings/6.jpg'
-
-
 
 import dost1 from '../img/DOST/1.jpg'
 import dost2 from '../img/DOST/2.jpg'
-import dost3 from '../img/DOST/3.jpg'
-
 
 import sbc1 from '../img/sbc/1.jpg'
 
@@ -61,17 +60,22 @@ const images = [
     description: "System presentation to end user",
   },
   {
-    src: spms2,
-    description: "System presentation to end user",
+    src: it_o1,
+    description: "IT olympics bronze medalist with partner Joe Abas",
   },
   {
-    src: spms3,
-    description: "System presentation to end user",
+    src: opt1,
+    description: "Optimo International, with our CEO John Rankins",
   },
   {
-    src: spms5,
-    description: "System presentation to end user",
+    src: it_o3,
+    description: "IT olympics bronze medalist with partner Joe Abas",
   },
+  {
+    src: it_o2,
+    description: "2nd event 8th IT olympics 2018 with new partner and proctor Ms. Grace Condez",
+  },
+
 ];
 
 const itemsPerPage = 6;

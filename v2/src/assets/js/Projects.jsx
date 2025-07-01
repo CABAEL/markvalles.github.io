@@ -104,7 +104,7 @@ const ProjectsList = () => {
             md={6}
             sx={{
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "text-end",
             }}
           >
             <Box
