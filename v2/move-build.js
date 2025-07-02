@@ -1,7 +1,7 @@
 import path from 'path';
 import fse from 'fs-extra';
 
-const publicPath = '../v2/dist/';
+const publicPath = '../public/';
 
 // Ensure public folder exists
 fse.ensureDirSync(publicPath);
