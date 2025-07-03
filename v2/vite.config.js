@@ -8,15 +8,15 @@ export default defineConfig({
     build: {
     outDir: '../public',
     emptyOutDir: true,
-    rollupOptions: {
-      output: {
-        // Put assets inside /public
-        entryFileNames: '[name].[hash].js',       
-        chunkFileNames: '[name].[hash].js',
-        assetFileNames: '[name].[hash][extname]',
+    // rollupOptions: {
+    //   output: {
+    //     // Put assets inside /public
+    //     entryFileNames: '[name].[hash].js',       
+    //     chunkFileNames: '[name].[hash].js',
+    //     assetFileNames: '[name].[hash][extname]',
 
-      },
-    },
+    //   },
+    // },
 
   }
 })
