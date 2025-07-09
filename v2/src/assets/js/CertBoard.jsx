@@ -21,10 +21,11 @@ import blockchain from '../img/blockchain.jpg';
 import careerpath from '../img/careerpath.jpg';
 import dost1 from '../img/dost1.png';
 import diploma from '../img/diploma.png';
+import itil_completion from '../img/itil.png';
 import { Margin } from '@mui/icons-material';
 
 const images = [
-  port06,dsse, yempo, pcieerd, optimo, port01, port02, port03, port04, port05,
+  itil_completion,port06,dsse, yempo, pcieerd, optimo, port01, port02, port03, port04, port05,
   dost1, blockchain, dbp, internship, careerpath, diploma
 ];
 

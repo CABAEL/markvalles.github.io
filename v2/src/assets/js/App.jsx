@@ -197,6 +197,8 @@ function App() {
                 bottom: 0,
                 height: 70,
                 opacity: 1,
+                mt:5,
+                mb:2,
                 p: 2,
                 filter: 'brightness(500%)',
                 pointerEvents: 'none',
