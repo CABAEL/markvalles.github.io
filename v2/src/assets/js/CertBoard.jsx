@@ -25,9 +25,10 @@ import itil_basic from '../img/itil.png';
 import { Margin } from '@mui/icons-material';
 import incanta from '../img/incanta.png';
 import itilv4 from '../img/itilv4.png';
+import Ai from '../img/ai.png';
 
 const images = [
-  incanta,itilv4,itil_basic,port06,dsse, yempo, pcieerd, optimo, port01, port02, port03, port04, port05,
+  incanta,Ai,itilv4,itil_basic,port06,dsse, yempo, pcieerd, optimo, port01, port02, port03, port04, port05,
   dost1, blockchain, dbp, internship, careerpath, diploma
 ];
 
