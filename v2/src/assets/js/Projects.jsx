@@ -12,6 +12,14 @@ import {
 
 const projects = [
   {
+    type: "MAX AI VOICE ASSISTANT",
+    name: "MAX AI",
+    description:
+      "AI Assistant hosted using LM Studio, integrated with Node.js and Python for voice interaction.",
+    link: "https://github.com/CABAEL/max_ai",
+    linkText: "View Repo",
+  },
+  {
     type: "HR Management System",
     name: "HRMS",
     description:

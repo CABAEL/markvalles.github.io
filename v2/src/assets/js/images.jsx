@@ -12,14 +12,10 @@ import it_o3 from '../img/it_olympics/3.jpg'
 import opt1 from '../img/Optimo/1.jpg'
 
 import blockchain2 from '../img/blockchain/2.jpg'
-import blockchain3 from '../img/blockchain/3.jpg'
-import blockchain4 from '../img/blockchain/4.jpg'
-import blockchain5 from '../img/blockchain/5.jpg'
+
 
 import spms1 from '../img/trainings/1.jpg'
-import spms2 from '../img/trainings/2.jpg'
-import spms3 from '../img/trainings/3.jpg'
-import spms5 from '../img/trainings/5.jpg'
+
 
 import dost1 from '../img/DOST/1.jpg'
 import dost2 from '../img/DOST/2.jpg'
@@ -33,23 +29,11 @@ const images = [
   },
   {
     src: dost1,
-    description: "Team BBQ Dinner pic.",
+    description: "DOST_PCIEERD Team BBQ Dinner pic.",
   },
   {
     src: dost2,
     description: "DOST-PCIEERD IT/SD Dept team",
-  },
-  {
-    src: blockchain3,
-    description: "With Paytaca CEO Mr. Joemar Taganna, awarding me as 2nd placer for blockchain voting system prototype",
-  },
-  {
-    src: blockchain4,
-    description: "Block chain app presentation.",
-  },
-  {
-    src: blockchain5,
-    description: "Top 3 blockchain activity performer. I am second placer",
   },
   {
     src: blockchain2,
