@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import wallbg from '../img/wall4.png'
-import { Container, Card, CardContent, Stack, Button, Grid, Box, Dialog, DialogContent, IconButton, Typography, Slide } from '@mui/material';
+import { Container, Card, CardContent, Stack, Button, Grid, Box, Dialog, DialogContent, IconButton, Typography, Slide, ThemeProvider, CssBaseline } from '@mui/material';
 import ExpList from './Experiences';
 import HelmetTag from './Helmet';
-import { motion, px } from "framer-motion"
+import { motion } from "framer-motion"
 const MotionTypography = motion(Typography);
 import NameCard from './Namecard';
 import LetThereBeLight from './Light';
-import Skills from './Skills';
+
 import CertificationBoard from './CertBoard';
 import walking from '../img/walking.gif'
 import walkingpng from '../img/walking.png'
@@ -17,6 +17,8 @@ import { AnimatePresence } from 'framer-motion';
 import Gallery from './images';
 import ProjectsSection from './Projects';
 import Footer from './Footer';
+import FloatingNav from './FloatingNav';
+import theme from './theme';
 
 const MotionDiv = motion.div;
 
@@ -62,7 +64,7 @@ function App() {
         left: 0,
         width: '100vw',
         height: '200vh',
-        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        backgroundColor: 'rgba(51, 51, 51, 0.3)',
         zIndex: 1000,
         pointerEvents: 'none',
       }}
@@ -112,7 +114,8 @@ function App() {
   };
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <AnimatePresence>{loading && <Preloader key="preloader" />}</AnimatePresence>
 
       {!loading && (
@@ -158,7 +161,7 @@ function App() {
                       pt: { lg: 25, xs: 0 },
                     }}
                     animate={{
-                      textShadow: ['1px 1px 2px #222', '2px 10px 8px #444', '1px 1px 2px #222'],
+                      textShadow: ['1px 1px 2px #444', '2px 10px 8px #444', '1px 1px 2px #444'],
                     }}
                     transition={{
                       duration: 5,
@@ -170,53 +173,28 @@ function App() {
                   </MotionTypography>
                 </Grid>
 
-                <Grid size={12}>
+                <Grid size={12} id="experience">
                   <ExpList dimmed={dimmed} />
                 </Grid>
               </Grid>
             </Grid>
 
-
-            <Grid container spacing={0}>
-              <Grid size={{ xs: 12, lg: 6 }}>
-                <Grid item >
-                  <ProjectsSection />
-                </Grid>
+            <Grid container spacing={2} sx={{ px: 2 }}>
+              <Grid size={{ xs: 12, lg: 6 }} id="projects">
+                <ProjectsSection />
               </Grid>
-              <Grid size={{ xs: 12, lg: 6 }}>
-                <Grid item>
-                  <Gallery />
-                </Grid>
+              <Grid size={{ xs: 12, lg: 6 }} id="gallery">
+                <Gallery />
               </Grid>
             </Grid>
 
-
-            <Box
-              sx={{
-                position: 'relative',
-                bottom: 0,
-                height: 70,
-                opacity: 1,
-                mt:5,
-                mb:2,
-                p: 2,
-                filter: 'brightness(500%)',
-                pointerEvents: 'none',
-                userSelect: 'none',
-                zIndex: 1,
-                mx: 'auto'
-              }}
-              component="img"
-              src={!dimmed ? walking : walkingpng}
-              alt="WALK WITH ME"
-            />
-
-            <Footer />
+            <Footer data={[walking,walkingpng]} dimmed={dimmed}/>
           </Grid>
 
+          <FloatingNav />
         </>
       )}
-    </>
+    </ThemeProvider>
   );
 }
 

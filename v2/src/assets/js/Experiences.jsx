@@ -1,8 +1,10 @@
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 const ExpList = ({ dimmed }) => {
-  const textColor = '#fff'; // Softer than white for readability
+  const textColor = '#fff'; // Softer than pure white for readability
   const linkColor = '#aed1e8'; // MUI primary light blue
 
   const experiences = [
@@ -71,7 +73,6 @@ const ExpList = ({ dimmed }) => {
   return (
     <Box
       sx={{
-        color: textColor,
         display: 'grid',
         gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
         gap: 3,
@@ -79,38 +80,48 @@ const ExpList = ({ dimmed }) => {
       }}
     >
       {experiences.map((exp, i) => (
-        <Box key={i}>
-          <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
-            {exp.link ? (
-              <a
-                href={exp.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: linkColor,
-                  textShadow: !dimmed ? '1px 1px 1px #333' : 'none'
-                }}
-              >
-                {exp.company}
-              </a>
-            ) : (
-              exp.company
+        <Card
+          key={i}
+          sx={{
+            backgroundColor: 'hsla(230, 60%, 4%, 0.62)',
+            boxShadow: 4,
+            borderRadius: 0, // removed border radius
+          }}
+        >
+          <CardContent>
+            <Typography variant="subtitle1" sx={{ fontWeight: 600, color: textColor }}>
+              {exp.link ? (
+                <a
+                  href={exp.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: linkColor,
+                    textDecoration: 'none',
+                    textShadow: !dimmed ? '1px 1px 1px #333' : 'none'
+                  }}
+                >
+                  {exp.company}
+                </a>
+              ) : (
+                exp.company
+              )}
+            </Typography>
+            {exp.role && (
+              <Typography variant="body2" sx={{ color: '#ccc' }}>
+                {exp.role}
+              </Typography>
             )}
-          </Typography>
-          {exp.role && (
-            <Typography variant="body2" sx={{ color: '#ccc' }}>
-              {exp.role}
-            </Typography>
-          )}
-          {exp.dates && (
-            <Typography
-              variant="caption"
-              sx={{ color: '#eee', fontStyle: 'italic' }}
-            >
-              {exp.dates}
-            </Typography>
-          )}
-        </Box>
+            {exp.dates && (
+              <Typography
+                variant="caption"
+                sx={{ color: '#eee', fontStyle: 'italic' }}
+              >
+                {exp.dates}
+              </Typography>
+            )}
+          </CardContent>
+        </Card>
       ))}
     </Box>
   );

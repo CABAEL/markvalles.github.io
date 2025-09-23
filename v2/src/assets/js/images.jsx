@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Box, Pagination, Typography } from "@mui/material";
+import { Box, Pagination, Typography, Chip } from "@mui/material";
+import { Photo } from "@mui/icons-material";
 import Masonry from "@mui/lab/Masonry";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
 
-import it_o1 from '../img/it_olympics/1.jpg' 
-import it_o2 from '../img/it_olympics/2.jpg' 
-import it_o3 from '../img/it_olympics/3.jpg' 
+import it_o1 from '../img/it_olympics/1.jpg'
+import it_o2 from '../img/it_olympics/2.jpg'
+import it_o3 from '../img/it_olympics/3.jpg'
 
 import opt1 from '../img/Optimo/1.jpg'
 
@@ -21,6 +22,8 @@ import dost1 from '../img/DOST/1.jpg'
 import dost2 from '../img/DOST/2.jpg'
 
 import sbc1 from '../img/sbc/1.jpg'
+
+import sirgolfo from '../img/sirgolfo.jpg'
 
 const images = [
   {
@@ -52,14 +55,17 @@ const images = [
     description: "Optimo International, with our CEO John Rankins",
   },
   {
+    src: sirgolfo,
+    description: "Picture with sir Golfo, my client for the WAIS project",
+  },
+  {
     src: it_o3,
     description: "IT olympics bronze medalist with partner Joe Abas",
   },
   {
     src: it_o2,
     description: "2nd event 8th IT olympics 2018 with new partner and proctor Ms. Grace Condez",
-  },
-
+  }
 ];
 
 const itemsPerPage = 6;
@@ -78,10 +84,50 @@ export default function PinterestGalleryWithLightboxDescription() {
   };
 
   return (
-    <Box sx={{ p: 2 }}>
-      <Masonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={2}>
+    <Box sx={{ py: 4, px: 2 }}>
+      <Box sx={{ textAlign: 'center', mb: 4 }}>
+        <Typography
+          variant="h4"
+          fontWeight="bold"
+          gutterBottom
+          sx={{ pt: 5,
+            color: '#ffff',
+            textShadow: '1px 1px 2px #000',
+          }}
+        >
+          Photo Gallery
+        </Typography>
+        <Typography variant="h6" sx={{ mb: 2, color: '#D0D0D0' }}>
+          Memorable moments and professional experiences
+        </Typography>
+        <Chip
+          icon={<Photo />}
+          label={`${images.length} Photos`}
+          sx={{
+            color: '#B0B0B0',
+            borderColor: '#B0B0B0'
+          }}
+          variant="outlined"
+        />
+      </Box>
+
+      <Masonry columns={{ xs: 1, sm: 2 }} spacing={1.5}>
         {paginatedImages.map((image, index) => (
-          <Box key={index} sx={{ borderRadius: 2, overflow: "hidden" }}>
+          <Box
+            key={index}
+            sx={{
+              overflow: "hidden",
+              bgcolor: 'rgba(239, 240, 211, 0.3)',
+              backdropFilter: 'blur(100px)',
+              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              position: 'relative',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+              '&:hover': {
+                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
+                transform: 'translateY(-2px)',
+              },
+            }}
+          >
             <Box
               component="img"
               src={image.src}
@@ -90,18 +136,21 @@ export default function PinterestGalleryWithLightboxDescription() {
               sx={{
                 width: "100%",
                 cursor: "pointer",
-                transition: "0.3s",
-                borderRadius: 2,
-                "&:hover": { opacity: 0.85 },
+                filter: 'sepia(100%) brightness(0.4)',
+                transition: 'filter 0.6s ease',
+                "&:hover": {
+                  filter: 'sepia(0%) brightness(1)',
+                },
               }}
             />
             <Typography
               variant="body2"
               sx={{
-                color: "#ccc",
-                mt: 0.5,
-                px: 0.5,
-                fontSize: "0.85rem",
+                color: "#D0D0D0",
+                p: 1.5,
+                fontSize: "0.8rem",
+                lineHeight: 1.4,
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
               }}
             >
               {image.description}
@@ -110,26 +159,30 @@ export default function PinterestGalleryWithLightboxDescription() {
         ))}
       </Masonry>
 
-      <Box display="flex" justifyContent="center" mt={2}>
+      <Box display="flex" justifyContent="center" mt={3}>
         <Pagination
           count={Math.ceil(images.length / itemsPerPage)}
           page={page}
-          onChange={(e, value) => setPage(value)}
+          onChange={(_, value) => setPage(value)}
           sx={{
             "& .MuiPaginationItem-root": {
-              color: "#ace",
-              borderColor: "#38bdf8",
+              color: "#B0B0B0",
+              borderColor: "#131010ff",
+              "&:hover": {
+                bgcolor: "rgba(176, 176, 176, 0.1)",
+                borderColor: "#B0B0B0",
+              },
             },
             "& .Mui-selected": {
-              bgcolor: "#aaa",
-              color: "#ffff",
+              bgcolor: "#707070",
+              color: "#FFFFFF",
+              borderColor: "#131010ff",
               "&:hover": {
-                bgcolor: "#0ea5e9",
+                bgcolor: "#B0B0B0",
               },
             },
           }}
         />
-
       </Box>
 
       <Lightbox
@@ -138,7 +191,7 @@ export default function PinterestGalleryWithLightboxDescription() {
         slides={images}
         index={currentIndex}
         render={{
-          slide: ({ slide, rect }) => (
+          slide: ({ slide }) => (
             <Box
               sx={{
                 position: "relative",

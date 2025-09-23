@@ -35,7 +35,7 @@ const LetThereBeLight = ({handleToggleDim,dimmed}) => {
                     mt:2
                 }}
             >
-                <img src={light} alt="Image" style={{borderTop:'5px solid #222',width: '100%', height: '100%', objectFit: 'contain', filter: dimmed ? 'brightness(40%) contrast(120%)' : 'none', }} />
+                <img src={light} alt="Image" style={{borderTop:'5px solid #333333',width: '100%', height: '100%', objectFit: 'contain', filter: dimmed ? 'brightness(40%) contrast(120%)' : 'none', }} />
                 <MUISwitch checked={dimmed} onChange={handleToggleDim} sx={{ position: 'relative', float: 'right', zIndex: 1001 }} />
             </Box>
 
