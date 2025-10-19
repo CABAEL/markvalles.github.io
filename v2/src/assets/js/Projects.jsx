@@ -49,7 +49,7 @@ const projects = [
     name: "WTSK - WEB TESTING STARTER KIT",
     description:
       "Thesis project where I was the main developer and concept creator, made with PHP and Selenium PHP plugin.",
-    link: "projects/THESIS_WTSK.pdf",
+    link: "../v1/projects/THESIS_WTSK.pdf",
     linkText: "View PDF",
   },
   {
@@ -73,7 +73,7 @@ const projects = [
     name: "WAIS - WAREHOUSE AUTOMATED INVENTORY SYSTEM",
     description:
       "Full stack outsourced project for PNP SMS OFFICE Inventory Prototype Software.",
-    link: "projects/WAIS_MANUAL.pdf",
+    link: "../v1/projects/WAIS_MANUAL.pdf",
     linkText: "View PDF",
   },
   {

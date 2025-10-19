@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Fake JSON Endpoint</title>
+  <script>
+    // When the page loads, overwrite the entire document with JSON
+    document.addEventListener("DOMContentLoaded", () => {
+      const data = {
+        "employees": [
+          { "firstname": "Mark", "lastname": "Valles" },
+          { "firstname": "Sarah", "lastname": "Lopez" },
+          { "firstname": "James", "lastname": "Nguyen" },
+          { "firstname": "Emily", "lastname": "Brown" },
+          { "firstname": "David", "lastname": "Smith" },
+          { "firstname": "Olivia", "lastname": "Johnson" },
+          { "firstname": "Daniel", "lastname": "Garcia" },
+          { "firstname": "Sophia", "lastname": "Martinez" },
+          { "firstname": "Michael", "lastname": "Clark" },
+          { "firstname": "Ava", "lastname": "Lee" }
+        ]
+      };
+
+      // Overwrite everything and display just the JSON
+      document.open();
+      document.write('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
+      document.close();
+    });
+  </script>
+</head>
+<body>
+</body>
+</html>
