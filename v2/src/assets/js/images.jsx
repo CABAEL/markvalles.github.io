@@ -22,10 +22,20 @@ import dost1 from '../img/DOST/1.jpg'
 import dost2 from '../img/DOST/2.jpg'
 
 import sbc1 from '../img/sbc/1.jpg'
+import sbc2 from '../img/sbc/2.jpeg'
+//import sbc3 from '../img/sbc/3.jpeg'
 
 import sirgolfo from '../img/sirgolfo.jpg'
 
 const images = [
+  {
+    src: sbc2,
+    description: "Security Bank Corporation - Team building, listening to security bank CTO Prakash Mahajan speech. ",
+  },
+  // {
+  //   src: sbc3,
+  //   description: "Security Bank Corporation - Engineers group picture.",
+  // },    
   {
     src: sbc1,
     description: "Security Bank Corporation - Squad 1 Engineers coffee break with: Sir Roger, Robin and Jerald.",
@@ -47,12 +57,12 @@ const images = [
     description: "System presentation to end user",
   },
   {
-    src: it_o1,
-    description: "IT olympics bronze medalist with partner Joe Abas",
-  },
-  {
     src: opt1,
     description: "Optimo International, with our CEO John Rankins",
+  },
+  {
+    src: it_o1,
+    description: "IT olympics bronze medalist with partner Joe Abas",
   },
   {
     src: sirgolfo,
@@ -111,7 +121,7 @@ export default function PinterestGalleryWithLightboxDescription() {
         />
       </Box>
 
-      <Masonry columns={{ xs: 1, sm: 2 }} spacing={1.5}>
+      <Masonry columns={{ xs: 1, sm: 2 }} spacing={1}>
         {paginatedImages.map((image, index) => (
           <Box
             key={index}
@@ -139,7 +149,7 @@ export default function PinterestGalleryWithLightboxDescription() {
                 filter: 'sepia(100%) brightness(0.4)',
                 transition: 'filter 0.6s ease',
                 "&:hover": {
-                  filter: 'sepia(0%) brightness(1)',
+                  filter: 'sepia(0%) brightness(1.1)',
                 },
               }}
             />

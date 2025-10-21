@@ -57,7 +57,7 @@ const Preloader = () => {
             borderRadius: 3,
             backgroundColor: 'rgba(148, 163, 184, 0.2)',
             '& .MuiLinearProgress-bar': {
-              background: 'linear-gradient(45deg, #0e5a7aff, #0f0e7aff)',
+              background: 'linear-gradient(45deg, #0e5a7aff, #ffffffff)',
               borderRadius: 3,
             },
           }}

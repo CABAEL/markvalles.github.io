@@ -2,6 +2,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import { motion as Motion } from 'framer-motion';
 
 const ExpList = ({ dimmed }) => {
   const textColor = '#fff'; // Softer than pure white for readability
@@ -80,10 +81,19 @@ const ExpList = ({ dimmed }) => {
       }}
     >
       {experiences.map((exp, i) => (
+
+        <Motion.div
+          key={i}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: i * 0.1 }}
+        >
+
         <Card
           key={i}
           sx={{
-            backgroundColor: 'hsla(230, 60%, 4%, 0.62)',
+            backgroundColor: 'hsla(230, 60%, 4%, 0.43)',
             boxShadow: 4,
             borderRadius: 0, // removed border radius
           }}
@@ -122,6 +132,10 @@ const ExpList = ({ dimmed }) => {
             )}
           </CardContent>
         </Card>
+
+        </Motion.div>
+
+
       ))}
     </Box>
   );

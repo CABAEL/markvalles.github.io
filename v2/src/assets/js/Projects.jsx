@@ -9,7 +9,9 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
+import thesis from '../pdf/THESIS_WTSK.pdf'
+import wais from '../pdf/WAIS_MANUAL.pdf'
 
 const projects = [
   {
@@ -49,7 +51,7 @@ const projects = [
     name: "WTSK - WEB TESTING STARTER KIT",
     description:
       "Thesis project where I was the main developer and concept creator, made with PHP and Selenium PHP plugin.",
-    link: "../v1/projects/THESIS_WTSK.pdf",
+    link: thesis,
     linkText: "View PDF",
   },
   {
@@ -73,7 +75,7 @@ const projects = [
     name: "WAIS - WAREHOUSE AUTOMATED INVENTORY SYSTEM",
     description:
       "Full stack outsourced project for PNP SMS OFFICE Inventory Prototype Software.",
-    link: "../v1/projects/WAIS_MANUAL.pdf",
+    link: wais,
     linkText: "View PDF",
   },
   {
@@ -109,22 +111,64 @@ const ProjectsList = () => {
         align="center"
         fontWeight="bold"
         gutterBottom
-        sx={{ pt: 5,
+        sx={{
+          pt: 5,
           color: '#ffff',
           textShadow: '1px 1px 2px #000',
         }}
       >
         Featured Projects
       </Typography>
-      <Typography 
-        variant="h6" 
+      <Typography
+        variant="h6"
         align="center"
         sx={{ mb: 4, color: '#F0F0F0' }}
       >
         Showcasing innovative solutions and technical expertise
       </Typography>
-      
+
+
+
+
       <Grid container spacing={1} justifyContent="center">
+
+        <Box
+          sx={{
+            width: "100%",
+            background: getProjectBackgroundColor(),
+            color: "#FFFFFF",
+            mb: 1,
+            p: 2.5,
+            display: "flex",
+            flexDirection: "column",
+            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            position: 'relative',
+            overflow: 'hidden',
+          }}
+        >
+          <Typography
+            variant="subtitle1"
+            sx={{ fontWeight: "bold", color: "#FFFFFF", mb: 0.5 }}
+          >
+            Monday.com x Twilio (Call & text) x Email
+          </Typography>
+          <iframe
+            width="100%"
+            height="315"
+            src="https://www.youtube.com/embed/fFEJymw7LL0?autoplay=1&mute=1&loop=1&playlist=fFEJymw7LL0"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+          ></iframe>
+
+          <Typography variant="caption" sx={{ color: "#707070", fontWeight: "bold",mt:2 }}>
+            Monday.com automation integration for emails ,calls and SMS using Twilio and API integraion for syncing data and email sender integration.
+          </Typography>
+
+        </Box>
+
+
         {projects.map((project, index) => (
           <Grid
             item
@@ -137,7 +181,7 @@ const ProjectsList = () => {
               justifyContent: "center",
             }}
           >
-            <motion.div
+            <Motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -148,6 +192,7 @@ const ProjectsList = () => {
                   width: { lg: "240px", md: "220px", xs: "100%" },
                   background: getProjectBackgroundColor(),
                   color: "#FFFFFF",
+                  height: "100%",
                   p: 2.5,
                   display: "flex",
                   flexDirection: "column",
@@ -180,63 +225,63 @@ const ProjectsList = () => {
                   },
                 }}
               >
-              <Typography
-                variant="caption"
-                sx={{ 
-                  color: getProjectAccentColor(), 
-                  fontWeight: 600, 
-                  mb: 0.5,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.5px'
-                }}
-              >
-                {project.type}
-              </Typography>
-              <Typography
-                variant="subtitle1"
-                sx={{ fontWeight: "bold", color: "#FFFFFF", mb: 0.5 }}
-              >
-                {project.name}
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ color: "#B0B0B0", mb: 1 }}
-              >
-                {project.description}
-              </Typography>
-              {project.link ? (
-                <Button
-                  size="small"
-                  variant="outlined"
+                <Typography
+                  variant="caption"
                   sx={{
                     color: getProjectAccentColor(),
-                    borderColor: getProjectAccentColor(),
-                    textTransform: "none",
-                    mt: "auto",
-                    fontWeight: 500,
-
-                    transition: 'all 0.3s ease',
-                    "&:hover": {
-                      bgcolor: getProjectAccentColor(),
-                      color: "#333333",
-                      transform: 'scale(1.05)',
-                      boxShadow: `0 4px 12px ${getProjectAccentColor()}40`,
-                    },
+                    fontWeight: 600,
+                    mb: 0.5,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px'
                   }}
-                  component={Link}
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener"
                 >
-                  {project.linkText}
-                </Button>
-              ) : (
-                <Typography variant="caption" sx={{ color: "#707070", fontWeight: "bold" }}>
-                  {project.linkText}
+                  {project.type}
                 </Typography>
-              )}
+                <Typography
+                  variant="subtitle1"
+                  sx={{ fontWeight: "bold", color: "#FFFFFF", mb: 0.5 }}
+                >
+                  {project.name}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ color: "#B0B0B0", mb: 1 }}
+                >
+                  {project.description}
+                </Typography>
+                {project.link ? (
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    sx={{
+                      color: getProjectAccentColor(),
+                      borderColor: getProjectAccentColor(),
+                      textTransform: "none",
+                      mt: "auto",
+                      fontWeight: 500,
+
+                      transition: 'all 0.3s ease',
+                      "&:hover": {
+                        bgcolor: getProjectAccentColor(),
+                        color: "#333333",
+                        transform: 'scale(1.05)',
+                        boxShadow: `0 4px 12px ${getProjectAccentColor()}40`,
+                      },
+                    }}
+                    component={Link}
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    {project.linkText}
+                  </Button>
+                ) : (
+                  <Typography variant="caption" sx={{ color: "#707070", fontWeight: "bold" }}>
+                    {project.linkText}
+                  </Typography>
+                )}
               </Box>
-            </motion.div>
+            </Motion.div>
           </Grid>
         ))}
       </Grid>

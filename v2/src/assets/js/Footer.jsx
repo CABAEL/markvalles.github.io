@@ -79,7 +79,7 @@ const Footer = ({ dimmed, data}) => {
             </IconButton>
           </Stack>
 
-          <Divider sx={{ width: '100%', borderColor: '#B0B0B0' }} />
+          <Divider sx={{ width: '100%', borderColor: '#333' }} />
 
           {/* Footer Text */}
           <Stack spacing={1} alignItems="center">
