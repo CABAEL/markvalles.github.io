@@ -131,44 +131,6 @@ const ProjectsList = () => {
 
 
       <Grid container spacing={1} justifyContent="center">
-
-        <Box
-          sx={{
-            width: "100%",
-            background: getProjectBackgroundColor(),
-            color: "#FFFFFF",
-            mb: 1,
-            p: 2.5,
-            display: "flex",
-            flexDirection: "column",
-            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-            position: 'relative',
-            overflow: 'hidden',
-          }}
-        >
-          <Typography
-            variant="subtitle1"
-            sx={{ fontWeight: "bold", color: "#FFFFFF", mb: 0.5 }}
-          >
-            Monday.com x Twilio (Call & text) x Email
-          </Typography>
-          <iframe
-            width="100%"
-            height="315"
-            src="https://www.youtube.com/embed/fFEJymw7LL0?autoplay=1&mute=1&loop=1&playlist=fFEJymw7LL0"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-          ></iframe>
-
-          <Typography variant="caption" sx={{ color: "#707070", fontWeight: "bold",mt:2 }}>
-            Monday.com automation integration for emails ,calls and SMS using Twilio and API integraion for syncing data and email sender integration.
-          </Typography>
-
-        </Box>
-
-
         {projects.map((project, index) => (
           <Grid
             item
