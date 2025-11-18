@@ -1,5 +1,6 @@
 import React from 'react';
 import { ThemeProvider, CssBaseline } from '@mui/material';
+import { motion } from "framer-motion";
 import theme from './theme';
 
 // --- 404 GLITCH ONLY ---
