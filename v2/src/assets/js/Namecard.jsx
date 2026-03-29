@@ -2,6 +2,7 @@ import { Box, Button, Stack, Typography, Avatar, Chip, Divider } from '@mui/mate
 import { LinkedIn, Email, Phone, Download } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import mypic from '../img/me.png';
+import me_sleep from '../img/me_sleep.png';
 import Resume from '../resume/Mark_Valles.pdf';
 
 const MotionBox = motion(Box);
@@ -26,7 +27,28 @@ const NameCard = ({ dimmed }) => {
         : '0px 0px 0px rgba(0, 0, 0, 0.3)',
       }}
     >
-      <MotionAvatar
+      {dimmed ? (
+
+        <MotionAvatar
+        src={me_sleep}
+        alt="Mark Valles"
+        whileHover={{ scale: 1.05 }}
+        sx={{
+          width: 120,
+          height: 120,
+          mx: 'auto',
+          mb: 2,
+          border: '3px solid rgba(255,255,255,0.6)',
+          boxShadow: dimmed
+            ? '0 8px 24px rgba(0, 0, 0, 0.6)'
+            : '0 8px 24px rgba(0, 0, 0, 0.2)',
+          backdropFilter: 'blur(8px)',
+        }}
+        />
+
+      ) : (
+
+        <MotionAvatar
         src={mypic}
         alt="Mark Valles"
         whileHover={{ scale: 1.05 }}
@@ -41,7 +63,11 @@ const NameCard = ({ dimmed }) => {
             : '0 8px 24px rgba(0, 0, 0, 0.2)',
           backdropFilter: 'blur(8px)',
         }}
-      />
+        />
+
+      ) }
+
+      
 
       <Typography
         variant="h5"
