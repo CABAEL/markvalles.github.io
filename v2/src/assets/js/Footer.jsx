@@ -94,7 +94,7 @@ const Footer = ({ dimmed, data}) => {
             </Typography>
             
             <Typography variant="caption" sx={{ color: '#B0B0B0' }}>
-              © 2025 Mark Valles. All rights reserved.
+              © 2017 - {new Date().getFullYear()} Mark Valles Portfolio. All rights reserved.
             </Typography>
 
 

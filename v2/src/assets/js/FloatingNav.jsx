@@ -37,42 +37,7 @@ const FloatingNav = () => {
 
   return (
     <>
-      {/* Speed Dial for Navigation */}
-      <SpeedDial
-        ariaLabel="Navigation"
-        sx={{
-          position: 'fixed',
-          bottom: 16,
-          right: 16,
-          zIndex: 1300,
-          '& .MuiFab-primary': {
-            bgcolor: '#555555',
-            '&:hover': {
-              bgcolor: '#707070',
-            },
-          },
-        }}
-        icon={<SpeedDialIcon />}
-      >
-        {actions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-            onClick={action.onClick}
-            sx={{
-              '& .MuiFab-primary': {
-                bgcolor: 'rgba(85, 85, 85, 0.9)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid #707070',
-                '&:hover': {
-                  bgcolor: '#B0B0B0',
-                },
-              },
-            }}
-          />
-        ))}
-      </SpeedDial>
+
 
       {/* Scroll to Top Button */}
       {showScrollTop && (
@@ -85,7 +50,7 @@ const FloatingNav = () => {
           onClick={scrollToTop}
           sx={{
             position: 'fixed',
-            bottom: 100,
+            bottom: 16,
             right: 16,
             zIndex: 1300,
             bgcolor: '#707070',

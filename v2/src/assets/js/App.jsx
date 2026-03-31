@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import wallbg from '../img/wall4.png'
-import { Container, Card, CardContent, Stack, Button, Grid, Box, Dialog, DialogContent, IconButton, Typography, Slide, ThemeProvider, CssBaseline } from '@mui/material';
+import { Grid, Box, Typography, Slide, ThemeProvider, CssBaseline } from '@mui/material';
 import ExpList from './Experiences';
 import HelmetTag from './Helmet';
 import { motion } from "framer-motion"
@@ -129,11 +129,11 @@ function App() {
               backgroundImage: `url(${!dimmed ? wallbg : ''})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              height: 'auto',
+              minHeight: '100vh',
+              width: '100%',
               filter: dimmed ? 'brightness(55%)' : 'brightness(100%)',
-              position: 'absolute',
-              top: '0px',
-              left: '0px',
+              position: 'relative',
+              overflowX: 'hidden',
             }}
             container
             spacing={0}
@@ -188,7 +188,7 @@ function App() {
               </Grid>
             </Grid>
 
-            <Footer data={[walking,walkingpng]} dimmed={dimmed}/>
+            <Footer data={[walking, walkingpng]} dimmed={dimmed} />
           </Grid>
 
           <FloatingNav />
