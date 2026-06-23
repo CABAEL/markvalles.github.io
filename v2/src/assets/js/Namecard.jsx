@@ -3,7 +3,7 @@ import { LinkedIn, Email, Phone, Download } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import mypic from '../img/me.png';
 import me_sleep from '../img/me_sleep.png';
-import Resume from '../resume/Mark_Valles.pdf';
+import Resume from '../resume/Mark_Valles_v2.pdf';
 
 const MotionBox = motion(Box);
 const MotionAvatar = motion(Avatar);
