@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import wallbg from '../img/wall4.png'
+import wallbg from '../img/wall4.png';
 import { Grid, Box, Typography, Slide, ThemeProvider, CssBaseline, Divider } from '@mui/material';
 import ExpList from './Experiences';
 import HelmetTag from './Helmet';
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 const MotionTypography = motion(Typography);
 import NameCard from './Namecard';
 import LetThereBeLight from './Light';
 
 import CertificationBoard from './CertBoard';
 import Skills from './Skills';
-import walking from '../img/walking.gif'
-import walkingpng from '../img/walking.png'
-import galaxy from '../img/videoplayback2.mp4'
+import walking from '../img/walking.gif';
+import walkingpng from '../img/walking.png';
+import galaxy from '../img/videoplayback2.mp4';
 import Preloader from './Preloader';
 import { AnimatePresence } from 'framer-motion';
 import Gallery from './images';
@@ -22,11 +22,6 @@ import FloatingNav from './FloatingNav';
 import theme from './theme';
 
 const MotionDiv = motion.div;
-
-// Transition for Dialog slide up
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -143,50 +138,61 @@ function App() {
             container
             spacing={0}
           >
-            <Grid size={{ xs: 12, md: 12, lg: 5 }} pt={8} pb={{ xs: 5 }} pl={0} id="about">
-              <Box color="white" textAlign="center">
-                <NameCard dimmed={dimmed} />
-                <CertificationBoard dimmed={dimmed} />
-              </Box>
-            </Grid>
+            {/* Left Column: Light hanging directly above centered NameCard */}
+<Grid size={{ xs: 12, md: 12, lg: 5 }} pt={0} pb={{ xs: 15 }} id="about">
+  <Box color="white" display="flex" flexDirection="column" alignItems="center">
+    {/* Hanging Light Fixture */}
+    <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+      <LetThereBeLight handleToggleDim={handleToggleDim} setDimmed={setDimmed} dimmed={dimmed} />
+    </Box>
 
-            <Grid size={{ xs: 12, md: 12, lg: 6 }}>
-              <Grid container spacing={10}>
-                <Grid size={{ lg: 2, xs: 12 }}>
-                  <LetThereBeLight handleToggleDim={handleToggleDim} setDimmed={setDimmed} dimmed={dimmed} />
-                </Grid>
-                <Grid size={{ lg: 10, xs: 12 }}>
-                  <MotionTypography
-                    variant="h1"
-                    sx={{
-                      fontSize: { xs: '4vh', sm: '5vh', md: '6vh', lg: '3vw' },
-                      textAlign: 'center',
-                      fontWeight: 'bold',
-                      color: '#eee',
-                      pt: { lg: 25, xs: 0 },
-                    }}
-                    animate={{
-                      textShadow: ['1px 1px 2px #444', '2px 10px 8px #444', '1px 1px 2px #444'],
-                    }}
-                    transition={{
-                      duration: 5,
-                      repeat: Infinity,
-                      repeatType: 'loop',
-                    }}
-                  >
-                    WORK EXPERIENCES
-                  </MotionTypography>
-                </Grid>
+    {/* NameCard directly centered beneath light */}
+    <Box 
+      sx={{ 
+        width: '100%', 
+        display: 'flex', 
+        justifyContent: 'center', 
+        px: 2 
+      }}
+    >
+      <NameCard dimmed={dimmed} />
+    </Box>
+  </Box>
+</Grid>
 
-                <Grid size={12} id="experience">
+            {/* Right Column: Work Experiences */}
+            <Grid size={{ xs: 12, md: 12, lg: 7 }} pt={{ lg: 8, xs: 2 }}>
+              <Box sx={{ px: { xs: 2, md: 4 } }}>
+<MotionTypography
+  variant="h1"
+  sx={{
+    fontSize: { xs: '4vh', sm: '5vh', md: '6vh', lg: '3vw' },
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#eee',
+    mb: 4,
+  }}
+  animate={{
+    textShadow: [
+      '5px 4px 8px #444',
+      '-5px 4px 8px #444',
+      '5px 4px 8px #444',
+    ],
+  }}
+  transition={{
+    duration: 4,
+    repeat: Infinity,
+    repeatType: 'loop',
+    ease: 'easeInOut',
+  }}
+>
+  WORK EXPERIENCES
+</MotionTypography>
+
+                <Box id="experience">
                   <ExpList dimmed={dimmed} />
-                </Grid>
-              </Grid>
-            </Grid>
-
-
-            <Grid size={12}>
-              <SectionDivider />
+                </Box>
+              </Box>
             </Grid>
 
             <Grid size={12} id="projects" sx={{ px: 2, pb: 4 }}>
@@ -197,10 +203,13 @@ function App() {
               <SectionDivider />
             </Grid>
 
+            <Grid size={12} id="projects" sx={{ px: 2, pb: 4 }}>
+              <CertificationBoard dimmed={dimmed} />
+            </Grid>
+
             <Grid size={12} id="skills" sx={{ px: 2 }}>
               <Skills dimmed={dimmed} />
             </Grid>
-
 
             <Grid size={12}>
               <SectionDivider />

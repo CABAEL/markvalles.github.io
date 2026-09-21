@@ -16,12 +16,9 @@ const NameCard = ({ dimmed }) => {
       transition={{ duration: 0.6 }}
       sx={{
         maxWidth: 420,
-        mx: "auto",
-        mt: 3,
-        mb: 5,
+        mx: "auto", 
         textAlign: 'center',
-        p: 4,
-        borderRadius: '16px',
+        p: 2,
         bgcolor: 'rgba(21, 22, 26, 0.35)',
         border: '1px solid rgba(255,255,255,0.08)',
         backdropFilter: 'blur(6px)',
@@ -184,13 +181,13 @@ const NameCard = ({ dimmed }) => {
             rel="noopener noreferrer"
             sx={{
               borderColor: 'rgba(255, 255, 255, 0.6)',
-              color: dimmed ? '#222' : '#fff',
+              color: dimmed ? '#FFF' : '#222',
               backgroundColor: 'rgba(255, 255, 255, 0.2)',
               backdropFilter: 'blur(6px)',
               fontWeight: 500,
               '&:hover': {
                 borderColor: 'rgba(255, 255, 255, 0.9)',
-                backgroundColor: 'rgba(243, 227, 227, 0.3)',
+                backgroundColor: 'rgba(255, 255, 255, 0.3)',
                 transform: 'translateY(-2px)',
               },
             }}

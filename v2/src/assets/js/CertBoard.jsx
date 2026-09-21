@@ -31,7 +31,7 @@ import Ai from '../img/ai.png';
 import intellishift from '../img/intellishift_sti.jpg';
 
 const images = [
-  intellishift,incanta, Ai, itilv4, itil_basic, port06, dsse, yempo, pcieerd, optimo, port01, port02, port03, port04, port05,
+  intellishift, incanta, Ai, itilv4, itil_basic, port06, dsse, yempo, pcieerd, optimo, port01, port02, port03, port04, port05,
   dost1, blockchain, dbp, internship, careerpath, diploma
 ];
 
@@ -69,7 +69,7 @@ const CertificationBoard = ({ dimmed }) => {
   };
 
   return (
-    <Box sx={{ p: { xs: 2, lg: 2 } }}>
+    <Box sx={{ p: { xs: 1, sm: 2 }, width: '100%' }}>
       <Box sx={{ textAlign: 'center', mb: 3 }}>
         <Typography
           variant="h4"
@@ -97,19 +97,21 @@ const CertificationBoard = ({ dimmed }) => {
         />
       </Box>
 
-      {/* Main Display Area */}
-      <Box sx={{ mb: 3, display: 'flex', justifyContent: 'center' }}>
+      {/* Expanded Main Display Area */}
+      <Box sx={{ mb: 3, width: '100%', display: 'flex', justifyContent: 'center' }}>
         <motion.div
           key={selectedIndex}
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
+          style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
         >
           <Card
             onClick={handleMainImageClick}
             sx={{
               cursor: 'pointer',
-              maxWidth: 400,
+              width: '100%',
+              maxWidth: { xs: '100%', sm: '600px', md: '720px', lg: '850px' },
               bgcolor: dimmed ? 'rgba(30, 41, 59, 0.6)' : 'rgba(30, 41, 59, 0.8)',
               backdropFilter: 'blur(10px)',
               overflow: 'hidden',
@@ -118,7 +120,7 @@ const CertificationBoard = ({ dimmed }) => {
               transition: 'all 0.3s ease',
               '&:hover': {
                 boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)',
-                transform: 'scale(1.015)',
+                transform: 'scale(1.01)',
               },
             }}
           >
@@ -127,8 +129,10 @@ const CertificationBoard = ({ dimmed }) => {
               image={images[selectedIndex]}
               alt={`Certification ${selectedIndex + 1}`}
               sx={{
-                height: { xs: 250, sm: 300 },
-                objectFit: 'cover',
+                width: '100%',
+                height: { xs: 260, sm: 380, md: 450 },
+                objectFit: 'contain',
+                bgcolor: 'rgba(0, 0, 0, 0.25)',
               }}
             />
           </Card>
@@ -136,13 +140,13 @@ const CertificationBoard = ({ dimmed }) => {
       </Box>
 
       {/* Thumbnail Selector with Pagination */}
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-        {/* Navigation and Thumbnails */}
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, width: '100%' }}>
         <Box sx={{ 
           display: 'flex', 
           alignItems: 'center',
-          gap: 2,
+          gap: { xs: 1, sm: 2 },
           justifyContent: 'center',
+          width: '100%',
         }}>
           {/* Previous Button */}
           <IconButton
@@ -162,25 +166,25 @@ const CertificationBoard = ({ dimmed }) => {
           {/* Thumbnails Container */}
           <Box sx={{ 
             display: 'flex', 
-            gap: 1, 
+            gap: 1.5, 
             justifyContent: 'center',
-            minWidth: 340, // 5 thumbnails * 60px + gaps
+            flexWrap: 'nowrap',
           }}>
             {getCurrentThumbnails().map(({ image, originalIndex }, i) => (
               <motion.div
                 key={originalIndex}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: i * 0.1 }}
-                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.3, delay: i * 0.05 }}
+                whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <Card
                   onClick={() => handleThumbnailClick(originalIndex)}
                   sx={{
                     cursor: 'pointer',
-                    width: 60,
-                    height: 60,
+                    width: { xs: 55, sm: 75, md: 85 },
+                    height: { xs: 55, sm: 75, md: 85 },
                     bgcolor: dimmed ? 'rgba(30, 41, 59, 0.6)' : 'rgba(30, 41, 59, 0.8)',
                     backdropFilter: 'blur(10px)',
                     overflow: 'hidden',
@@ -235,11 +239,11 @@ const CertificationBoard = ({ dimmed }) => {
                 width: 8,
                 height: 8,
                 borderRadius: '50%',
-                bgcolor: currentPage === i ? '#555' : 'rgba(85, 85, 85, 0.3)',
+                bgcolor: currentPage === i ? '#7DD3FC' : 'rgba(255, 255, 255, 0.2)',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
                 '&:hover': {
-                  bgcolor: '#555',
+                  bgcolor: '#7DD3FC',
                   transform: 'scale(1.2)',
                 },
               }}

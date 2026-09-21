@@ -10,7 +10,6 @@ import {
   AccountTree,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
-import { getAccent } from './designTokens';
 
 const MotionBox = motion(Box);
 
@@ -80,20 +79,36 @@ const About = ({ dimmed }) => {
     },
   ];
 
-  const textShadowStyle = '0px 2px 4px rgba(0, 0, 0, 0.9)';
+  // Masculine Slate / Steel Color Palette
+  const darkBg = '#333333';
+  const steelAccent = '#94A3B8'; // Slate/Steel blue-grey for subtle highlights
+  const headerText = '#E2E8F0';  // Cool light grey heading
+  const subText = '#94A3B8';     // Muted steel subtitle text
+  const chipBg = '#222222';      // Deep charcoal pill background
 
   return (
-    <Box sx={{ py: 4, px: { xs: 1, sm: 2 } }}>
+    <Box
+      sx={{
+        py: 5,
+        px: { xs: 2, sm: 4 },
+        borderRadius: '12px',
+        bgcolor: darkBg,
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5)',
+      }}
+    >
       {/* Header Section */}
-      <Box sx={{ textAlign: 'center', mb: 6 }}>
+      <Box sx={{ textAlign: 'center', mb: 5 }}>
         <Typography
           variant="h4"
           fontWeight="800"
           gutterBottom
           sx={{
-            color: '#FFFFFF',
-            textShadow: textShadowStyle,
-            letterSpacing: '0.5px',
+            color: headerText,
+            textTransform: 'uppercase',
+            letterSpacing: '1.5px',
+            fontSize: { xs: '1.5rem', sm: '1.875rem' },
+            textShadow: '0px 2px 8px rgba(0, 0, 0, 0.8)',
           }}
         >
           Technical Infrastructure & Skills
@@ -101,10 +116,11 @@ const About = ({ dimmed }) => {
         <Typography
           variant="h6"
           sx={{
-            mb: 2,
-            color: '#FFFFFF',
-            textShadow: textShadowStyle,
-            opacity: 0.9,
+            mb: 2.5,
+            color: subText,
+            fontSize: '0.95rem',
+            fontWeight: 500,
+            letterSpacing: '0.3px',
           }}
         >
           Technologies, automation tools, and frameworks I leverage
@@ -112,13 +128,13 @@ const About = ({ dimmed }) => {
         <Chip
           label={`${skillGroups.length} Technical Domains`}
           sx={{
-            color: '#FFFFFF',
-            borderColor: 'rgba(255,255,255,0.3)',
-            bgcolor: 'rgba(0, 0, 0, 0.2)',
-            backdropFilter: 'blur(4px)',
-            textShadow: textShadowStyle,
-            boxShadow: '0px 2px 4px rgba(0,0,0,0.5)',
-            fontWeight: 600,
+            color: steelAccent,
+            borderColor: 'rgba(148, 163, 184, 0.3)',
+            bgcolor: 'rgba(0, 0, 0, 0.3)',
+            fontWeight: 700,
+            fontSize: '0.75rem',
+            letterSpacing: '0.5px',
+            textTransform: 'uppercase',
           }}
           variant="outlined"
         />
@@ -129,95 +145,86 @@ const About = ({ dimmed }) => {
         sx={{
           display: 'grid',
           gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
-          gap: 3,
+          gap: 4,
         }}
       >
-        {skillGroups.map(({ title, items }, index) => {
-          const accent = getAccent(index);
-
-          return (
-            <MotionBox
-              key={title}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-20px' }}
-              transition={{ duration: 0.35, delay: index * 0.05 }}
-              sx={{
-                position: 'relative',
-                p: 2.5,
-                borderRadius: '12px',
-                borderLeft: `3px solid ${accent}`,
-                background: `linear-gradient(90deg, ${accent}10 0%, rgba(255, 255, 255, 0.02) 100%)`,
-                transition: 'all 0.25s ease',
-                '&:hover': {
-                  background: `linear-gradient(90deg, ${accent}20 0%, rgba(255, 255, 255, 0.04) 100%)`,
-                  transform: 'translateY(-2px)',
-                },
-              }}
-            >
-              {/* Category Header */}
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25, mb: 2 }}>
-                <Box
-                  sx={{
-                    color: accent,
-                    display: 'flex',
-                    alignItems: 'center',
-                    filter: `drop-shadow(0px 0px 6px ${accent})`,
-                  }}
-                >
-                  {getSkillIcon(title)}
-                </Box>
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    fontWeight: 700,
-                    color: '#FFFFFF',
-                    textShadow: textShadowStyle,
-                    fontSize: '1rem',
-                    letterSpacing: '0.2px',
-                  }}
-                >
-                  {title}
-                </Typography>
+        {skillGroups.map(({ title, items }, index) => (
+          <MotionBox
+            key={title}
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-20px' }}
+            transition={{ duration: 0.35, delay: index * 0.05 }}
+            sx={{
+              position: 'relative',
+              pl: 2,
+              borderLeft: `3px solid ${steelAccent}`,
+            }}
+          >
+            {/* Category Header */}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25, mb: 1.5 }}>
+              <Box
+                sx={{
+                  color: steelAccent,
+                  bgcolor: 'rgba(0, 0, 0, 0.3)',
+                  p: 0.7,
+                  borderRadius: '6px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                }}
+              >
+                {getSkillIcon(title)}
               </Box>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  fontWeight: 700,
+                  color: headerText,
+                  fontSize: '0.95rem',
+                  letterSpacing: '0.5px',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {title}
+              </Typography>
+            </Box>
 
-              {/* Tag / Pill Grid */}
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                {items.map((item, i) => (
-                  <Box
-                    key={i}
+            {/* Tag / Pill Grid */}
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+              {items.map((item, i) => (
+                <Box
+                  key={i}
+                  sx={{
+                    px: 1.5,
+                    py: 0.5,
+                    borderRadius: '4px',
+                    bgcolor: chipBg,
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    transition: 'all 0.2s ease',
+                    '&:hover': {
+                      borderColor: steelAccent,
+                      bgcolor: '#2A2A2A',
+                    },
+                  }}
+                >
+                  <Typography
+                    variant="body2"
                     sx={{
-                      px: 1.5,
-                      py: 0.6,
-                      borderRadius: '6px',
-                      bgcolor: 'rgba(255, 255, 255, 0.06)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
-                      backdropFilter: 'blur(4px)',
-                      transition: 'all 0.2s ease',
-                      '&:hover': {
-                        borderColor: accent,
-                        bgcolor: `${accent}22`,
-                        boxShadow: `0 0 8px ${accent}44`,
-                      },
+                      color: '#CBD5E1',
+                      fontWeight: 500,
+                      fontSize: '0.8rem',
+                      letterSpacing: '0.2px',
                     }}
                   >
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: '#FFFFFF',
-                        textShadow: textShadowStyle,
-                        fontWeight: 500,
-                        fontSize: '0.825rem',
-                      }}
-                    >
-                      {item}
-                    </Typography>
-                  </Box>
-                ))}
-              </Box>
-            </MotionBox>
-          );
-        })}
+                    {item}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </MotionBox>
+        ))}
       </Box>
     </Box>
   );

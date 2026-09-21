@@ -126,18 +126,23 @@ const ProjectsList = () => {
   return (
     <Container maxWidth="xl" sx={{ color: "#FFFFFF", py: 4 }}>
       {/* Title & Header */}
-      <Box sx={{ textAlign: "center", mb: 6 }}>
+      <Box sx={{ textAlign: "center", mb: 6 ,mt: 3}}>
         <Typography
           variant={isMobile ? "h5" : "h4"}
           fontWeight="800"
           gutterBottom
-          sx={{ color: "#FFFFFF", letterSpacing: "0.5px" }}
+          sx={{
+            fontWeight: 'bold',
+            mb: 1,
+            color: '#ffff',
+            textShadow: '1px 1px 2px #000',
+          }}
         >
           Featured Projects
         </Typography>
         <Typography
           variant="body1"
-          sx={{ color: "#A0A5B5", fontWeight: 500 }}
+          sx={{ color: "#D0D0D0", fontWeight: 500 }}
         >
           Showcasing interactive previews, live software systems, and open-source repos
         </Typography>
