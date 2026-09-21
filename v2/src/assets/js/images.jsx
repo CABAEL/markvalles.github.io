@@ -78,7 +78,7 @@ const images = [
   }
 ];
 
-const itemsPerPage = 6;
+const itemsPerPage = 8;
 
 export default function PinterestGalleryWithLightboxDescription() {
   const [page, setPage] = useState(1);
@@ -121,50 +121,64 @@ export default function PinterestGalleryWithLightboxDescription() {
         />
       </Box>
 
-      <Masonry columns={{ xs: 1, sm: 2 }} spacing={1}>
+      <Masonry columns={{ xs: 2, sm: 3, md: 4 }} spacing={1.5}>
         {paginatedImages.map((image, index) => (
           <Box
             key={index}
+            onClick={() => handleImageClick(index)}
             sx={{
               overflow: "hidden",
-              bgcolor: 'rgba(239, 240, 211, 0.3)',
-              backdropFilter: 'blur(100px)',
-              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              borderRadius: '10px',
               position: 'relative',
+              cursor: 'pointer',
               boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+              transition: 'box-shadow 0.3s ease, transform 0.3s ease',
               '&:hover': {
-                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
+                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.45)',
                 transform: 'translateY(-2px)',
+              },
+              '&:hover .gallery-caption': {
+                opacity: 1,
+              },
+              '&:hover .gallery-img': {
+                filter: 'sepia(0%) brightness(1.05)',
+                transform: 'scale(1.04)',
               },
             }}
           >
             <Box
               component="img"
+              className="gallery-img"
               src={image.src}
               alt={`Gallery ${index}`}
-              onClick={() => handleImageClick(index)}
               sx={{
                 width: "100%",
-                cursor: "pointer",
+                height: 200,
+                objectFit: "cover",
+                display: "block",
                 filter: 'sepia(100%) brightness(0.4)',
-                transition: 'filter 0.6s ease',
-                "&:hover": {
-                  filter: 'sepia(0%) brightness(1.1)',
-                },
+                transition: 'filter 0.5s ease, transform 0.5s ease',
               }}
             />
-            <Typography
-              variant="body2"
+            <Box
+              className="gallery-caption"
               sx={{
-                color: "#D0D0D0",
-                p: 1.5,
-                fontSize: "0.8rem",
-                lineHeight: 1.4,
-                textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
+                position: 'absolute',
+                inset: 0,
+                display: 'flex',
+                alignItems: 'flex-end',
+                background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 55%, transparent 100%)',
+                opacity: { xs: 1, sm: 0 },
+                transition: 'opacity 0.3s ease',
               }}
             >
-              {image.description}
-            </Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: "#EDEDED", p: 1.25, fontSize: "0.72rem", lineHeight: 1.35 }}
+              >
+                {image.description}
+              </Typography>
+            </Box>
           </Box>
         ))}
       </Masonry>

@@ -113,10 +113,12 @@ const CertificationBoard = ({ dimmed }) => {
               bgcolor: dimmed ? 'rgba(30, 41, 59, 0.6)' : 'rgba(30, 41, 59, 0.8)',
               backdropFilter: 'blur(10px)',
               overflow: 'hidden',
+              borderRadius: '12px',
+              border: '1px solid rgba(255,255,255,0.07)',
               transition: 'all 0.3s ease',
               '&:hover': {
-                boxShadow: '0 8px 24px rgba(240, 240, 240, 0.3)',
-                transform: 'scale(1.02)',
+                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)',
+                transform: 'scale(1.015)',
               },
             }}
           >
@@ -182,12 +184,13 @@ const CertificationBoard = ({ dimmed }) => {
                     bgcolor: dimmed ? 'rgba(30, 41, 59, 0.6)' : 'rgba(30, 41, 59, 0.8)',
                     backdropFilter: 'blur(10px)',
                     overflow: 'hidden',
+                    borderRadius: '8px',
                     transition: 'all 0.3s ease',
-                    border: selectedIndex === originalIndex ? '2px solid #F0F0F0' : '2px solid transparent',
-                    opacity: selectedIndex === originalIndex ? 1 : 0.7,
+                    border: selectedIndex === originalIndex ? '2px solid #7DD3FC' : '2px solid transparent',
+                    opacity: selectedIndex === originalIndex ? 1 : 0.65,
                     '&:hover': {
                       opacity: 1,
-                      boxShadow: '0 4px 12px rgba(240, 240, 240, 0.4)',
+                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)',
                     },
                   }}
                 >

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import wallbg from '../img/wall4.png'
-import { Grid, Box, Typography, Slide, ThemeProvider, CssBaseline } from '@mui/material';
+import { Grid, Box, Typography, Slide, ThemeProvider, CssBaseline, Divider } from '@mui/material';
 import ExpList from './Experiences';
 import HelmetTag from './Helmet';
 import { motion } from "framer-motion"
@@ -9,6 +9,7 @@ import NameCard from './Namecard';
 import LetThereBeLight from './Light';
 
 import CertificationBoard from './CertBoard';
+import Skills from './Skills';
 import walking from '../img/walking.gif'
 import walkingpng from '../img/walking.png'
 import galaxy from '../img/videoplayback2.mp4'
@@ -113,6 +114,10 @@ function App() {
     setDimmed(event.target.checked);
   };
 
+  const SectionDivider = () => (
+    <Divider sx={{ borderColor: 'rgba(255,255,255,0.08)', mx: { xs: 2, md: 6 }, my: 2 }} />
+  );
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -138,7 +143,7 @@ function App() {
             container
             spacing={0}
           >
-            <Grid size={{ xs: 12, md: 12, lg: 5 }} pt={8} pb={{ xs: 5 }} pl={0}>
+            <Grid size={{ xs: 12, md: 12, lg: 5 }} pt={8} pb={{ xs: 5 }} pl={0} id="about">
               <Box color="white" textAlign="center">
                 <NameCard dimmed={dimmed} />
                 <CertificationBoard dimmed={dimmed} />
@@ -179,13 +184,30 @@ function App() {
               </Grid>
             </Grid>
 
-            <Grid container spacing={2} sx={{ px: 2 }}>
-              <Grid size={{ xs: 12, lg: 6 }} id="projects">
-                <ProjectsSection />
-              </Grid>
-              <Grid size={{ xs: 12, lg: 6 }} id="gallery">
-                <Gallery />
-              </Grid>
+
+            <Grid size={12}>
+              <SectionDivider />
+            </Grid>
+
+            <Grid size={12} id="projects" sx={{ px: 2, pb: 4 }}>
+              <ProjectsSection />
+            </Grid>
+
+            <Grid size={12}>
+              <SectionDivider />
+            </Grid>
+
+            <Grid size={12} id="skills" sx={{ px: 2 }}>
+              <Skills dimmed={dimmed} />
+            </Grid>
+
+
+            <Grid size={12}>
+              <SectionDivider />
+            </Grid>
+
+            <Grid size={12} id="gallery" sx={{ px: 2 }}>
+              <Gallery />
             </Grid>
 
             <Footer data={[walking, walkingpng]} dimmed={dimmed} />

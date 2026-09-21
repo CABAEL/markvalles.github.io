@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Fab, SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
-import { KeyboardArrowUp, Person, Work, Code, Photo, ContactMail } from '@mui/icons-material';
+import { KeyboardArrowUp, Person, Work, Code, Photo } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
 const MotionFab = motion(Fab);
@@ -37,9 +37,36 @@ const FloatingNav = () => {
 
   return (
     <>
+      <SpeedDial
+        ariaLabel="Section navigation"
+        icon={<SpeedDialIcon />}
+        sx={{
+          position: 'fixed',
+          bottom: 16,
+          left: 16,
+          zIndex: 1300,
+          '& .MuiFab-primary': {
+            bgcolor: '#15161a',
+            border: '1px solid rgba(255,255,255,0.12)',
+            '&:hover': { bgcolor: '#1e1f24' },
+          },
+        }}
+      >
+        {actions.map((action) => (
+          <SpeedDialAction
+            key={action.name}
+            icon={action.icon}
+            tooltipTitle={action.name}
+            onClick={action.onClick}
+            sx={{
+              bgcolor: '#15161a',
+              color: '#EDEDED',
+              '&:hover': { bgcolor: '#1e1f24' },
+            }}
+          />
+        ))}
+      </SpeedDial>
 
-
-      {/* Scroll to Top Button */}
       {showScrollTop && (
         <MotionFab
           initial={{ opacity: 0, scale: 0 }}
@@ -53,10 +80,9 @@ const FloatingNav = () => {
             bottom: 16,
             right: 16,
             zIndex: 1300,
-            bgcolor: '#707070',
-            '&:hover': {
-              bgcolor: '#B0B0B0',
-            },
+            bgcolor: '#15161a',
+            border: '1px solid rgba(255,255,255,0.12)',
+            '&:hover': { bgcolor: '#1e1f24' },
           }}
         >
           <KeyboardArrowUp />

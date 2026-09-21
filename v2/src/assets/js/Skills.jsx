@@ -1,154 +1,224 @@
 import React from 'react';
-import { Box, Typography, Card, CardContent, Chip, Stack, Grid } from '@mui/material';
-import { Code, Storage, Build, BugReport, Computer, Brush } from '@mui/icons-material';
+import { Box, Typography, Chip } from '@mui/material';
+import {
+  Code,
+  Web,
+  Storage,
+  SmartToy,
+  CloudQueue,
+  BugReport,
+  AccountTree,
+} from '@mui/icons-material';
 import { motion } from 'framer-motion';
+import { getAccent } from './designTokens';
 
-const MotionCard = motion(Card);
+const MotionBox = motion(Box);
 
 const getSkillIcon = (title) => {
   const icons = {
-    'Popular Web Development Stack': <Code />,
-    'Back-end & API': <Storage />,
-    'Dev Tools & Workflow': <Build />,
-    'Testing & Deployment': <BugReport />,
-    'IT & Support': <Computer />,
-    'Media & Content': <Brush />,
+    'Core Languages & Frameworks': <Code fontSize="small" />,
+    'Frontend': <Web fontSize="small" />,
+    'Databases & Caching': <Storage fontSize="small" />,
+    'Agentic AI & Automation': <SmartToy fontSize="small" />,
+    'Infrastructure & Deployment': <CloudQueue fontSize="small" />,
+    'QA, Testing & Operations': <BugReport fontSize="small" />,
+    'Methodologies & SDLC': <AccountTree fontSize="small" />,
   };
-  return icons[title] || <Code />;
-};
-
-const getSkillColor = (title) => {
-  const colors = {
-    'Popular Web Development Stack': 'primary',
-    'Back-end & API': 'secondary',
-    'Dev Tools & Workflow': 'success',
-    'Testing & Deployment': 'warning',
-    'IT & Support': 'info',
-    'Media & Content': 'error',
-  };
-  return colors[title] || 'primary';
+  return icons[title] || <Code fontSize="small" />;
 };
 
 const About = ({ dimmed }) => {
   const skillGroups = [
     {
-      title: 'Popular Web Development Stack',
-      items: ['JavaScript (JS)', 'HTML / CSS', 'React', 'PHP', 'Laravel', 'Bootstrap', 'jQuery'],
+      title: 'Core Languages & Frameworks',
+      items: [
+        'PHP (Laravel / CodeIgniter / Yii2 / ProcessMaker)',
+        'TypeScript',
+        'JavaScript (NextJs / Node.js / Express.js)',
+        'Python (FastAPI)',
+        'Java (SpringBoot)',
+      ],
     },
     {
-      title: 'Back-end & API',
-      items: ['RESTful API', 'NodeJs', 'ExpressJS', 'MongoDB', 'CodeIgniter', 'Yii2', 'Redis'],
+      title: 'Frontend',
+      items: ['React', 'Vue.js', 'Bootstrap', 'jQuery', 'HTML5', 'CSS3', 'Tailwind'],
     },
     {
-      title: 'Dev Tools & Workflow',
-      items: ['Git', 'Bitbucket', 'SourceTree', 'Git Kraken', 'Postman', 'FTP / SSH / SFTP', 'Web hosting'],
+      title: 'Databases & Caching',
+      items: ['MySQL', 'PostgreSQL', 'SQL Server', 'MongoDB', 'Redis', 'Valkey'],
     },
     {
-      title: 'Testing & Deployment',
-      items: ['Test case creation', 'Test Driven Development', 'Smart Contract deployment (Remix)', 'Deployment/Hosting', 'Local server setup for web apps'],
+      title: 'Agentic AI & Automation',
+      items: [
+        'Claude',
+        'Gemini',
+        'GPT API',
+        'LM Studio',
+        'ElevenLabs',
+        'Twilio',
+        'Zapier',
+        'Make',
+        'Monday.com',
+      ],
     },
     {
-      title: 'IT & Support',
-      items: ['PC networking (wired/wireless)', 'Basic PC troubleshooting', 'PC formatting and setup', 'Printer networking'],
+      title: 'Infrastructure & Deployment',
+      items: ['Docker', 'Apache', 'Nginx', 'Render', 'Supabase'],
     },
     {
-      title: 'Media & Content',
-      items: ['Multimedia editing (Adobe Suite, Audacity)', 'FL studio', 'Canva'],
+      title: 'QA, Testing & Operations',
+      items: [
+        'Test Driven Development (TDD)',
+        'Selenium Test Automation',
+        'Remix Smart Contract Deployment',
+        'Network & Hardware Provisioning',
+      ],
+    },
+    {
+      title: 'Methodologies & SDLC',
+      items: ['Agile Scrum', 'Waterfall', 'Full SDLC Lifecycle'],
     },
   ];
 
+  const textShadowStyle = '0px 2px 4px rgba(0, 0, 0, 0.9)';
+
   return (
-    <Box sx={{ py: 4, px: 2 }}>
-      <Box sx={{ textAlign: 'center', mb: 3 }}>
+    <Box sx={{ py: 4, px: { xs: 1, sm: 2 } }}>
+      {/* Header Section */}
+      <Box sx={{ textAlign: 'center', mb: 6 }}>
         <Typography
           variant="h4"
-          fontWeight="bold"
+          fontWeight="800"
           gutterBottom
-          sx={{ color: '#F0F0F0' }}
+          sx={{
+            color: '#FFFFFF',
+            textShadow: textShadowStyle,
+            letterSpacing: '0.5px',
+          }}
         >
-          Technical Skills
+          Technical Infrastructure & Skills
         </Typography>
-        <Typography variant="h6" sx={{ mb: 2, color: '#D0D0D0' }}>
-          Technologies and tools I work with
+        <Typography
+          variant="h6"
+          sx={{
+            mb: 2,
+            color: '#FFFFFF',
+            textShadow: textShadowStyle,
+            opacity: 0.9,
+          }}
+        >
+          Technologies, automation tools, and frameworks I leverage
         </Typography>
-        <Chip 
-          label={`${skillGroups.length} Skill Categories`}
-          sx={{ 
-            color: '#B0B0B0',
-            borderColor: '#B0B0B0'
+        <Chip
+          label={`${skillGroups.length} Technical Domains`}
+          sx={{
+            color: '#FFFFFF',
+            borderColor: 'rgba(255,255,255,0.3)',
+            bgcolor: 'rgba(0, 0, 0, 0.2)',
+            backdropFilter: 'blur(4px)',
+            textShadow: textShadowStyle,
+            boxShadow: '0px 2px 4px rgba(0,0,0,0.5)',
+            fontWeight: 600,
           }}
           variant="outlined"
         />
       </Box>
 
-      <Grid container spacing={2}>
-        {skillGroups.map(({ title, items }, index) => (
-          <Grid item xs={12} sm={6} key={title}>
-            <MotionCard
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.05 }}
-              whileHover={{ y: -3 }}
+      {/* Grid Layout Matrix */}
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
+          gap: 3,
+        }}
+      >
+        {skillGroups.map(({ title, items }, index) => {
+          const accent = getAccent(index);
+
+          return (
+            <MotionBox
+              key={title}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-20px' }}
+              transition={{ duration: 0.35, delay: index * 0.05 }}
               sx={{
-                height: '100%',
-                bgcolor: dimmed ? 'rgba(30, 41, 59, 0.6)' : 'rgba(30, 41, 59, 0.8)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(148, 163, 184, 0.2)',
-                transition: 'all 0.3s ease',
+                position: 'relative',
+                p: 2.5,
+                borderRadius: '12px',
+                borderLeft: `3px solid ${accent}`,
+                background: `linear-gradient(90deg, ${accent}10 0%, rgba(255, 255, 255, 0.02) 100%)`,
+                transition: 'all 0.25s ease',
                 '&:hover': {
-                  borderColor: '#F0F0F0',
-                  boxShadow: '0 4px 16px rgba(240, 240, 240, 0.2)',
+                  background: `linear-gradient(90deg, ${accent}20 0%, rgba(255, 255, 255, 0.04) 100%)`,
+                  transform: 'translateY(-2px)',
                 },
               }}
             >
-              <CardContent sx={{ p: 2 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1.5 }}>
+              {/* Category Header */}
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25, mb: 2 }}>
+                <Box
+                  sx={{
+                    color: accent,
+                    display: 'flex',
+                    alignItems: 'center',
+                    filter: `drop-shadow(0px 0px 6px ${accent})`,
+                  }}
+                >
+                  {getSkillIcon(title)}
+                </Box>
+                <Typography
+                  variant="subtitle1"
+                  sx={{
+                    fontWeight: 700,
+                    color: '#FFFFFF',
+                    textShadow: textShadowStyle,
+                    fontSize: '1rem',
+                    letterSpacing: '0.2px',
+                  }}
+                >
+                  {title}
+                </Typography>
+              </Box>
+
+              {/* Tag / Pill Grid */}
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                {items.map((item, i) => (
                   <Box
+                    key={i}
                     sx={{
-                      p: 0.8,
-                      borderRadius: 1,
-                      bgcolor: '#707070',
-                      color: 'white',
-                      mr: 1.5,
+                      px: 1.5,
+                      py: 0.6,
+                      borderRadius: '6px',
+                      bgcolor: 'rgba(255, 255, 255, 0.06)',
+                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      backdropFilter: 'blur(4px)',
+                      transition: 'all 0.2s ease',
+                      '&:hover': {
+                        borderColor: accent,
+                        bgcolor: `${accent}22`,
+                        boxShadow: `0 0 8px ${accent}44`,
+                      },
                     }}
                   >
-                    {getSkillIcon(title)}
-                  </Box>
-                  <Typography 
-                    variant="subtitle1" 
-                    fontWeight="bold" 
-                    sx={{ fontSize: '1rem', color: '#F0F0F0' }}
-                  >
-                    {title}
-                  </Typography>
-                </Box>
-
-                <Stack direction="row" flexWrap="wrap" gap={0.6}>
-                  {items.map((item, i) => (
-                    <Chip
-                      key={i}
-                      label={item}
-                      size="small"
-                      variant="outlined"
+                    <Typography
+                      variant="body2"
                       sx={{
-                        color: '#D0D0D0',
-                        borderColor: '#707070',
-                        fontSize: '0.75rem',
-                        height: '26px',
-                        '&:hover': {
-                          bgcolor: '#F0F0F0',
-                          color: '#333333',
-                          borderColor: '#F0F0F0',
-                        },
+                        color: '#FFFFFF',
+                        textShadow: textShadowStyle,
+                        fontWeight: 500,
+                        fontSize: '0.825rem',
                       }}
-                    />
-                  ))}
-                </Stack>
-              </CardContent>
-            </MotionCard>
-          </Grid>
-        ))}
-      </Grid>
+                    >
+                      {item}
+                    </Typography>
+                  </Box>
+                ))}
+              </Box>
+            </MotionBox>
+          );
+        })}
+      </Box>
     </Box>
   );
 };
