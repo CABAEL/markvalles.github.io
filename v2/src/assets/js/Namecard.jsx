@@ -23,58 +23,52 @@ const NameCard = ({ dimmed }) => {
         border: '1px solid rgba(255,255,255,0.08)',
         backdropFilter: 'blur(6px)',
         boxShadow: dimmed
-        ? '0 8px 24px rgba(0, 0, 0, 0.6)'
-        : '0 8px 24px rgba(0, 0, 0, 0.25)',
+          ? '0 8px 24px rgba(0, 0, 0, 0.6)'
+          : '0 8px 24px rgba(0, 0, 0, 0.25)',
       }}
     >
       {dimmed ? (
-
         <MotionAvatar
-        src={me_sleep}
-        alt="Mark Valles"
-        whileHover={{ scale: 1.05 }}
-        sx={{
-          width: 120,
-          height: 120,
-          mx: 'auto',
-          mb: 2,
-          border: '3px solid rgba(255,255,255,0.6)',
-          boxShadow: dimmed
-            ? '0 8px 24px rgba(0, 0, 0, 0.6)'
-            : '0 8px 24px rgba(0, 0, 0, 0.2)',
-          backdropFilter: 'blur(8px)',
-        }}
+          src={me_sleep}
+          alt="Mark Valles"
+          whileHover={{ scale: 1.05 }}
+          sx={{
+            width: 120,
+            height: 120,
+            mx: 'auto',
+            mb: 2,
+            border: '3px solid rgba(255,255,255,0.6)',
+            boxShadow: dimmed
+              ? '0 8px 24px rgba(0, 0, 0, 0.6)'
+              : '0 8px 24px rgba(0, 0, 0, 0.2)',
+            backdropFilter: 'blur(8px)',
+          }}
         />
-
       ) : (
-
         <MotionAvatar
-        src={mypic}
-        alt="Mark Valles"
-        whileHover={{ scale: 1.05 }}
-        sx={{
-          width: 120,
-          height: 120,
-          mx: 'auto',
-          mb: 2,
-          border: '3px solid rgba(255,255,255,0.6)',
-          boxShadow: dimmed
-            ? '0 8px 24px rgba(0, 0, 0, 0.6)'
-            : '0 8px 24px rgba(0, 0, 0, 0.2)',
-          backdropFilter: 'blur(8px)',
-        }}
+          src={mypic}
+          alt="Mark Valles"
+          whileHover={{ scale: 1.05 }}
+          sx={{
+            width: 120,
+            height: 120,
+            mx: 'auto',
+            mb: 2,
+            border: '3px solid rgba(255,255,255,0.6)',
+            boxShadow: dimmed
+              ? '0 8px 24px rgba(0, 0, 0, 0.6)'
+              : '0 8px 24px rgba(0, 0, 0, 0.2)',
+            backdropFilter: 'blur(8px)',
+          }}
         />
-
-      ) }
-
-      
+      )}
 
       <Typography
         variant="h5"
         sx={{
           fontWeight: 'bold',
           mb: 1,
-          color: dimmed ? '#FFFFFF' : '#ffff',
+          color: '#ffffff',
           textShadow: dimmed ? '0 2px 4px rgba(0,0,0,0.4)' : 'none',
         }}
       >
@@ -121,7 +115,7 @@ const NameCard = ({ dimmed }) => {
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
           <Email
             sx={{
-              color: dimmed ? '#EAEAEA' : '#333',
+              color: dimmed ? '#EAEAEA' : '#ffff',
             }}
             fontSize="small"
           />
@@ -138,14 +132,14 @@ const NameCard = ({ dimmed }) => {
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
           <Phone
             sx={{
-              color: dimmed ? '#EAEAEA' : '#333',
+              color: dimmed ? '#EAEAEA' : '#ffff',
             }}
             fontSize="small"
           />
           <Typography
             variant="body2"
             sx={{
-              color: dimmed ? '#EAEAEA' : '#fff',
+              color: dimmed ? '#EAEAEA' : '#ffff',
             }}
           >
             +63 956 443 3716
@@ -164,7 +158,7 @@ const NameCard = ({ dimmed }) => {
               fontWeight: 600,
               boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
               '&:hover': {
-                backgroundColor: '#fff',
+                backgroundColor: '#ffffff',
                 transform: 'translateY(-2px)',
                 boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
               },
@@ -175,19 +169,18 @@ const NameCard = ({ dimmed }) => {
 
           <Button
             variant="outlined"
-            startIcon={<LinkedIn />}
+            startIcon={<LinkedIn sx={{ color: '#ffffff' }} />}
             href="https://www.linkedin.com/in/mark-valles-bb7251246/"
             target="_blank"
             rel="noopener noreferrer"
             sx={{
-              borderColor: 'rgba(255, 255, 255, 0.6)',
-              color: dimmed ? '#FFF' : '#222',
-              backgroundColor: 'rgba(255, 255, 255, 0.2)',
-              backdropFilter: 'blur(6px)',
+              borderColor: '#ffffff',
+              color: '#ffffff',
+              backgroundColor: 'transparent',
               fontWeight: 500,
               '&:hover': {
-                borderColor: 'rgba(255, 255, 255, 0.9)',
-                backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                borderColor: '#ffffff',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
                 transform: 'translateY(-2px)',
               },
             }}
