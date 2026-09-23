@@ -167,7 +167,7 @@ function App() {
   variant="h1"
   sx={{
     fontSize: { xs: '4vh', sm: '5vh', md: '6vh', lg: '3vw' },
-    textAlign: 'center',
+    textAlign: 'left',
     fontWeight: 'bold',
     color: '#eee',
     mb: 4,
@@ -193,6 +193,10 @@ function App() {
                   <ExpList dimmed={dimmed} />
                 </Box>
               </Box>
+            </Grid>
+
+                        <Grid size={12}>
+              <SectionDivider />
             </Grid>
 
             <Grid size={12} id="projects" sx={{ px: 2, pb: 4 }}>

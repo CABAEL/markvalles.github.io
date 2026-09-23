@@ -104,11 +104,10 @@ const About = ({ dimmed }) => {
           fontWeight="800"
           gutterBottom
           sx={{
-            color: headerText,
-            textTransform: 'uppercase',
-            letterSpacing: '1.5px',
-            fontSize: { xs: '1.5rem', sm: '1.875rem' },
-            textShadow: '0px 2px 8px rgba(0, 0, 0, 0.8)',
+            fontWeight: 'bold',
+            mb: 1,
+            color: '#ffff',
+            textShadow: '1px 1px 2px #000',
           }}
         >
           Technical Infrastructure & Skills
