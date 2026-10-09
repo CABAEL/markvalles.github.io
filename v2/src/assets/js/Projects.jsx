@@ -18,6 +18,17 @@ import wais from "../pdf/WAIS_MANUAL.pdf";
 
 const projectsData = [
   {
+    type: "Productivity Utility",
+    name: "Idle Police",
+    description:
+      "Lightweight Windows background app designed to eliminate idle distractions and maintain flow state. Runs in the system tray tracking inactivity via Windows API, triggering a full-screen siren overlay with audio if idle threshold is exceeded, and silencing instantly upon mouse/keyboard movement.",
+    link: "https://github.com/CABAEL/idle_police",
+    linkText: "View Repo",
+    // Replace with your YouTube embed link (e.g., "https://www.youtube.com/embed/YOUR_VIDEO_ID")
+    youtubeUrl: "https://www.youtube.com/embed/HUP7mSn2w-E",
+    mediaType: "youtube",
+  },
+  {
     type: "MAX AI VOICE ASSISTANT",
     name: "MAX AI",
     description:
@@ -64,15 +75,6 @@ const projectsData = [
     mediaType: "pdf",
   },
   {
-    type: "Blockchain Voting System",
-    name: "Voting System",
-    description:
-      "2nd place in a training activity competition. Built with Vue, Solidity, and Remix.",
-    link: "https://github.com/CABAEL/blockchain_voting_system",
-    linkText: "View Repo",
-    mediaType: "code",
-  },
-  {
     type: "DOST-PCIEERD Agency Tracker",
     name: "Strategic Performance Management System",
     description:
@@ -82,6 +84,15 @@ const projectsData = [
     mediaType: "private",
   },
   {
+    type: "Blockchain Voting System",
+    name: "Voting System",
+    description:
+      "2nd place in a training activity competition. Built with Vue, Solidity, and Remix.",
+    link: "https://github.com/CABAEL/blockchain_voting_system",
+    linkText: "View Repo",
+    mediaType: "code",
+  },
+  {
     type: "Inventory Management",
     name: "WAIS - WAREHOUSE AUTOMATED INVENTORY SYSTEM",
     description:
@@ -89,16 +100,6 @@ const projectsData = [
     link: wais,
     linkText: "View PDF",
     mediaType: "pdf",
-  },
-  {
-    type: "Record Management",
-    name: "Record Office Application Solution",
-    description:
-      "Successfully implemented for record office sector of Taguig City Hall. Presented by my co-dev Mr. Rasdi Kasim.",
-    link: "https://www.dailymotion.com/embed/video/x7ushww",
-    linkText: "Watch Demo Video",
-    iframeUrl: "https://www.dailymotion.com/embed/video/x7ushww",
-    mediaType: "video",
   },
   {
     type: "Company Website",
@@ -112,8 +113,10 @@ const projectsData = [
   },
 ];
 
-// Sort array so items with available links come first
+// Sort array ensuring Idle Police stays first, followed by items with available links
 const projects = [...projectsData].sort((a, b) => {
+  if (a.name === "Idle Police") return -1;
+  if (b.name === "Idle Police") return 1;
   if (a.link && !b.link) return -1;
   if (!a.link && b.link) return 1;
   return 0;
@@ -126,16 +129,16 @@ const ProjectsList = () => {
   return (
     <Container maxWidth="xl" sx={{ color: "#FFFFFF", py: 4 }}>
       {/* Title & Header */}
-      <Box sx={{ textAlign: "center", mb: 6 ,mt: 3}}>
+      <Box sx={{ textAlign: "center", mb: 6, mt: 3 }}>
         <Typography
           variant={isMobile ? "h5" : "h4"}
           fontWeight="800"
           gutterBottom
           sx={{
-            fontWeight: 'bold',
+            fontWeight: "bold",
             mb: 1,
-            color: '#ffff',
-            textShadow: '1px 1px 2px #000',
+            color: "#ffff",
+            textShadow: "1px 1px 2px #000",
           }}
         >
           Featured Projects
@@ -189,38 +192,52 @@ const ProjectsList = () => {
                   },
                 }}
               >
-                {/* Embedded Media Preview Section (iFrames & Badges) */}
-                {project.iframeUrl ? (
+                {/* Embedded Media Preview Section (YouTube, iFrames & Badges) */}
+                {project.youtubeUrl || project.iframeUrl ? (
                   <Box
                     sx={{
                       position: "relative",
                       width: "100%",
-                      height: project.mediaType === "video" ? "200px" : "240px",
+                      height: project.mediaType === "youtube" ? "200px" : "240px",
                       bgcolor: "#050507",
                       borderBottom: "1px solid #2A2C36",
                       overflow: "hidden",
                     }}
                   >
-                    <iframe
-                      src={project.iframeUrl}
-                      title={project.name}
-                      loading="lazy"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        border: "none",
-                        pointerEvents: project.mediaType === "video" ? "auto" : "none",
-                      }}
-                    />
+                    {project.youtubeUrl ? (
+                      <iframe
+                        src={project.youtubeUrl}
+                        title={project.name}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          border: "none",
+                        }}
+                      />
+                    ) : (
+                      <iframe
+                        src={project.iframeUrl}
+                        title={project.name}
+                        loading="lazy"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          border: "none",
+                          pointerEvents: "none",
+                        }}
+                      />
+                    )}
                     <Chip
                       icon={
-                        project.mediaType === "video" ? (
+                        project.mediaType === "youtube" ? (
                           <PlayCircleOutlineIcon sx={{ fontSize: "14px !important", color: "#FFF" }} />
                         ) : (
                           <OpenInNewIcon sx={{ fontSize: "12px !important", color: "#FFF" }} />
                         )
                       }
-                      label={project.mediaType === "video" ? "Live Video" : "Live Preview"}
+                      label={project.mediaType === "youtube" ? "YouTube Video" : "Live Preview"}
                       size="small"
                       sx={{
                         position: "absolute",
@@ -232,11 +249,12 @@ const ProjectsList = () => {
                         bgcolor: "#121318",
                         color: "#FFFFFF",
                         border: "1px solid #3F4250",
+                        pointerEvents: "none",
                       }}
                     />
                   </Box>
                 ) : (
-                  /* Visual Banner for Non-iFrame Items */
+                  /* Visual Banner for Non-iFrame / Non-YouTube Items */
                   <Box
                     sx={{
                       px: 2.5,
@@ -270,7 +288,7 @@ const ProjectsList = () => {
                 )}
 
                 {/* Card Content */}
-                <Box sx={{ p: 2.5, pt: project.iframeUrl ? 2 : 1 }}>
+                <Box sx={{ p: 2.5, pt: project.youtubeUrl || project.iframeUrl ? 2 : 1 }}>
                   <Typography
                     sx={{
                       color: "#9396A0",
@@ -328,7 +346,7 @@ const ProjectsList = () => {
                         fontSize: "0.8rem",
                         fontWeight: 600,
                         textDecoration: "none",
-                        transition: "all 0.2s ease",
+                        transition: "all 0.22s ease",
                         "&:hover": {
                           bgcolor: "#2E3242",
                           borderColor: "#FFFFFF",
