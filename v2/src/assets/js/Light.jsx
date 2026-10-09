@@ -225,7 +225,7 @@ const LetThereBeLight = ({ handleToggleDim, dimmed }) => {
               letterSpacing: '0.05em',
               fontFamily: 'inherit',
               color: 'text.primary',
-              opacity: 0.15,
+              opacity: 0.3,
               whiteSpace: 'nowrap',
               userSelect: 'none',
               pointerEvents: 'none',

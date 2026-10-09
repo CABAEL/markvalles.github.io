@@ -80,10 +80,10 @@ const ExpList = ({ dimmed }) => {
   return (
     <Box
       sx={{
-        p: 1,
+        pl: 1,
         width: '100%',
         columnCount: { xs: 1, md: 2 }, // 1 column on small screens, 2 on desktop
-        columnGap: 4, // space between left and right column
+        columnGap: 5, // space between left and right column
       }}
     >
       {experiences.map((exp, i) => {

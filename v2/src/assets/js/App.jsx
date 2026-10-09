@@ -18,7 +18,6 @@ import { AnimatePresence } from 'framer-motion';
 import Gallery from './images';
 import ProjectsSection from './Projects';
 import Footer from './Footer';
-import FloatingNav from './FloatingNav';
 import theme from './theme';
 
 const MotionDiv = motion.div;
@@ -134,7 +133,6 @@ function App() {
               filter: dimmed ? 'brightness(55%)' : 'brightness(100%)',
               position: 'relative',
               overflowX: 'hidden',
-              pl: { xs: 2, md: 4 },
             }}
             container
             spacing={0}
@@ -203,7 +201,7 @@ function App() {
             </Grid>
 
             {/* Side-by-Side Equated Grid Row: Featured Projects & Technical Skills */}
-            <Grid container spacing={2.5} size={12} sx={{ px: { xs: 2, md: 4 }, pb: 2, alignItems: 'stretch',pt: 3}}>
+            <Grid container spacing={2.5} size={12} sx={{ px: { xs: 2, md: 4 }, pb: 2, alignItems: 'stretch', pt: 3 }}>
               <Grid size={{ xs: 12, lg: 6 }} id="projects" sx={{ display: 'flex', flexDirection: 'column' }}>
                 <ProjectsSection dimmed={dimmed} />
               </Grid>
@@ -230,8 +228,6 @@ function App() {
 
             <Footer data={[walking, walkingpng]} dimmed={dimmed} />
           </Grid>
-
-          <FloatingNav />
         </>
       )}
     </ThemeProvider>

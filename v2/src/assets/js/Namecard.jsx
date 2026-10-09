@@ -36,18 +36,18 @@ const NameCard = ({ dimmed }) => {
         `}
       </style>
       
-      {/* Outer Widescreen Monitor Platform Station */}
+      {/* Outer Widescreen Monitor Platform Station with Responsive Left Padding */}
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           width: '100%',
-          maxWidth: 620,
-          mx: 'auto',
+          maxWidth: 640,
+          pl: { xs: 0, sm: 4, md: 6 }, // Removed padding on mobile, kept on desktop
+          mx: { xs: 'auto', lg: 0 },
           mb: 0,
           pb: 0,
-          px: { xs: 1.5, sm: 0 },
           boxSizing: 'border-box',
           position: 'relative',
           zIndex: 9999,
@@ -120,7 +120,7 @@ const NameCard = ({ dimmed }) => {
             }}
           />
 
-          {/* Internal Landscape Split-Pane Workspace Grid (Strictly row layout across all screens to keep landscape form) */}
+          {/* Internal Landscape Split-Pane Workspace Grid */}
           <Box 
             sx={{ 
               position: 'relative', 
