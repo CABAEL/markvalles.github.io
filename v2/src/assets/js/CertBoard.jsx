@@ -30,8 +30,8 @@ import Ai from '../img/ai.png';
 import intellishift from '../img/intellishift_sti.jpg';
 
 const certificates = [
-  { img: intellishift, title: "Intellishift Certification", caption: "Advanced workflow and shift optimization credential." },
-  { img: incanta, title: "Incanta Milestone", caption: "Successfully completed specialized tech training." },
+  { img: intellishift, title: "Intellishift Certification", caption: "Successfully completed consulting work." },
+  { img: incanta, title: "Incanta Milestone", caption: "Successfully completed consulting work." },
   { img: Ai, title: "AI Integration Workshop", caption: "Deep dive into modern AI tools and LLM architectures." },
   { img: itilv4, title: "ITIL v4 Foundation", caption: "Certified in IT service management best practices." },
   { img: itil_basic, title: "ITIL Framework Basics", caption: "Foundational training in IT service operations." },
