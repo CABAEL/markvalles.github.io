@@ -13,17 +13,27 @@ import { motion } from 'framer-motion';
 
 const MotionBox = motion(Box);
 
+const markerColors = [
+  '#0284c7', // Marker Blue
+  '#16a34a', // Marker Green
+  '#d97706', // Marker Orange
+  '#9333ea', // Marker Purple
+  '#dc2626', // Marker Red
+  '#0d9488', // Marker Teal
+  '#4f46e5', // Marker Indigo
+];
+
 const getSkillIcon = (title) => {
   const icons = {
-    'Core Languages & Frameworks': <Code fontSize="small" />,
-    'Frontend': <Web fontSize="small" />,
-    'Databases & Caching': <Storage fontSize="small" />,
-    'Agentic AI & Automation': <SmartToy fontSize="small" />,
-    'Infrastructure & Deployment': <CloudQueue fontSize="small" />,
-    'QA, Testing & Operations': <BugReport fontSize="small" />,
-    'Methodologies & SDLC': <AccountTree fontSize="small" />,
+    'Core Languages & Frameworks': <Code sx={{ fontSize: '1rem' }} />,
+    'Frontend': <Web sx={{ fontSize: '1rem' }} />,
+    'Databases & Caching': <Storage sx={{ fontSize: '1rem' }} />,
+    'Agentic AI & Automation': <SmartToy sx={{ fontSize: '1rem' }} />,
+    'Infrastructure & Deployment': <CloudQueue sx={{ fontSize: '1rem' }} />,
+    'QA, Testing & Operations': <BugReport sx={{ fontSize: '1rem' }} />,
+    'Methodologies & SDLC': <AccountTree sx={{ fontSize: '1rem' }} />,
   };
-  return icons[title] || <Code fontSize="small" />;
+  return icons[title] || <Code sx={{ fontSize: '1rem' }} />;
 };
 
 const About = ({ dimmed }) => {
@@ -50,6 +60,7 @@ const About = ({ dimmed }) => {
       title: 'Agentic AI & Automation',
       items: [
         'Claude',
+        'Github Copilot',
         'Gemini',
         'GPT API',
         'LM Studio',
@@ -79,30 +90,18 @@ const About = ({ dimmed }) => {
     },
   ];
 
-  // Masculine Slate / Steel Color Palette
-  const darkBg = '#333333';
-  const steelAccent = '#94A3B8'; // Slate/Steel blue-grey for subtle highlights
-  const headerText = '#E2E8F0';  // Cool light grey heading
-  const subText = '#94A3B8';     // Muted steel subtitle text
-  const chipBg = '#222222';      // Deep charcoal pill background
-
   return (
     <Box
       sx={{
-        py: 5,
-        px: { xs: 2, sm: 4 },
-        borderRadius: '12px',
-        bgcolor: darkBg,
-        border: '1px solid rgba(255, 255, 255, 0.1)',
-        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5)',
+        backgroundColor: 'transparent',
+        maxWidth: '1200px',
+        mx: 'auto',
       }}
     >
       {/* Header Section */}
-      <Box sx={{ textAlign: 'center', mb: 5 }}>
+      <Box sx={{ textAlign: 'center', mb: 3 }}>
         <Typography
           variant="h4"
-          fontWeight="800"
-          gutterBottom
           sx={{
             fontWeight: 'bold',
             mb: 1,
@@ -113,117 +112,105 @@ const About = ({ dimmed }) => {
           Technical Infrastructure & Skills
         </Typography>
         <Typography
-          variant="h6"
-          sx={{
-            mb: 2.5,
-            color: subText,
-            fontSize: '0.95rem',
-            fontWeight: 500,
-            letterSpacing: '0.3px',
-          }}
+         sx={{ color: "#D0D0D0", fontWeight: 500, fontSize: "0.78rem",pb: 1 }}
         >
-          Technologies, automation tools, and frameworks I leverage
+          Core technologies, modern frameworks, and automation tools I leverage
         </Typography>
         <Chip
           label={`${skillGroups.length} Technical Domains`}
           sx={{
-            color: steelAccent,
-            borderColor: 'rgba(148, 163, 184, 0.3)',
-            bgcolor: 'rgba(0, 0, 0, 0.3)',
+            color: 'primary.main',
+            borderColor: 'primary.main',
+            bgcolor: 'transparent',
             fontWeight: 700,
-            fontSize: '0.75rem',
-            letterSpacing: '0.5px',
+            fontSize: '0.65rem',
+            letterSpacing: '0.8px',
             textTransform: 'uppercase',
+            height: '22px',
           }}
           variant="outlined"
         />
       </Box>
 
-      {/* Grid Layout Matrix */}
+      {/* Shiny Whiteboard Surface Container (No Cards) */}
       <Box
         sx={{
+          bgcolor: '#ffffff',
+          backgroundImage: `
+            linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(240,244,248,1) 100%),
+            radial-gradient(#e2e8f0 1px, transparent 1px)
+          `,
+          backgroundSize: '100% 100%, 24px 24px',
+          border: '6px solid #cbd5e1',
+          borderRadius: '5px',
+          p: { xs: 2.5, sm: 4 },
+          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.45), inset 0 2px 8px rgba(255, 255, 255, 0.9), inset 0 -4px 12px rgba(0, 0, 0, 0.05)',
           display: 'grid',
-          gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
-          gap: 4,
+          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' },
+          gap: 3,
         }}
       >
-        {skillGroups.map(({ title, items }, index) => (
-          <MotionBox
-            key={title}
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-20px' }}
-            transition={{ duration: 0.35, delay: index * 0.05 }}
-            sx={{
-              position: 'relative',
-              pl: 2,
-              borderLeft: `3px solid ${steelAccent}`,
-            }}
-          >
-            {/* Category Header */}
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25, mb: 1.5 }}>
-              <Box
-                sx={{
-                  color: steelAccent,
-                  bgcolor: 'rgba(0, 0, 0, 0.3)',
-                  p: 0.7,
-                  borderRadius: '6px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                }}
-              >
-                {getSkillIcon(title)}
-              </Box>
-              <Typography
-                variant="subtitle1"
-                sx={{
-                  fontWeight: 700,
-                  color: headerText,
-                  fontSize: '0.95rem',
-                  letterSpacing: '0.5px',
-                  textTransform: 'uppercase',
-                }}
-              >
-                {title}
-              </Typography>
-            </Box>
-
-            {/* Tag / Pill Grid */}
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-              {items.map((item, i) => (
+        {skillGroups.map(({ title, items }, index) => {
+          const markerColor = markerColors[index % markerColors.length];
+          return (
+            <MotionBox
+              key={title}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-10px' }}
+              transition={{ duration: 0.25, delay: index * 0.02 }}
+              sx={{
+                backgroundColor: 'transparent',
+                display: 'flex',
+                flexDirection: 'column',
+                p: 1,
+              }}
+            >
+              {/* Category Header with Marker Color */}
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.75 }}>
                 <Box
-                  key={i}
                   sx={{
-                    px: 1.5,
-                    py: 0.5,
-                    borderRadius: '4px',
-                    bgcolor: chipBg,
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    transition: 'all 0.2s ease',
-                    '&:hover': {
-                      borderColor: steelAccent,
-                      bgcolor: '#2A2A2A',
-                    },
+                    color: markerColor,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    filter: `drop-shadow(0 1px 1px ${markerColor}33)`,
                   }}
                 >
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: '#CBD5E1',
-                      fontWeight: 500,
-                      fontSize: '0.8rem',
-                      letterSpacing: '0.2px',
-                    }}
-                  >
-                    {item}
-                  </Typography>
+                  {getSkillIcon(title)}
                 </Box>
-              ))}
-            </Box>
-          </MotionBox>
-        ))}
+                <Typography
+                  variant="subtitle2"
+                  sx={{
+                    fontWeight: 900,
+                    color: markerColor,
+                    fontSize: '0.9rem',
+                    fontFamily: '"Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif',
+                    letterSpacing: '0.3px',
+                    textShadow: `0 0 1px ${markerColor}44`,
+                  }}
+                >
+                  {title}
+                </Typography>
+              </Box>
+
+              {/* Inline Comma-Separated Marker Text */}
+              <Typography
+                variant="body2"
+                sx={{
+                  color: '#334155',
+                  fontSize: '0.8rem',
+                  lineHeight: 1.5,
+                  fontWeight: 700,
+                  fontFamily: '"Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif',
+                  pl: 3.5,
+                }}
+              >
+                {items.join(', ')}
+              </Typography>
+            </MotionBox>
+          );
+        })}
       </Box>
     </Box>
   );

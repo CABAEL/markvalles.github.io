@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Typography,
   Link,
   Box,
-  Container,
   useTheme,
   useMediaQuery,
-  Chip,
+  Modal,
+  IconButton,
+  Backdrop,
+  Switch,
+  FormControlLabel,
 } from "@mui/material";
-import { motion as Motion } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import CodeIcon from "@mui/icons-material/Code";
+import CloseIcon from "@mui/icons-material/Close";
+import WbIncandescentIcon from "@mui/icons-material/WbIncandescent";
 import thesis from "../pdf/THESIS_WTSK.pdf";
 import wais from "../pdf/WAIS_MANUAL.pdf";
 
@@ -24,9 +26,10 @@ const projectsData = [
       "Lightweight Windows background app designed to eliminate idle distractions and maintain flow state. Runs in the system tray tracking inactivity via Windows API, triggering a full-screen siren overlay with audio if idle threshold is exceeded, and silencing instantly upon mouse/keyboard movement.",
     link: "https://github.com/CABAEL/idle_police",
     linkText: "View Repo",
-    // Replace with your YouTube embed link (e.g., "https://www.youtube.com/embed/YOUR_VIDEO_ID")
     youtubeUrl: "https://www.youtube.com/embed/HUP7mSn2w-E",
     mediaType: "youtube",
+    spineColor: "#1a2a3a",
+    tilt: 0,
   },
   {
     type: "MAX AI VOICE ASSISTANT",
@@ -36,6 +39,8 @@ const projectsData = [
     link: "https://github.com/CABAEL/max_ai",
     linkText: "View Repo",
     mediaType: "code",
+    spineColor: "#3a1a1a",
+    tilt: 2,
   },
   {
     type: "HR Management System",
@@ -45,6 +50,8 @@ const projectsData = [
     link: "https://github.com/CABAEL/HRMS.git",
     linkText: "View Repo",
     mediaType: "code",
+    spineColor: "#1a3a2a",
+    tilt: -2,
   },
   {
     type: "Sales Software",
@@ -55,6 +62,8 @@ const projectsData = [
     linkText: "Visit Site",
     iframeUrl: "https://thesalesmachine.com/",
     mediaType: "iframe",
+    spineColor: "#3a3a1a",
+    tilt: 3,
   },
   {
     type: "Document Management System",
@@ -64,6 +73,8 @@ const projectsData = [
     link: "https://github.com/CABAEL/qrsys",
     linkText: "View Repo",
     mediaType: "code",
+    spineColor: "#2a1a3a",
+    tilt: -3,
   },
   {
     type: "Testing Tool",
@@ -73,6 +84,8 @@ const projectsData = [
     link: thesis,
     linkText: "View PDF",
     mediaType: "pdf",
+    spineColor: "#3a2a1a",
+    tilt: -2,
   },
   {
     type: "DOST-PCIEERD Agency Tracker",
@@ -82,6 +95,8 @@ const projectsData = [
     link: "",
     linkText: "Hosted under private domain",
     mediaType: "private",
+    spineColor: "#1a3a3a",
+    tilt: 3,
   },
   {
     type: "Blockchain Voting System",
@@ -91,6 +106,8 @@ const projectsData = [
     link: "https://github.com/CABAEL/blockchain_voting_system",
     linkText: "View Repo",
     mediaType: "code",
+    spineColor: "#3a1a2a",
+    tilt: -3,
   },
   {
     type: "Inventory Management",
@@ -100,6 +117,8 @@ const projectsData = [
     link: wais,
     linkText: "View PDF",
     mediaType: "pdf",
+    spineColor: "#2a3a1a",
+    tilt: 2,
   },
   {
     type: "Company Website",
@@ -110,10 +129,11 @@ const projectsData = [
     linkText: "Visit Site",
     iframeUrl: "https://peacemakerfilmworkseast.com/",
     mediaType: "iframe",
+    spineColor: "#202028",
+    tilt: -2,
   },
 ];
 
-// Sort array ensuring Idle Police stays first, followed by items with available links
 const projects = [...projectsData].sort((a, b) => {
   if (a.name === "Idle Police") return -1;
   if (b.name === "Idle Police") return 1;
@@ -122,260 +142,501 @@ const projects = [...projectsData].sort((a, b) => {
   return 0;
 });
 
-const ProjectsList = () => {
+const topShelfProjects = projects.slice(0, 5);
+const bottomShelfProjects = projects.slice(5, 10);
+
+const ProjectsList = ({ dimmed }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [selectedProject, setSelectedProject] = useState(null);
+  
+  const [isLightOn, setIsLightOn] = useState(!dimmed);
+
+  useEffect(() => {
+    setIsLightOn(!dimmed);
+  }, [dimmed]);
+
+  const handleOpenModal = (project, e) => {
+    if (e.target.closest("a")) return;
+    setSelectedProject(project);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedProject(null);
+  };
 
   return (
-    <Container maxWidth="xl" sx={{ color: "#FFFFFF", py: 4 }}>
-      {/* Title & Header */}
-      <Box sx={{ textAlign: "center", mb: 6, mt: 3 }}>
+    <Box sx={{ color: "#FFFFFF", width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <Box sx={{ textAlign: "center", mb: 1.5, width: "100%" }}>
         <Typography
-          variant={isMobile ? "h5" : "h4"}
           fontWeight="800"
-          gutterBottom
+          variant="h4"
           sx={{
-            fontWeight: "bold",
-            mb: 1,
-            color: "#ffff",
-            textShadow: "1px 1px 2px #000",
+            fontWeight: 'bold',
+            mb: 0.25,
+            color: 'rgb(225, 234, 243)',
+            textShadow: '1px 1px 2px #000',
+            fontSize: { xs: "1.3rem", sm: "1.6rem" },
           }}
         >
           Featured Projects
         </Typography>
         <Typography
-          variant="body1"
-          sx={{ color: "#D0D0D0", fontWeight: 500 }}
+          variant="body2"
+          sx={{ color: "#D0D0D0", fontWeight: 500, fontSize: "0.78rem",pb:5 }}
         >
-          Showcasing interactive previews, live software systems, and open-source repos
+          Explore code repositories and live systems organized on the developer bookshelf
         </Typography>
       </Box>
 
-      {/* Pinterest Masonry Column Container */}
+      {/* Two-Tier Shelf Cabinet Container */}
       <Box
         sx={{
-          columnCount: { xs: 1, sm: 2, md: 3 },
-          columnGap: "24px",
+          position: "relative",
+          bgcolor: isLightOn ? "#1c1c24" : "#0a0a0e",
+          border: "5px solid #281e17",
+          borderRadius: "12px",
+          p: { xs: 2, sm: 2.5 },
+          boxShadow: isLightOn
+            ? "0 15px 40px rgba(0, 0, 0, 0.8), inset 0 30px 30px rgba(186, 230, 253, 0.08)"
+            : "0 15px 40px rgba(0, 0, 0, 0.95), inset 0 0 30px rgba(0,0,0,0.8)",
+          transition: "background-color 0.4s ease, box-shadow 0.4s ease",
+          overflow: "visible",
           width: "100%",
+          maxWidth: "450px", // Snug width matching actual space occupied by the books
+          mx: "auto",
         }}
       >
-        {projects.map((project, index) => {
-          return (
-            <Motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-30px" }}
-              transition={{ duration: 0.35, delay: (index % 3) * 0.04 }}
-              style={{
-                breakInside: "avoid",
-                marginBottom: "24px",
-                display: "inline-block",
-                width: "100%",
-              }}
-            >
-              <Box
+        {/* Light switch control */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 10,
+            right: 14,
+            zIndex: 100,
+            display: "flex",
+            alignItems: "center",
+            gap: 0.5,
+            bgcolor: "rgba(0,0,0,0.4)",
+            px: 1.25,
+            py: 0.25,
+            borderRadius: "14px",
+            border: "1px solid rgba(255,255,255,0.1)",
+          }}
+        >
+          <WbIncandescentIcon
+            sx={{
+              fontSize: "0.95rem",
+              color: isLightOn ? "#38bdf8" : "#6c707e",
+              filter: isLightOn ? "drop-shadow(0 0 4px #38bdf8)" : "none",
+              transition: "all 0.3s ease",
+            }}
+          />
+          <FormControlLabel
+            control={
+              <Switch
+                checked={isLightOn}
+                onChange={(e) => setIsLightOn(e.target.checked)}
+                size="small"
                 sx={{
-                  borderRadius: "12px",
-                  bgcolor: "#121318",
-                  border: "1px solid #2A2C36",
-                  borderLeft: "4px solid #4A4D5A",
-                  overflow: "hidden",
-                  boxShadow: "0 4px 16px rgba(0, 0, 0, 0.4)",
-                  transition: "all 0.22s ease-in-out",
-                  "&:hover": {
-                    bgcolor: "#181A20",
-                    borderColor: "#3F4250",
-                    borderLeftColor: "#FFFFFF",
-                    boxShadow: "0 8px 28px rgba(0, 0, 0, 0.7)",
-                    transform: "translateY(-4px)",
-                  },
+                  "& .MuiSwitch-switchBase.Mui-checked": { color: "#38bdf8" },
+                  "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": { backgroundColor: "#0ea5e9" },
                 }}
+              />
+            }
+            label=""
+            sx={{ m: 0 }}
+          />
+        </Box>
+
+        {/* Overhead Light Glow */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: "15%",
+            right: "15%",
+            height: "5px",
+            bgcolor: isLightOn ? "#e0f2fe" : "transparent",
+            boxShadow: isLightOn ? "0 6px 20px 6px rgba(186, 230, 253, 0.35)" : "none",
+            borderRadius: "50%",
+            transition: "all 0.4s ease",
+          }}
+        />
+
+        {/* Top Shelf Tier */}
+        <Box sx={{ position: "relative", overflow: "visible", pt: 2.5, pb: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: "12px",
+              alignItems: "flex-end",
+              px: 1,
+            }}
+          >
+            {topShelfProjects.map((project, index) => (
+              <Motion.div
+                key={index}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.25, delay: index * 0.03 }}
+                style={{ flexShrink: 0, overflow: "visible" }}
               >
-                {/* Embedded Media Preview Section (YouTube, iFrames & Badges) */}
-                {project.youtubeUrl || project.iframeUrl ? (
+                <Box
+                  onClick={(e) => handleOpenModal(project, e)}
+                  component={Motion.div}
+                  animate={{ rotate: project.tilt }}
+                  whileHover={{
+                    y: -18,
+                    x: 0,
+                    scale: 1.04,
+                    rotate: 0,
+                    zIndex: 50,
+                    boxShadow: isLightOn
+                      ? "12px 16px 28px rgba(0,0,0,0.9)"
+                      : "6px 10px 18px rgba(0,0,0,0.95)",
+                  }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  sx={{
+                    width: { xs: "42px", sm: "48px" },
+                    height: { xs: "220px", sm: "270px" },
+                    bgcolor: project.spineColor,
+                    borderRadius: "2px 4px 2px 2px",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    borderLeft: "3px solid rgba(255,255,255,0.22)",
+                    boxShadow: isLightOn
+                      ? "2px 4px 10px rgba(0,0,0,0.7), inset -2px 0 6px rgba(0,0,0,0.5)"
+                      : "1px 3px 8px rgba(0,0,0,0.9), inset -2px 0 8px rgba(0,0,0,0.8)",
+                    cursor: "pointer",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    p: 0.5,
+                    position: "relative",
+                    overflow: "hidden",
+                    transformOrigin: "bottom center",
+                    transformStyle: "preserve-3d",
+                    filter: isLightOn ? "brightness(100%)" : "brightness(65%)",
+                  }}
+                >
                   <Box
                     sx={{
-                      position: "relative",
-                      width: "100%",
-                      height: project.mediaType === "youtube" ? "200px" : "240px",
-                      bgcolor: "#050507",
-                      borderBottom: "1px solid #2A2C36",
-                      overflow: "hidden",
-                    }}
-                  >
-                    {project.youtubeUrl ? (
-                      <iframe
-                        src={project.youtubeUrl}
-                        title={project.name}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          border: "none",
-                        }}
-                      />
-                    ) : (
-                      <iframe
-                        src={project.iframeUrl}
-                        title={project.name}
-                        loading="lazy"
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          border: "none",
-                          pointerEvents: "none",
-                        }}
-                      />
-                    )}
-                    <Chip
-                      icon={
-                        project.mediaType === "youtube" ? (
-                          <PlayCircleOutlineIcon sx={{ fontSize: "14px !important", color: "#FFF" }} />
-                        ) : (
-                          <OpenInNewIcon sx={{ fontSize: "12px !important", color: "#FFF" }} />
-                        )
-                      }
-                      label={project.mediaType === "youtube" ? "YouTube Video" : "Live Preview"}
-                      size="small"
-                      sx={{
-                        position: "absolute",
-                        top: 12,
-                        right: 12,
-                        height: "24px",
-                        fontSize: "0.7rem",
-                        fontWeight: 700,
-                        bgcolor: "#121318",
-                        color: "#FFFFFF",
-                        border: "1px solid #3F4250",
-                        pointerEvents: "none",
-                      }}
-                    />
-                  </Box>
-                ) : (
-                  /* Visual Banner for Non-iFrame / Non-YouTube Items */
-                  <Box
-                    sx={{
-                      px: 2.5,
-                      pt: 2.5,
-                      pb: 0.5,
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "space-between",
+                      justifyContent: "center",
+                      writingMode: "vertical-rl",
+                      transform: "rotate(180deg)",
+                      height: "100%",
+                      py: 0.5,
                     }}
                   >
-                    <Chip
-                      icon={
-                        project.mediaType === "pdf" ? (
-                          <PictureAsPdfIcon sx={{ fontSize: "13px !important", color: "#A0A5B5" }} />
-                        ) : (
-                          <CodeIcon sx={{ fontSize: "13px !important", color: "#A0A5B5" }} />
-                        )
-                      }
-                      label={project.mediaType.toUpperCase()}
-                      size="small"
-                      sx={{
-                        height: "22px",
-                        fontSize: "0.68rem",
-                        fontWeight: 700,
-                        color: "#C5C8D0",
-                        bgcolor: "#1C1E26",
-                        border: "1px solid #2A2C36",
-                      }}
-                    />
-                  </Box>
-                )}
-
-                {/* Card Content */}
-                <Box sx={{ p: 2.5, pt: project.youtubeUrl || project.iframeUrl ? 2 : 1 }}>
-                  <Typography
-                    sx={{
-                      color: "#9396A0",
-                      fontSize: "0.72rem",
-                      fontWeight: 700,
-                      mb: 0.5,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.6px",
-                    }}
-                  >
-                    {project.type}
-                  </Typography>
-
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: 700,
-                      color: "#FFFFFF",
-                      mb: 1,
-                      fontSize: "1.05rem",
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {project.name}
-                  </Typography>
-
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: "#C5C8D0",
-                      mb: 2.5,
-                      lineHeight: 1.55,
-                      fontSize: "0.85rem",
-                    }}
-                  >
-                    {project.description}
-                  </Typography>
-
-                  {/* Action Link Button */}
-                  {project.link ? (
-                    <Link
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      sx={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 0.75,
-                        px: 2,
-                        py: 0.75,
-                        borderRadius: "6px",
-                        color: "#FFFFFF",
-                        bgcolor: "#222530",
-                        border: "1px solid #3F4250",
-                        fontSize: "0.8rem",
-                        fontWeight: 600,
-                        textDecoration: "none",
-                        transition: "all 0.22s ease",
-                        "&:hover": {
-                          bgcolor: "#2E3242",
-                          borderColor: "#FFFFFF",
-                          color: "#FFFFFF",
-                        },
-                      }}
-                    >
-                      {project.linkText}
-                      <OpenInNewIcon sx={{ fontSize: "0.85rem" }} />
-                    </Link>
-                  ) : (
                     <Typography
-                      variant="caption"
+                      variant="body2"
                       sx={{
-                        color: "#6C707E",
-                        fontWeight: 600,
-                        fontStyle: "italic",
+                        fontWeight: 700,
+                        color: "#FFFFFF",
+                        fontSize: { xs: "0.55rem", sm: "0.64rem" },
+                        lineHeight: 1.2,
+                        letterSpacing: "0.3px",
+                        textShadow: "0 1px 3px rgba(0,0,0,0.9)",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
                       }}
                     >
-                      {project.linkText}
+                      {project.name}
                     </Typography>
+                  </Box>
+                </Box>
+              </Motion.div>
+            ))}
+          </Box>
+        </Box>
+
+        {/* Middle Shelf Wood Plank Divider */}
+        <Box
+          sx={{
+            height: "14px",
+            bgcolor: "#281e17",
+            borderTop: "1px solid #3d2e24",
+            borderBottom: "2px solid #14100d",
+            boxShadow: "0 4px 8px rgba(0,0,0,0.8)",
+            mx: -3,
+            my: 1.5,
+          }}
+        />
+
+        {/* Bottom Shelf Tier */}
+        <Box sx={{ position: "relative", overflow: "visible", pt: 1, pb: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: "12px",
+              alignItems: "flex-end",
+              px: 1,
+            }}
+          >
+            {bottomShelfProjects.map((project, index) => (
+              <Motion.div
+                key={index}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.25, delay: index * 0.03 }}
+                style={{ flexShrink: 0, overflow: "visible" }}
+              >
+                <Box
+                  onClick={(e) => handleOpenModal(project, e)}
+                  component={Motion.div}
+                  animate={{ rotate: project.tilt }}
+                  whileHover={{
+                    y: -18,
+                    x: 0,
+                    scale: 1.04,
+                    rotate: 0,
+                    zIndex: 50,
+                    boxShadow: isLightOn
+                      ? "12px 16px 28px rgba(0,0,0,0.9)"
+                      : "6px 10px 18px rgba(0,0,0,0.95)",
+                  }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  sx={{
+                    width: { xs: "42px", sm: "48px" },
+                    height: { xs: "220px", sm: "270px" },
+                    bgcolor: project.spineColor,
+                    borderRadius: "2px 4px 2px 2px",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    borderLeft: "3px solid rgba(255,255,255,0.22)",
+                    boxShadow: isLightOn
+                      ? "2px 4px 10px rgba(0,0,0,0.7), inset -2px 0 6px rgba(0,0,0,0.5)"
+                      : "1px 3px 8px rgba(0,0,0,0.9), inset -2px 0 8px rgba(0,0,0,0.8)",
+                    cursor: "pointer",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    p: 0.5,
+                    position: "relative",
+                    overflow: "hidden",
+                    transformOrigin: "bottom center",
+                    transformStyle: "preserve-3d",
+                    filter: isLightOn ? "brightness(100%)" : "brightness(65%)",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      writingMode: "vertical-rl",
+                      transform: "rotate(180deg)",
+                      height: "100%",
+                      py: 0.5,
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        fontWeight: 700,
+                        color: "#FFFFFF",
+                        fontSize: { xs: "0.55rem", sm: "0.64rem" },
+                        lineHeight: 1.2,
+                        letterSpacing: "0.3px",
+                        textShadow: "0 1px 3px rgba(0,0,0,0.9)",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {project.name}
+                    </Typography>
+                  </Box>
+                </Box>
+              </Motion.div>
+            ))}
+          </Box>
+
+          {/* Bottom Shelf Base */}
+          <Box
+            sx={{
+              height: "18px",
+              bgcolor: "#281e17",
+              borderTop: "1px solid #3d2e24",
+              borderBottom: "4px solid #14100d",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.8)",
+              mt: 1.5,
+              mx: -3,
+              mb: -2.5,
+            }}
+          />
+        </Box>
+      </Box>
+
+      {/* Project Details Modal */}
+      <Modal
+        open={Boolean(selectedProject)}
+        onClose={handleCloseModal}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 350,
+            sx: { bgcolor: "rgba(5, 5, 7, 0.85)", backdropFilter: "blur(6px)" },
+          },
+        }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          p: 2,
+        }}
+      >
+        <AnimatePresence>
+          {selectedProject && (
+            <Box
+              component={Motion.div}
+              initial={{ opacity: 0, scale: 0.92, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 15 }}
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              sx={{
+                position: "relative",
+                width: { xs: "100%", sm: "550px" },
+                maxHeight: "90vh",
+                overflowY: "auto",
+                bgcolor: "#121318",
+                border: "1px solid #3F4250",
+                borderLeft: "6px solid #38bdf8",
+                borderRadius: "14px",
+                boxShadow: "0 20px 50px rgba(0, 0, 0, 0.9)",
+                p: { xs: 2.5, sm: 3.5 },
+                color: "#FFFFFF",
+                outline: "none",
+                my: "auto",
+              }}
+            >
+              <IconButton
+                onClick={handleCloseModal}
+                sx={{
+                  position: "absolute",
+                  top: 14,
+                  right: 14,
+                  color: "#9396A0",
+                  "&:hover": { color: "#FFFFFF", bgcolor: "rgba(255,255,255,0.08)" },
+                }}
+              >
+                <CloseIcon fontSize="small" />
+              </IconButton>
+
+              <Typography
+                sx={{
+                  color: "#38bdf8",
+                  fontSize: "0.75rem",
+                  fontWeight: 700,
+                  mb: 0.5,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.6px",
+                }}
+              >
+                {selectedProject.type}
+              </Typography>
+
+              <Typography
+                variant="h5"
+                sx={{
+                  fontWeight: 800,
+                  color: "#FFFFFF",
+                  mb: 2,
+                  fontSize: "1.35rem",
+                }}
+              >
+                {selectedProject.name}
+              </Typography>
+
+              {(selectedProject.youtubeUrl || selectedProject.iframeUrl) && (
+                <Box
+                  sx={{
+                    position: "relative",
+                    width: "100%",
+                    height: "260px",
+                    bgcolor: "#050507",
+                    borderRadius: "8px",
+                    border: "1px solid #2A2C36",
+                    overflow: "hidden",
+                    mb: 2.5,
+                  }}
+                >
+                  {selectedProject.youtubeUrl ? (
+                    <iframe
+                      src={selectedProject.youtubeUrl}
+                      title={selectedProject.name}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      style={{ width: "100%", height: "100%", border: "none" }}
+                    />
+                  ) : (
+                    <iframe
+                      src={selectedProject.iframeUrl}
+                      title={selectedProject.name}
+                      loading="lazy"
+                      style={{ width: "100%", height: "100%", border: "none" }}
+                    />
                   )}
                 </Box>
-              </Box>
-            </Motion.div>
-          );
-        })}
-      </Box>
-    </Container>
+              )}
+
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "#D0D4E0",
+                  mb: 3,
+                  lineHeight: 1.7,
+                  fontSize: "0.95rem",
+                }}
+              >
+                {selectedProject.description}
+              </Typography>
+
+              {selectedProject.link && (
+                <Link
+                  href={selectedProject.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 0.75,
+                    px: 2.5,
+                    py: 1,
+                    borderRadius: "6px",
+                    color: "#FFFFFF",
+                    bgcolor: "#222530",
+                    border: "1px solid #3F4250",
+                    fontSize: "0.85rem",
+                    fontWeight: 600,
+                    textDecoration: "none",
+                    transition: "all 0.22s ease",
+                    "&:hover": {
+                      bgcolor: "#2E3242",
+                      borderColor: "#FFFFFF",
+                    },
+                  }}
+                >
+                  {selectedProject.linkText}
+                  <OpenInNewIcon sx={{ fontSize: "0.9rem" }} />
+                </Link>
+              )}
+            </Box>
+          )}
+        </AnimatePresence>
+      </Modal>
+    </Box>
   );
 };
 

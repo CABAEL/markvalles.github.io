@@ -5,12 +5,13 @@ import Chip from '@mui/material/Chip';
 import { motion as Motion } from 'framer-motion';
 import { getAccent } from './designTokens';
 
-const MotionBox = Motion(Box);
+const MotionTypography = Motion(Typography);
 
 const ExpList = ({ dimmed }) => {
-  const textShadowStyle = '0px 2px 4px rgba(101, 101, 101, 0.9)';
-  const blackTextShadow = '0px 1px 2px rgba(0, 0, 0, 0.8)';
-  const darkTextColor = '#c4d3ee';
+  const textShadowStyle = '0px 2px 6px rgba(0, 0, 0, 0.95)';
+  const companyTextColor = '#ffffff'; // Bright pure white for company names
+  const roleTextColor = '#cbd5e1';    // Distinct lighter gray-silver for roles/titles
+  const dateTextColor = '#444445';    // Solid blackish-blue for dates (without shadow)
 
   const experiences = [
     {
@@ -82,45 +83,60 @@ const ExpList = ({ dimmed }) => {
         p: 1,
         width: '100%',
         columnCount: { xs: 1, md: 2 }, // 1 column on small screens, 2 on desktop
-        columnGap: 3, // space between left and right column
+        columnGap: 4, // space between left and right column
       }}
     >
       {experiences.map((exp, i) => {
         const accent = getAccent(i);
 
         return (
-          <MotionBox
+          <MotionTypography
             key={i}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.4, delay: i * 0.04 }}
             sx={{
-              py: 2,
-              px: 1.5,
+              py: 1.1,
+              px: 1,
+              mb: 0.75,
               width: '100%',
               display: 'inline-block', // Prevents card breaking across column boundaries
               breakInside: 'avoid',
               boxSizing: 'border-box',
-              borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-              transition: 'background-color 0.2s ease',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+              transition: 'transform 0.2s ease',
               '&:hover': {
-                bgcolor: 'rgba(255, 255, 255, 0.03)',
+                transform: 'translateX(4px)',
               },
             }}
           >
             {/* Top Content */}
             <Box sx={{ width: '100%' }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
-                <Typography
+                <MotionTypography
                   variant="subtitle1"
                   sx={{
                     fontWeight: 700,
-                    color: darkTextColor,
-                    fontSize: '0.95rem',
+                    color: companyTextColor,
+                    fontSize: '0.9rem',
                     lineHeight: 1.3,
-                    textShadow: blackTextShadow,
+                    textShadow: textShadowStyle,
                     wordBreak: 'break-word',
+                    letterSpacing: '0.3px',
+                  }}
+                  animate={{
+                    textShadow: [
+                      '5px 4px 8px #444',
+                      '-5px 4px 8px #444',
+                      '5px 4px 8px #444',
+                    ],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    repeatType: 'loop',
+                    ease: 'easeInOut',
                   }}
                 >
                   {exp.link ? (
@@ -129,8 +145,9 @@ const ExpList = ({ dimmed }) => {
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
-                        color: darkTextColor,
+                        color: companyTextColor,
                         textDecoration: 'none',
+                        borderBottom: '1.5px solid rgba(255, 255, 255, 0.5)',
                       }}
                     >
                       {exp.company}
@@ -138,23 +155,21 @@ const ExpList = ({ dimmed }) => {
                   ) : (
                     exp.company
                   )}
-                </Typography>
+                </MotionTypography>
 
                 {exp.current && (
                   <Chip
                     label="Current"
                     size="small"
                     sx={{
-                      height: '20px',
                       fontSize: '0.65rem',
                       fontWeight: 700,
                       color: '#FFFFFF',
-                      bgcolor: `${accent}33`,
+                      bgcolor: `${accent}44`,
                       borderColor: accent,
                       borderWidth: 1,
                       borderStyle: 'solid',
                       textShadow: textShadowStyle,
-                      boxShadow: '0px 2px 4px rgba(0,0,0,0.6)',
                       flexShrink: 0,
                     }}
                   />
@@ -165,11 +180,11 @@ const ExpList = ({ dimmed }) => {
                 <Typography
                   variant="body2"
                   sx={{
-                    color: '#FFFFFF',
-                    textShadow: textShadowStyle,
-                    fontWeight: 700,
+                    color: roleTextColor,
+                    fontWeight: 60,
                     fontSize: '0.9rem',
-                    mt: 0.5,
+                    fontStyle: 'italic',
+                    mt: 0.35,
                   }}
                 >
                   {exp.role}
@@ -183,17 +198,17 @@ const ExpList = ({ dimmed }) => {
                 variant="caption"
                 sx={{
                   display: 'block',
-                  color: 'rgba(255, 255, 255, 0.8)',
-                  textShadow: textShadowStyle,
-                  fontWeight: 500,
+                  color: dateTextColor,
+                  textShadow: 'none', // Shadow removed here
+                  fontWeight: 600,
                   fontSize: '0.8rem',
-                  mt: 1,
+                  mt: 0.35,
                 }}
               >
                 {exp.dates}
               </Typography>
             )}
-          </MotionBox>
+          </MotionTypography>
         );
       })}
     </Box>

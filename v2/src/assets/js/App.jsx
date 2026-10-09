@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import wallbg from '../img/wall4.png';
-import { Grid, Box, Typography, Slide, ThemeProvider, CssBaseline, Divider } from '@mui/material';
+import { Grid, Box, Typography, ThemeProvider, CssBaseline, Divider } from '@mui/material';
 import ExpList from './Experiences';
 import HelmetTag from './Helmet';
 import { motion } from "framer-motion";
@@ -110,7 +110,7 @@ function App() {
   };
 
   const SectionDivider = () => (
-    <Divider sx={{ borderColor: 'rgba(255,255,255,0.08)', mx: { xs: 2, md: 6 }, my: 2 }} />
+    <Divider sx={{ borderColor: 'rgba(255,255,255,0.08)', mx: { xs: 2, md: 6 }, my: 1.5 }} />
   );
 
   return (
@@ -134,60 +134,63 @@ function App() {
               filter: dimmed ? 'brightness(55%)' : 'brightness(100%)',
               position: 'relative',
               overflowX: 'hidden',
+              pl: { xs: 2, md: 4 },
             }}
             container
             spacing={0}
           >
             {/* Left Column: Light hanging directly above centered NameCard */}
-<Grid size={{ xs: 12, md: 12, lg: 5 }} pt={0} pb={{ xs: 15 }} id="about">
-  <Box color="white" display="flex" flexDirection="column" alignItems="center">
-    {/* Hanging Light Fixture */}
-    <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-      <LetThereBeLight handleToggleDim={handleToggleDim} setDimmed={setDimmed} dimmed={dimmed} />
-    </Box>
+            <Grid size={{ xs: 12, md: 12, lg: 5 }} pt={0} pb={{ xs: 4, lg: 0 }} id="about">
+              <Box color="white" display="flex" flexDirection="column" alignItems="center">
+                {/* Hanging Light Fixture */}
+                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                  <LetThereBeLight handleToggleDim={handleToggleDim} setDimmed={setDimmed} dimmed={dimmed} />
+                </Box>
 
-    {/* NameCard directly centered beneath light */}
-    <Box 
-      sx={{ 
-        width: '100%', 
-        display: 'flex', 
-        justifyContent: 'center', 
-        px: 2 
-      }}
-    >
-      <NameCard dimmed={dimmed} />
-    </Box>
-  </Box>
-</Grid>
+                {/* NameCard directly centered beneath light */}
+                <Box 
+                  sx={{ 
+                    width: '100%', 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    px: 2 
+                  }}
+                >
+                  <NameCard dimmed={dimmed} />
+                </Box>
+              </Box>
+            </Grid>
 
             {/* Right Column: Work Experiences */}
-            <Grid size={{ xs: 12, md: 12, lg: 7 }} pt={{ lg: 8, xs: 2 }}>
+            <Grid size={{ xs: 12, md: 12, lg: 7 }} pt={{ lg: 2, xs: 2 }} pb={{ xs: 2, lg: 0 }}>
               <Box sx={{ px: { xs: 2, md: 4 } }}>
-<MotionTypography
-  variant="h1"
-  sx={{
-    fontSize: { xs: '4vh', sm: '5vh', md: '6vh', lg: '3vw' },
-    textAlign: 'left',
-    fontWeight: 'bold',
-    color: '#eee',
-    mb: 4,
-  }}
-  animate={{
-    textShadow: [
-      '5px 4px 8px #444',
-      '-5px 4px 8px #444',
-      '5px 4px 8px #444',
-    ],
-  }}
-  transition={{
-    duration: 4,
-    repeat: Infinity,
-    repeatType: 'loop',
-    ease: 'easeInOut',
-  }}
->
-  WORK EXPERIENCES
-</MotionTypography>
+              <MotionTypography
+                variant="h1"
+                sx={{
+                  fontSize: { xs: '3vh', sm: '4vh', md: '5vh', lg: '2vw' },
+                  textAlign: 'center',
+                  fontFamily: 'Tahoma',
+                  color: 'rgb(190, 190, 190)',
+                  mb: 1.5,
+                  pt: 1,
+                  pb: 3,
+                }}
+                animate={{
+                  textShadow: [
+                    '5px 4px 8px #050505',
+                    '-5px 4px 8px #050505',
+                    '5px 4px 8px #050505',
+                  ],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  repeatType: 'loop',
+                  ease: 'easeInOut',
+                }}
+              >
+                WORK EXPERIENCES
+              </MotionTypography>
 
                 <Box id="experience">
                   <ExpList dimmed={dimmed} />
@@ -195,31 +198,33 @@ function App() {
               </Box>
             </Grid>
 
-                        <Grid size={12}>
-              <SectionDivider />
+            <Grid size={12} sx={{pt:3}}>
+              
             </Grid>
 
-            <Grid size={12} id="projects" sx={{ px: 2, pb: 4 }}>
-              <ProjectsSection />
+            {/* Side-by-Side Equated Grid Row: Featured Projects & Technical Skills */}
+            <Grid container spacing={2.5} size={12} sx={{ px: { xs: 2, md: 4 }, pb: 2, alignItems: 'stretch',pt: 3}}>
+              <Grid size={{ xs: 12, lg: 6 }} id="projects" sx={{ display: 'flex', flexDirection: 'column' }}>
+                <ProjectsSection dimmed={dimmed} />
+              </Grid>
+              <Grid size={{ xs: 12, lg: 6 }} id="skills" sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Skills dimmed={dimmed} />
+              </Grid>
             </Grid>
 
             <Grid size={12}>
               <SectionDivider />
             </Grid>
 
-            <Grid size={12} id="projects" sx={{ px: 2, pb: 4 }}>
+            <Grid size={12} id="certifications" sx={{ px: 2, pb: 2 }}>
               <CertificationBoard dimmed={dimmed} />
             </Grid>
 
-            <Grid size={12} id="skills" sx={{ px: 2 }}>
-              <Skills dimmed={dimmed} />
-            </Grid>
-
             <Grid size={12}>
               <SectionDivider />
             </Grid>
 
-            <Grid size={12} id="gallery" sx={{ px: 2 }}>
+            <Grid size={12} id="gallery" sx={{ px: 2, pb: 2 }}>
               <Gallery />
             </Grid>
 

@@ -107,7 +107,9 @@ export default function PinterestGalleryWithLightboxDescription() {
         >
           Photo Gallery
         </Typography>
-        <Typography variant="h6" sx={{ mb: 2, color: '#D0D0D0' }}>
+        <Typography
+          sx={{ color: "#D0D0D0", fontWeight: 500, fontSize: "0.78rem",pb: 1 }}
+        >
           Memorable moments and professional experiences
         </Typography>
         <Chip
