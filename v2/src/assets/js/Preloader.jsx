@@ -71,7 +71,7 @@ const Preloader = () => {
               mb: 1,
             }}
           >
-            MARK VALLES
+            DESIGNED BY: MARK VALLES
           </Typography>
           <Typography
             variant="body2"
