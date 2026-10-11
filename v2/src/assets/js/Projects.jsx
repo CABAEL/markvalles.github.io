@@ -32,6 +32,19 @@ const projectsData = [
     tilt: 0,
   },
   {
+    type: "Browser Game",
+    name: "Mostquito",
+    description:
+      "Are you bored like me? Try swatting away an army of mosquitoes before they crash your browser! It's a browser game: no need to install, no need to login! Best to play in PC but you can try it in mobile too! However, playing in mobile is a bit easy. Test your reaction time and patience, LOL! Apparently, I'm not even that good at it even though I built the game. You can download your stats image to share your score.",
+    link: "https://cabael.github.io/mostquito.github.io/",
+    linkText: "Play Game",
+    youtubeUrl: "https://www.youtube.com/embed/JqyGV9NjSe4",
+    verticalMedia: true,
+    mediaType: "youtube",
+    spineColor: "#1a1a3a",
+    tilt: -2,
+  },
+  {
     type: "MAX AI VOICE ASSISTANT",
     name: "MAX AI",
     description:
@@ -142,9 +155,6 @@ const projects = [...projectsData].sort((a, b) => {
   return 0;
 });
 
-const topShelfProjects = projects.slice(0, 5);
-const bottomShelfProjects = projects.slice(5, 10);
-
 const ProjectsList = ({ dimmed }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -166,7 +176,7 @@ const ProjectsList = ({ dimmed }) => {
   };
 
   return (
-    <Box sx={{ color: "#FFFFFF", width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+    <Box sx={{ color: "#FFFFFF", width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
       <Box sx={{ textAlign: "center", mb: 1.5, width: "100%" }}>
         <Typography
           fontWeight="800"
@@ -183,27 +193,27 @@ const ProjectsList = ({ dimmed }) => {
         </Typography>
         <Typography
           variant="body2"
-          sx={{ color: "#D0D0D0", fontWeight: 500, fontSize: "0.78rem",pb:5 }}
+          sx={{ color: "#D0D0D0", fontWeight: 500, fontSize: "0.78rem", pb: 5 }}
         >
           Explore code repositories and live systems organized on the developer bookshelf
         </Typography>
       </Box>
 
-      {/* Two-Tier Shelf Cabinet Container */}
+      {/* Wider Single-Tier Shelf Cabinet Container */}
       <Box
         sx={{
           position: "relative",
           bgcolor: isLightOn ? "#1c1c24" : "#0a0a0e",
           border: "5px solid #281e17",
           borderRadius: "12px",
-          p: { xs: 2, sm: 2.5 },
+          p: { xs: 2, sm: 3 },
           boxShadow: isLightOn
             ? "0 15px 40px rgba(0, 0, 0, 0.8), inset 0 30px 30px rgba(186, 230, 253, 0.08)"
             : "0 15px 40px rgba(0, 0, 0, 0.95), inset 0 0 30px rgba(0,0,0,0.8)",
           transition: "background-color 0.4s ease, box-shadow 0.4s ease",
           overflow: "visible",
           width: "100%",
-          maxWidth: "450px", // Snug width matching actual space occupied by the books
+          maxWidth: { xs: "100%", sm: "700px", md: "800px" }, 
           mx: "auto",
         }}
       >
@@ -264,19 +274,36 @@ const ProjectsList = ({ dimmed }) => {
           }}
         />
 
-        {/* Top Shelf Tier */}
+        {/* Single Shelf Row Container */}
         <Box sx={{ position: "relative", overflow: "visible", pt: 2.5, pb: 1 }}>
           <Box
             sx={{
               display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              gap: "12px",
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              gap: "14px",
               alignItems: "flex-end",
               px: 1,
+              overflowX: "auto",
+              py: 1,
+              /* Custom scrollbar to match shelf theme */
+              '&::-webkit-scrollbar': {
+                height: '6px',
+              },
+              '&::-webkit-scrollbar-track': {
+                bgcolor: 'rgba(0,0,0,0.3)',
+                borderRadius: '3px',
+              },
+              '&::-webkit-scrollbar-thumb': {
+                bgcolor: '#3d2e24',
+                borderRadius: '3px',
+                '&:hover': {
+                  bgcolor: '#523e31',
+                },
+              },
             }}
           >
-            {topShelfProjects.map((project, index) => (
+            {projects.map((project, index) => (
               <Motion.div
                 key={index}
                 initial={{ opacity: 0, y: 15 }}
@@ -301,113 +328,7 @@ const ProjectsList = ({ dimmed }) => {
                   }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
                   sx={{
-                    width: { xs: "42px", sm: "48px" },
-                    height: { xs: "220px", sm: "270px" },
-                    bgcolor: project.spineColor,
-                    borderRadius: "2px 4px 2px 2px",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    borderLeft: "3px solid rgba(255,255,255,0.22)",
-                    boxShadow: isLightOn
-                      ? "2px 4px 10px rgba(0,0,0,0.7), inset -2px 0 6px rgba(0,0,0,0.5)"
-                      : "1px 3px 8px rgba(0,0,0,0.9), inset -2px 0 8px rgba(0,0,0,0.8)",
-                    cursor: "pointer",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    p: 0.5,
-                    position: "relative",
-                    overflow: "hidden",
-                    transformOrigin: "bottom center",
-                    transformStyle: "preserve-3d",
-                    filter: isLightOn ? "brightness(100%)" : "brightness(65%)",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      writingMode: "vertical-rl",
-                      transform: "rotate(180deg)",
-                      height: "100%",
-                      py: 0.5,
-                    }}
-                  >
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontWeight: 700,
-                        color: "#FFFFFF",
-                        fontSize: { xs: "0.55rem", sm: "0.64rem" },
-                        lineHeight: 1.2,
-                        letterSpacing: "0.3px",
-                        textShadow: "0 1px 3px rgba(0,0,0,0.9)",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                      }}
-                    >
-                      {project.name}
-                    </Typography>
-                  </Box>
-                </Box>
-              </Motion.div>
-            ))}
-          </Box>
-        </Box>
-
-        {/* Middle Shelf Wood Plank Divider */}
-        <Box
-          sx={{
-            height: "14px",
-            bgcolor: "#281e17",
-            borderTop: "1px solid #3d2e24",
-            borderBottom: "2px solid #14100d",
-            boxShadow: "0 4px 8px rgba(0,0,0,0.8)",
-            mx: -3,
-            my: 1.5,
-          }}
-        />
-
-        {/* Bottom Shelf Tier */}
-        <Box sx={{ position: "relative", overflow: "visible", pt: 1, pb: 1 }}>
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              gap: "12px",
-              alignItems: "flex-end",
-              px: 1,
-            }}
-          >
-            {bottomShelfProjects.map((project, index) => (
-              <Motion.div
-                key={index}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.25, delay: index * 0.03 }}
-                style={{ flexShrink: 0, overflow: "visible" }}
-              >
-                <Box
-                  onClick={(e) => handleOpenModal(project, e)}
-                  component={Motion.div}
-                  animate={{ rotate: project.tilt }}
-                  whileHover={{
-                    y: -18,
-                    x: 0,
-                    scale: 1.04,
-                    rotate: 0,
-                    zIndex: 50,
-                    boxShadow: isLightOn
-                      ? "12px 16px 28px rgba(0,0,0,0.9)"
-                      : "6px 10px 18px rgba(0,0,0,0.95)",
-                  }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                  sx={{
-                    width: { xs: "42px", sm: "48px" },
+                    width: { xs: "44px", sm: "52px" },
                     height: { xs: "220px", sm: "270px" },
                     bgcolor: project.spineColor,
                     borderRadius: "2px 4px 2px 2px",
@@ -462,7 +383,7 @@ const ProjectsList = ({ dimmed }) => {
             ))}
           </Box>
 
-          {/* Bottom Shelf Base */}
+          {/* Bottom Shelf Wooden Base Plank */}
           <Box
             sx={{
               height: "18px",
@@ -564,7 +485,7 @@ const ProjectsList = ({ dimmed }) => {
                   sx={{
                     position: "relative",
                     width: "100%",
-                    height: "260px",
+                    height: selectedProject.verticalMedia ? { xs: "380px", sm: "440px" } : "260px",
                     bgcolor: "#050507",
                     borderRadius: "8px",
                     border: "1px solid #2A2C36",

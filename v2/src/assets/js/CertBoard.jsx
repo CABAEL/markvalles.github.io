@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Card, CardMedia, Typography, Box, Chip, Avatar, IconButton } from '@mui/material';
-import { motion } from 'framer-motion';
-import { Verified, ChevronLeft, ChevronRight } from '@mui/icons-material';
+import { CardMedia, Typography, Box, Chip, Avatar, IconButton } from '@mui/material';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Verified, ChevronLeft, ChevronRight, OpenInFull } from '@mui/icons-material';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 
-// Import your images
+// Import images
 import dsse from '../img/dsse.jpg';
 import yempo from '../img/yempo.png';
 import pcieerd from '../img/pcieerd_coe.jpg';
@@ -57,8 +57,9 @@ const CertificationBoard = ({ dimmed }) => {
   const [open, setOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
+  const [isFlipping, setIsFlipping] = useState(false);
 
-  const thumbnailsPerPage = 5;
+  const thumbnailsPerPage = 10;
   const totalPages = Math.ceil(certificates.length / thumbnailsPerPage);
 
   const handlePrevPage = () => {
@@ -67,6 +68,15 @@ const CertificationBoard = ({ dimmed }) => {
 
   const handleNextPage = () => {
     setCurrentPage((prev) => (prev < totalPages - 1 ? prev + 1 : 0));
+  };
+
+  const handleSelectCert = (index) => {
+    if (index === selectedIndex || isFlipping) return;
+    setIsFlipping(true);
+    setTimeout(() => {
+      setSelectedIndex(index);
+      setIsFlipping(false);
+    }, 300);
   };
 
   const getCurrentThumbnails = () => {
@@ -81,294 +91,353 @@ const CertificationBoard = ({ dimmed }) => {
   const activeCert = certificates[selectedIndex];
 
   return (
-    <Box sx={{ p: { xs: 1, sm: 3 }, width: '100%', maxWidth: '1200px', mx: 'auto' }}>
-      {/* Header */}
-      <Box sx={{ textAlign: 'center', mb: 4 }}>
+    <Box sx={{ p: { xs: 1, sm: 3 }, width: '100%', maxWidth: '980px', mx: 'auto' }}>
+      {/* Title Header */}
+      <Box sx={{ textAlign: 'center', mb: 3 }}>
         <Typography
           variant="h4"
           sx={{
             fontWeight: 'bold',
-            mb: 1,
-            color: '#ffff',
+            mb: 0.25,
+            color: 'rgb(225, 234, 243)',
             textShadow: '1px 1px 2px #000',
+            fontSize: { xs: "1.3rem", sm: "1.6rem" },
           }}
         >
           Certifications & Achievements
         </Typography>
         <Typography 
-          sx={{ color: "#D0D0D0", fontWeight: 500, fontSize: "0.78rem",pb: 1 }}
+          variant="body2"
+          sx={{ color: "#D0D0D0", fontWeight: 500, fontSize: "0.78rem", pb: 5 }}
         >
-          Professional credentials and recognition milestones
+          Overhead dark desk view • Flip pages to view credentials
         </Typography>
         <Chip
           icon={<Verified />}
-          label={`${certificates.length} Certifications`}
-          sx={{
-            color: '#B0B0B0',
-            borderColor: '#B0B0B0',
-          }}
+          label={`${certificates.length} Credentials`}
+          sx={{ color: '#e2e8f0', borderColor: '#334155', bgcolor: '#0f172a' }}
           variant="outlined"
           size="small"
         />
       </Box>
 
-      {/* Split Layout: Main Post on Left, Paginated Thumbnail List on Right */}
+      {/* Main Dark Wooden Table Surface (No Hard Borders) */}
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
-          gap: 3,
-          alignItems: 'stretch',
+          width: '100%',
+          bgcolor: '#121110',
+          background: `
+            radial-gradient(circle at 50% 25%, rgba(41, 37, 35, 0.6) 0%, rgba(15, 14, 13, 0.95) 90%),
+            linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(0,0,0,0.4) 100%)
+          `,
+          boxShadow: dimmed
+            ? '0 20px 40px rgba(0, 0, 0, 0.95)'
+            : '0 30px 60px rgba(0, 0, 0, 0.85), inset 0 1px 3px rgba(255, 255, 255, 0.08)',
+          p: { xs: 2, sm: 4 },
+          position: 'relative',
+          overflow: 'hidden',
+          boxSizing: 'border-box',
         }}
       >
-        {/* Left Side: Active Framed Post */}
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <motion.div
-            key={selectedIndex}
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.25 }}
-            style={{ width: '100%', height: '100%', display: 'flex' }}
+        {/* Subtle Recessed Pencil Groove on Dark Desk */}
+        <Box
+          sx={{
+            width: '65%',
+            height: { xs: '6px', sm: '10px' },
+            mx: 'auto',
+            mb: { xs: 2, sm: 3 },
+            bgcolor: '#090807',
+            borderRadius: '8px',
+            boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.9), 0 1px 0 rgba(255,255,255,0.04)',
+          }}
+        />
+
+        {/* Desk Surface Layout Grid (Notebook + Static Yellow Mongol Pencil) */}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: { xs: 2, sm: 3 },
+            position: 'relative',
+          }}
+        >
+          {/* Main Spiral Notebook Sheet */}
+          <Box
+            sx={{
+              position: 'relative',
+              width: '100%',
+              maxWidth: '680px',
+              bgcolor: '#fbfaf7',
+              borderRadius: '6px 14px 14px 6px',
+              boxShadow: '0 15px 35px rgba(0, 0, 0, 0.55), 0 5px 15px rgba(0, 0, 0, 0.3)',
+              pl: { xs: 4, sm: 5 },
+              pr: { xs: 2, sm: 3 },
+              py: { xs: 2.5, sm: 3.5 },
+            }}
           >
-            <Card
+            {/* Spiral Wire Binding (Left Edge) */}
+            <Box
               sx={{
-                width: '100%',
-                bgcolor: '#121318',
-                borderRadius: '12px',
-                border: '1px solid #2A2C36',
-                boxShadow: dimmed
-                  ? '0 10px 30px rgba(0, 0, 0, 0.9)'
-                  : '0 16px 40px rgba(0, 0, 0, 0.7)',
-                overflow: 'hidden',
+                position: 'absolute',
+                left: { xs: '8px', sm: '12px' },
+                top: '12px',
+                bottom: '12px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
+                zIndex: 10,
               }}
             >
-              {/* Post Header */}
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', p: 2, pb: 1.5 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                  <Avatar
-                    src={activeCert.img}
-                    alt="Mark Valles"
-                    sx={{ width: 36, height: 36, border: '2px solid rgba(255,255,255,0.2)' }}
-                  />
-                  <Box>
-                    <Typography
-                      variant="subtitle2"
-                      sx={{
-                        fontWeight: 700,
-                        color: '#FFFFFF',
-                        lineHeight: 1.2,
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 0.5,
-                      }}
-                    >
-                      mark_valles <Verified sx={{ fontSize: '0.9rem', color: '#94a3b8' }} />
-                    </Typography>
-                    <Typography variant="caption" sx={{ color: '#8E92A4' }}>
-                      Verified Credential
-                    </Typography>
-                  </Box>
-                </Box>
-              </Box>
-
-              {/* Framed Wall Image Display Container */}
-              <Box
-                onClick={() => setOpen(true)}
-                sx={{
-                  cursor: 'pointer',
-                  bgcolor: '#0a0a0e',
-                  p: { xs: '8px', sm: '16px' },
-                  borderTop: '6px solid #281e17',
-                  borderBottom: '6px solid #281e17',
-                  boxShadow: 'inset 0 0 20px rgba(0,0,0,0.8)',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  flexGrow: 1,
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  image={activeCert.img}
-                  alt={activeCert.title}
+              {[...Array(14)].map((_, i) => (
+                <Box
+                  key={i}
                   sx={{
-                    width: '100%',
-                    height: { xs: 260, sm: 360, md: 400 },
-                    objectFit: 'contain',
-                    bgcolor: '#0f0f13',
+                    width: { xs: '16px', sm: '22px' },
+                    height: { xs: '7px', sm: '9px' },
+                    bgcolor: '#27272a',
+                    background: 'linear-gradient(180deg, #71717a 0%, #18181b 50%, #52525b 100%)',
                     borderRadius: '4px',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    transition: 'transform 0.3s ease',
-                    '&:hover': {
-                      transform: 'scale(1.01)',
-                    },
+                    boxShadow: '2px 3px 4px rgba(0,0,0,0.5)',
+                    ml: '-10px',
                   }}
                 />
-              </Box>
+              ))}
+            </Box>
 
-              {/* Caption */}
-              <Box sx={{ px: 2, py: 2.5 }}>
-                <Typography variant="body2" sx={{ color: '#D0D4E0', fontSize: '0.9rem', lineHeight: 1.5 }}>
-                  <Box component="span" sx={{ fontWeight: 700, color: '#FFFFFF', mr: 1 }}>
-                    mark_valles
-                  </Box>
-                  {activeCert.caption}
+            {/* Notebook Header Tag */}
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2, pb: 1, borderBottom: '1px dashed #e4e4e7' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography variant="subtitle2" sx={{ fontFamily: '"Courier New", Courier, monospace', fontWeight: 700, color: '#3f3f46', fontSize: '0.85rem' }}>
+                  mark_valles.doc [{selectedIndex + 1}/{certificates.length}]
                 </Typography>
               </Box>
-            </Card>
-          </motion.div>
-        </Box>
+              <IconButton onClick={() => setOpen(true)} size="small" sx={{ color: '#71717a', '&:hover': { color: '#000' } }}>
+                <OpenInFull sx={{ fontSize: '1rem' }} />
+              </IconButton>
+            </Box>
 
-        {/* Right Side: Paginated Thumbnail Column (5 per page, neutral gray styling) */}
-        <Box
-          sx={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            bgcolor: '#121318',
-            borderRadius: '12px',
-            border: '1px solid #2A2C36',
-            p: 2.5,
-            boxShadow: dimmed
-              ? '0 10px 30px rgba(0, 0, 0, 0.9)'
-              : '0 16px 40px rgba(0, 0, 0, 0.7)',
-          }}
-        >
-          {/* Thumbnails Stack */}
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-            {getCurrentThumbnails().map(({ item, originalIndex }) => {
-              const isSelected = selectedIndex === originalIndex;
-              return (
-                <motion.div key={originalIndex} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
-                  <Card
-                    onClick={() => setSelectedIndex(originalIndex)}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 2,
-                      p: 1.25,
-                      cursor: 'pointer',
-                      bgcolor: isSelected ? 'rgba(255, 255, 255, 0.05)' : '#181920',
-                      border: isSelected ? '1px solid rgba(255, 255, 255, 0.3)' : '1px solid #2A2C36',
-                      borderRadius: '8px',
-                      transition: 'all 0.2s ease',
-                      '&:hover': {
-                        bgcolor: 'rgba(255, 255, 255, 0.03)',
-                        borderColor: 'rgba(255, 255, 255, 0.2)',
-                      },
-                    }}
+            {/* Certificate Page Frame with Page-Turn / Slide Transition */}
+            <Box
+              onClick={() => setOpen(true)}
+              sx={{
+                cursor: 'pointer',
+                position: 'relative',
+                minHeight: { xs: 260, sm: 360 },
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                overflow: 'hidden',
+              }}
+            >
+              <AnimatePresence mode="wait">
+                {!isFlipping && (
+                  <motion.div
+                    key={selectedIndex}
+                    initial={{ opacity: 0, x: 40, rotateY: 8 }}
+                    animate={{ opacity: 1, x: 0, rotateY: 0 }}
+                    exit={{ opacity: 0, x: -40, rotateY: -8 }}
+                    transition={{ duration: 0.28, ease: 'easeOut' }}
+                    style={{ width: '100%', display: 'flex', justifyContent: 'center', transformOrigin: 'left center' }}
                   >
-                    {/* Thumbnail Frame */}
                     <Box
                       sx={{
-                        width: 52,
-                        height: 52,
-                        flexShrink: 0,
-                        bgcolor: '#0a0a0e',
-                        p: '2px',
-                        borderTop: '2px solid #281e17',
-                        borderBottom: '2px solid #281e17',
-                        borderRadius: '4px',
-                        overflow: 'hidden',
+                        p: 0.5,
+                        bgcolor: '#ffffff',
+                        borderRadius: '2px',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                        width: '100%',
                       }}
                     >
                       <CardMedia
                         component="img"
-                        image={item.img}
-                        alt={item.title}
+                        image={activeCert.img}
+                        alt={activeCert.title}
                         sx={{
                           width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          borderRadius: '2px',
+                          height: { xs: 220, sm: 320, md: 350 },
+                          objectFit: 'contain',
+                          bgcolor: '#fafafa',
                         }}
                       />
                     </Box>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </Box>
 
-                    {/* Thumbnail Info */}
-                    <Box sx={{ overflow: 'hidden', flexGrow: 1 }}>
-                      <Typography
-                        variant="subtitle2"
-                        sx={{
-                          fontWeight: isSelected ? 700 : 500,
-                          color: isSelected ? '#FFFFFF' : '#cbd5e1',
-                          fontSize: '0.88rem',
-                          whiteSpace: 'nowrap',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                        }}
-                      >
-                        {item.title}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          color: '#8E92A4',
-                          fontSize: '0.78rem',
-                          display: '-webkit-box',
-                          WebkitLineClamp: 1,
-                          WebkitBoxOrient: 'vertical',
-                          overflow: 'hidden',
-                        }}
-                      >
-                        {item.caption}
-                      </Typography>
-                    </Box>
-                  </Card>
+            {/* Handwritten Style Caption */}
+            <Box sx={{ mt: 2, pt: 1, borderTop: '1px solid #f4f4f5' }}>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontFamily: '"Courier New", Courier, monospace',
+                  fontWeight: 600,
+                  color: '#27272a',
+                  fontSize: { xs: '0.78rem', sm: '0.86rem' },
+                }}
+              >
+                <Box component="span" sx={{ color: '#2563eb', fontWeight: 700, mr: 1 }}>
+                  ► {activeCert.title}:
+                </Box>
+                {activeCert.caption}
+              </Typography>
+            </Box>
+          </Box>
+
+          {/* Static Classic Yellow Mongol Pencil (Fixed, no hover movement) */}
+          <Box
+            onClick={() => setOpen(true)}
+            sx={{
+              display: { xs: 'none', md: 'flex' },
+              flexDirection: 'column',
+              alignItems: 'center',
+              cursor: 'pointer',
+            }}
+          >
+            <Box
+              sx={{
+                width: '14px',
+                height: '210px',
+                bgcolor: '#eab308', // Classic yellow Mongol pencil finish
+                borderRadius: '2px',
+                boxShadow: '4px 6px 12px rgba(0,0,0,0.6), inset -2px 0 3px rgba(0,0,0,0.3)',
+                position: 'relative',
+              }}
+            >
+              {/* Silver Ferrule Band */}
+              <Box sx={{ position: 'absolute', top: 0, width: '100%', height: '15px', bgcolor: '#94a3b8', borderRadius: '2px 2px 0 0' }} />
+              {/* Pink Eraser */}
+              <Box sx={{ position: 'absolute', top: '-9px', width: '100%', height: '9px', bgcolor: '#f43f5e', borderRadius: '3px 3px 0 0' }} />
+              {/* Sharpened Wood Tip */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  bottom: '-16px',
+                  left: 0,
+                  width: 0,
+                  height: 0,
+                  borderLeft: '7px solid transparent',
+                  borderRight: '7px solid transparent',
+                  borderTop: '16px solid #fde047',
+                }}
+              />
+              {/* Graphite Lead Tip */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  bottom: '-16px',
+                  left: '4px',
+                  width: 0,
+                  height: 0,
+                  borderLeft: '3px solid transparent',
+                  borderRight: '3px solid transparent',
+                  borderTop: '7px solid #18181b',
+                }}
+              />
+            </Box>
+          </Box>
+        </Box>
+
+        {/* Bottom Desk Groove Tray (Thumbnail Selector) */}
+        <Box
+          sx={{
+            mt: 3,
+            p: 2,
+            bgcolor: '#0a0908',
+            borderRadius: '12px',
+            boxShadow: 'inset 0 3px 6px rgba(0,0,0,0.9)',
+          }}
+        >
+          {/* Thumbnails Grid */}
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: 'repeat(5, 1fr)', sm: 'repeat(10, 1fr)' },
+              gap: 1,
+            }}
+          >
+            {getCurrentThumbnails().map(({ item, originalIndex }) => {
+              const isSelected = selectedIndex === originalIndex;
+              return (
+                <motion.div key={originalIndex} whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.94 }}>
+                  <Box
+                    onClick={() => handleSelectCert(originalIndex)}
+                    sx={{
+                      cursor: 'pointer',
+                      bgcolor: '#1c1917',
+                      p: '2px',
+                      borderRadius: '4px',
+                      border: isSelected ? '2px solid #38bdf8' : '1px solid transparent',
+                      boxShadow: isSelected ? '0 0 8px rgba(56, 189, 248, 0.4)' : 'none',
+                      overflow: 'hidden',
+                      height: 50,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      opacity: isSelected ? 1 : 0.55,
+                      '&:hover': { opacity: 1 },
+                    }}
+                  >
+                    <CardMedia
+                      component="img"
+                      image={item.img}
+                      alt={item.title}
+                      sx={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        borderRadius: '2px',
+                      }}
+                    />
+                  </Box>
                 </motion.div>
               );
             })}
           </Box>
 
-          {/* Pagination Controls Footer */}
+          {/* Tray Pagination Bar */}
           <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              pt: 2.5,
-              mt: 2,
-              borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+              pt: 1.5,
+              mt: 1.5,
+              borderTop: '1px solid rgba(255,255,255,0.05)',
             }}
           >
             <IconButton
               onClick={handlePrevPage}
+              size="small"
               sx={{
-                color: '#FFFFFF',
-                bgcolor: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: '8px',
-                px: 1.5,
-                py: 0.5,
-                fontSize: '0.85rem',
-                '&:hover': {
-                  bgcolor: 'rgba(255, 255, 255, 0.1)',
-                },
+                color: '#e2e8f0',
+                bgcolor: '#1c1917',
+                borderRadius: '4px',
+                px: 1.2,
+                py: 0.3,
+                fontSize: '0.75rem',
+                fontFamily: 'monospace',
+                '&:hover': { bgcolor: '#292524' },
               }}
             >
-              <ChevronLeft sx={{ fontSize: '1.1rem', mr: 0.5 }} /> Prev
+              <ChevronLeft sx={{ fontSize: '1rem', mr: 0.2 }} /> Prev Page
             </IconButton>
 
-            {/* Page Dots / Indicator */}
-            <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+            {/* Pagination Indicators */}
+            <Box sx={{ display: 'flex', gap: 0.8, alignItems: 'center' }}>
               {Array.from({ length: totalPages }, (_, i) => (
                 <Box
                   key={i}
                   onClick={() => setCurrentPage(i)}
                   sx={{
-                    width: currentPage === i ? 20 : 6,
+                    width: currentPage === i ? 16 : 6,
                     height: 6,
                     borderRadius: '3px',
-                    bgcolor: currentPage === i ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.2)',
+                    bgcolor: currentPage === i ? '#38bdf8' : '#44403c',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',
-                    '&:hover': {
-                      bgcolor: 'rgba(255, 255, 255, 0.5)',
-                    },
                   }}
                 />
               ))}
@@ -376,20 +445,19 @@ const CertificationBoard = ({ dimmed }) => {
 
             <IconButton
               onClick={handleNextPage}
+              size="small"
               sx={{
-                color: '#FFFFFF',
-                bgcolor: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: '8px',
-                px: 1.5,
-                py: 0.5,
-                fontSize: '0.85rem',
-                '&:hover': {
-                  bgcolor: 'rgba(255, 255, 255, 0.1)',
-                },
+                color: '#e2e8f0',
+                bgcolor: '#1c1917',
+                borderRadius: '4px',
+                px: 1.2,
+                py: 0.3,
+                fontSize: '0.75rem',
+                fontFamily: 'monospace',
+                '&:hover': { bgcolor: '#292524' },
               }}
             >
-              Next <ChevronRight sx={{ fontSize: '1.1rem', ml: 0.5 }} />
+              Next Page <ChevronRight sx={{ fontSize: '1rem', ml: 0.2 }} />
             </IconButton>
           </Box>
         </Box>

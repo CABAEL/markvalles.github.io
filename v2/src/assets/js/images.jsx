@@ -5,37 +5,29 @@ import Masonry from "@mui/lab/Masonry";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
+import it_o1 from '../img/it_olympics/1.jpg';
+import it_o2 from '../img/it_olympics/2.jpg';
+import it_o3 from '../img/it_olympics/3.jpg';
 
-import it_o1 from '../img/it_olympics/1.jpg'
-import it_o2 from '../img/it_olympics/2.jpg'
-import it_o3 from '../img/it_olympics/3.jpg'
+import opt1 from '../img/Optimo/1.jpg';
 
-import opt1 from '../img/Optimo/1.jpg'
+import blockchain2 from '../img/blockchain/2.jpg';
 
-import blockchain2 from '../img/blockchain/2.jpg'
+import spms1 from '../img/trainings/1.jpg';
 
+import dost1 from '../img/DOST/1.jpg';
+import dost2 from '../img/DOST/2.jpg';
 
-import spms1 from '../img/trainings/1.jpg'
+import sbc1 from '../img/sbc/1.jpg';
+import sbc2 from '../img/sbc/2.jpeg';
 
-
-import dost1 from '../img/DOST/1.jpg'
-import dost2 from '../img/DOST/2.jpg'
-
-import sbc1 from '../img/sbc/1.jpg'
-import sbc2 from '../img/sbc/2.jpeg'
-//import sbc3 from '../img/sbc/3.jpeg'
-
-import sirgolfo from '../img/sirgolfo.jpg'
+import sirgolfo from '../img/sirgolfo.jpg';
 
 const images = [
   {
     src: sbc2,
-    description: "Security Bank Corporation - Team building, listening to security bank CTO Prakash Mahajan speech. ",
+    description: "Security Bank Corporation - Team building, listening to security bank CTO Prakash Mahajan speech.",
   },
-  // {
-  //   src: sbc3,
-  //   description: "Security Bank Corporation - Engineers group picture.",
-  // },    
   {
     src: sbc1,
     description: "Security Bank Corporation - Squad 1 Engineers coffee break with: Sir Roger, Robin and Jerald.",
@@ -94,13 +86,14 @@ export default function PinterestGalleryWithLightboxDescription() {
   };
 
   return (
-    <Box sx={{ py: 4, px: 2 }}>
-      <Box sx={{ textAlign: 'center', mb: 4 }}>
+    <Box sx={{ py: 4, px: 2, minHeight: '100vh' }}>
+      <Box sx={{ textAlign: 'center', mb: 5 }}>
         <Typography
           variant="h4"
           fontWeight="bold"
           gutterBottom
-          sx={{ pt: 5,
+          sx={{
+            pt: 5,
             color: '#ffff',
             textShadow: '1px 1px 2px #000',
           }}
@@ -108,7 +101,7 @@ export default function PinterestGalleryWithLightboxDescription() {
           Photo Gallery
         </Typography>
         <Typography
-          sx={{ color: "#D0D0D0", fontWeight: 500, fontSize: "0.78rem",pb: 1 }}
+          sx={{ color: "#D0D0D0", fontWeight: 500, fontSize: "0.78rem", pb: 1 }}
         >
           Memorable moments and professional experiences
         </Typography>
@@ -123,69 +116,70 @@ export default function PinterestGalleryWithLightboxDescription() {
         />
       </Box>
 
-      <Masonry columns={{ xs: 2, sm: 3, md: 4 }} spacing={1.5}>
-        {paginatedImages.map((image, index) => (
-          <Box
-            key={index}
-            onClick={() => handleImageClick(index)}
-            sx={{
-              overflow: "hidden",
-              borderRadius: '10px',
-              position: 'relative',
-              cursor: 'pointer',
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-              transition: 'box-shadow 0.3s ease, transform 0.3s ease',
-              '&:hover': {
-                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.45)',
-                transform: 'translateY(-2px)',
-              },
-              '&:hover .gallery-caption': {
-                opacity: 1,
-              },
-              '&:hover .gallery-img': {
-                filter: 'sepia(0%) brightness(1.05)',
-                transform: 'scale(1.04)',
-              },
-            }}
-          >
+      {/* Pinterest-style Masonry Grid */}
+      <Box sx={{ maxWidth: 1200, mx: 'auto' }}>
+        <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={3}>
+          {paginatedImages.map((image, index) => (
             <Box
-              component="img"
-              className="gallery-img"
-              src={image.src}
-              alt={`Gallery ${index}`}
+              key={index}
+              onClick={() => handleImageClick(index)}
               sx={{
-                width: "100%",
-                height: 200,
-                objectFit: "cover",
-                display: "block",
-                filter: 'sepia(100%) brightness(0.4)',
-                transition: 'filter 0.5s ease, transform 0.5s ease',
-              }}
-            />
-            <Box
-              className="gallery-caption"
-              sx={{
-                position: 'absolute',
-                inset: 0,
-                display: 'flex',
-                alignItems: 'flex-end',
-                background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 55%, transparent 100%)',
-                opacity: { xs: 1, sm: 0 },
-                transition: 'opacity 0.3s ease',
+                backgroundColor: '#fefefe',
+                p: '12px 12px 20px 12px', // Authentic Polaroid proportions
+                borderRadius: '2px',
+                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)',
+                cursor: 'pointer',
+                position: 'relative',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-6px) rotate(1deg)',
+                  boxShadow: '0 14px 32px rgba(0, 0, 0, 0.5)',
+                  zIndex: 2,
+                },
               }}
             >
-              <Typography
-                variant="body2"
-                sx={{ color: "#EDEDED", p: 1.25, fontSize: "0.72rem", lineHeight: 1.35 }}
-              >
-                {image.description}
-              </Typography>
-            </Box>
-          </Box>
-        ))}
-      </Masonry>
+              {/* Photo Area: Fixed Square Aspect Ratio to avoid stretching */}
+              <Box
+                component="img"
+                src={image.src}
+                alt={`Gallery ${index}`}
+                sx={{
+                  width: "100%",
+                  aspectRatio: "1/1",
+                  objectFit: "cover",
+                  display: "block",
+                  backgroundColor: "#222",
+                  border: "1px solid rgba(0, 0, 0, 0.05)",
+                }}
+              />
 
-      <Box display="flex" justifyContent="center" mt={3}>
+              {/* Bottom Handwritten Caption Area with Text Clamp */}
+              <Box sx={{ mt: 1.5, minHeight: '42px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "#2b2b2b",
+                    fontFamily: '"Caveat", "Brush Script MT", cursive, sans-serif',
+                    fontSize: "0.95rem",
+                    lineHeight: 1.25,
+                    textAlign: 'center',
+                    px: 0.5,
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
+                >
+                  {image.description}
+                </Typography>
+              </Box>
+            </Box>
+          ))}
+        </Masonry>
+      </Box>
+
+      <Box display="flex" justifyContent="center" mt={4}>
         <Pagination
           count={Math.ceil(images.length / itemsPerPage)}
           page={page}
@@ -226,15 +220,15 @@ export default function PinterestGalleryWithLightboxDescription() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: "#000",
+                backgroundColor: "rgba(0, 0, 0, 0.9)",
               }}
             >
               <img
                 src={slide.src}
                 alt=""
                 style={{
-                  maxWidth: "100%",
-                  maxHeight: "100%",
+                  maxWidth: "90%",
+                  maxHeight: "80%",
                   objectFit: "contain",
                 }}
               />
@@ -243,15 +237,18 @@ export default function PinterestGalleryWithLightboxDescription() {
                   variant="body2"
                   sx={{
                     position: "absolute",
-                    bottom: 16,
-                    left: 16,
-                    right: 16,
+                    bottom: 24,
+                    left: 24,
+                    right: 24,
                     color: "#fff",
-                    background: "rgba(0,0,0,0.5)",
+                    textAlign: "center",
+                    background: "rgba(0,0,0,0.6)",
                     borderRadius: 1,
-                    px: 1,
-                    py: 0.5,
-                    fontSize: "0.9rem",
+                    px: 2,
+                    py: 1,
+                    fontSize: "0.95rem",
+                    maxWidth: "600px",
+                    mx: "auto",
                   }}
                 >
                   {slide.description}

@@ -1,12 +1,54 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import MUISwitch from './switch';
 import light from '../img/light.png';
-import { motion, useAnimation, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useAnimation, AnimatePresence, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import GlobalStyles from '@mui/material/GlobalStyles';
 import Mosquito from '../img/mosquito.png';
 
 const MotionDiv = motion.div;
+
+// Freshly lit bulb. On page load the whole page flickers like a bulb that has just been switched on:
+// the global dimming is switched on and off (dimmed true -> false) in quick pops, then the light
+// stays on. The lamp image follows with its own, finer brightness flicker (the keyframes below).
+// Kept to three quick pops so it never flashes more than three times a second.
+const DIM_FLICKER = [
+  [0, true],     // ms after load, dimmed: starts dark
+  [450, false],  // pop on
+  [540, true],
+  [700, false],  // pop on
+  [800, true],
+  [1100, false], // on for good
+];
+const LAMP_STRIKE = "lampStrike 2.2s linear 1";
+const lampFrame = (brightness) => ({
+  filter: `brightness(${brightness}%) contrast(${(100 + (100 - brightness) / 3).toFixed(1)}%)`,
+});
+const lampStrikeKeyframes = {
+  "@keyframes lampStrike": {
+    // 0-50% mirrors DIM_FLICKER (2.2 s long: 450 ms = 20%, 540 = 25%, 700 = 32%, 800 = 36%, 1100 = 50%)
+    "0%": lampFrame(40),
+    "20%": lampFrame(40),
+    "21%": lampFrame(100),
+    "24%": lampFrame(100),
+    "25%": lampFrame(35),
+    "31%": lampFrame(38),
+    "32%": lampFrame(100),
+    "36%": lampFrame(100),
+    "37%": lampFrame(42),
+    "49%": lampFrame(45),
+    "50%": lampFrame(100),
+    // after the page is lit for good the bulb still wavers a little, just on the lamp
+    "58%": lampFrame(78),
+    "62%": lampFrame(100),
+    "70%": lampFrame(88),
+    "74%": lampFrame(100),
+    "84%": lampFrame(94),
+    "90%": lampFrame(100),
+    "100%": lampFrame(100),
+  },
+};
 
 const LetThereBeLight = ({ handleToggleDim, dimmed }) => {
   const mosquitoControls = useAnimation();
@@ -18,6 +60,55 @@ const LetThereBeLight = ({ handleToggleDim, dimmed }) => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [shots, setShots] = useState([]);
   const [recoil, setRecoil] = useState(false);
+
+  // The page flickers once when it loads (skipped if it loads switched off, or for reduced motion)
+  const reduceMotion = useReducedMotion();
+  const [bulbStriking, setBulbStriking] = useState(() => !dimmed && !reduceMotion);
+  const toggleRef = useRef(handleToggleDim);
+  const dimmedRef = useRef(dimmed);
+  const prevDimmedRef = useRef(dimmed);
+  const flickerRef = useRef({ timers: [], expected: null });
+  toggleRef.current = handleToggleDim;
+  dimmedRef.current = dimmed;
+
+  // While the page flickers the mosquito and the crosshair behave as if the light were simply on, so
+  // the mosquito does not leave and re-enter with every pop.
+  const mosquitoDimmed = bulbStriking ? false : dimmed;
+
+  // Drives the global dimming through DIM_FLICKER. It runs before the first paint, so the page never
+  // shows a lit frame before it goes dark. Each step asks the parent for the state it wants; the
+  // fake change event carries it, so this works whether handleToggleDim toggles or reads the switch.
+  useLayoutEffect(() => {
+    if (!bulbStriking) return undefined;
+    const f = flickerRef.current;
+    DIM_FLICKER.forEach(([ms, value], i) => {
+      const step = () => {
+        f.expected = i === DIM_FLICKER.length - 1 ? null : value;
+        if (dimmedRef.current !== value) toggleRef.current({ target: { checked: value } });
+      };
+      if (ms === 0) step();
+      else f.timers.push(setTimeout(step, ms));
+    });
+    return () => {
+      f.timers.forEach(clearTimeout);
+      f.timers = [];
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // If someone else (the user flipping the switch) changes the light mid-flicker, stop the show.
+  // Only real changes count: on mount the first step has been planned but not rendered yet.
+  useEffect(() => {
+    if (prevDimmedRef.current === dimmed) return;
+    prevDimmedRef.current = dimmed;
+    const f = flickerRef.current;
+    if (f.expected !== null && dimmed !== f.expected) {
+      f.timers.forEach(clearTimeout);
+      f.timers = [];
+      f.expected = null;
+      setBulbStriking(false);
+    }
+  }, [dimmed]);
 
   // Track window scroll position for smooth vertical trailing
   const { scrollY } = useScroll();
@@ -56,7 +147,7 @@ const LetThereBeLight = ({ handleToggleDim, dimmed }) => {
 
   // Handle Gunshot Click & Precise Crosshair Hit Detection relative to Static Outer Box
   const handleContainerClick = (e) => {
-    if (dimmed || !containerRef.current) return;
+    if (mosquitoDimmed || !containerRef.current) return;
 
     // Calculate exact click coordinates directly from event
     const rect = containerRef.current.getBoundingClientRect();
@@ -116,12 +207,12 @@ const LetThereBeLight = ({ handleToggleDim, dimmed }) => {
 
   // Respawn / initialize mosquito when light is turned ON
   useEffect(() => {
-    if (!dimmed) {
+    if (!mosquitoDimmed) {
       flyInFromOffScreen();
     } else {
       setIsDead(false);
     }
-  }, [dimmed]);
+  }, [mosquitoDimmed]);
 
   return (
     <Box
@@ -136,7 +227,7 @@ const LetThereBeLight = ({ handleToggleDim, dimmed }) => {
         width: '100%',
         position: 'relative',
         display: 'block',
-        cursor: isHovering && !dimmed ? 'none' : 'default',
+        cursor: isHovering && !mosquitoDimmed ? 'none' : 'default',
         userSelect: 'none',
         WebkitUserSelect: 'none',
         MozUserSelect: 'none',
@@ -144,8 +235,10 @@ const LetThereBeLight = ({ handleToggleDim, dimmed }) => {
         overflow: 'visible',
       }}
     >
-      {/* Light Blue Scope Crosshair Reticle */}
-      {isHovering && !dimmed && (
+      <GlobalStyles styles={lampStrikeKeyframes} />
+
+      {/* Clean White Scope Crosshair Reticle */}
+      {isHovering && !mosquitoDimmed && (
         <Box
           component={motion.div}
           initial={{ x: "-50%", y: "-50%" }}
@@ -162,10 +255,10 @@ const LetThereBeLight = ({ handleToggleDim, dimmed }) => {
             width: 52,
             height: 52,
             borderRadius: '50%',
-            border: '2px solid rgba(56, 189, 248, 0.95)',
+            border: '2px solid rgba(255, 255, 255, 0.95)',
             boxShadow: recoil
-              ? '0 0 22px rgba(56, 189, 248, 0.95), inset 0 0 15px rgba(255, 255, 255, 0.8)'
-              : '0 0 14px rgba(56, 189, 248, 0.6), inset 0 0 10px rgba(56, 189, 248, 0.25)',
+              ? '0 0 22px rgba(255, 255, 255, 0.95), inset 0 0 15px rgba(255, 255, 255, 0.8)'
+              : '0 0 14px rgba(255, 255, 255, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.25)',
             pointerEvents: 'none',
             zIndex: 1005,
             display: 'flex',
@@ -174,13 +267,13 @@ const LetThereBeLight = ({ handleToggleDim, dimmed }) => {
             backdropFilter: 'brightness(110%)',
           }}
         >
-          <Box sx={{ position: 'absolute', width: '100%', height: '1.5px', bgcolor: 'rgba(56, 189, 248, 0.9)' }} />
-          <Box sx={{ position: 'absolute', width: '1.5px', height: '100%', bgcolor: 'rgba(56, 189, 248, 0.9)' }} />
-          <Box sx={{ width: 6, height: 6, borderRadius: '50%', border: '1px solid #38bdf8', bgcolor: 'rgba(56, 189, 248, 0.4)' }} />
+          <Box sx={{ position: 'absolute', width: '100%', height: '1.5px', bgcolor: 'rgba(255, 255, 255, 0.9)' }} />
+          <Box sx={{ position: 'absolute', width: '1.5px', height: '100%', bgcolor: 'rgba(255, 255, 255, 0.9)' }} />
+          <Box sx={{ width: 6, height: 6, borderRadius: '50%', border: '1px solid #ffffff', bgcolor: 'rgba(255, 255, 255, 0.4)' }} />
         </Box>
       )}
 
-      {/* Gunshot Muzzle Flash & Explosion Effects */}
+      {/* Gunshot Muzzle Flash & Reddish-Orange Explosion Effects */}
       {shots.map((shot) => (
         <Box
           key={shot.id}
@@ -195,8 +288,8 @@ const LetThereBeLight = ({ handleToggleDim, dimmed }) => {
             width: 36,
             height: 36,
             borderRadius: '50%',
-            background: 'radial-gradient(circle, #ffffff 15%, #38bdf8 45%, #0284c7 70%, rgba(56,189,248,0) 100%)',
-            boxShadow: '0 0 25px #38bdf8, 0 0 10px #ffffff',
+            background: 'radial-gradient(circle, #ffffff 15%, #ff7700 45%, #ff2200 70%, rgba(255,34,0,0) 100%)',
+            boxShadow: '0 0 25px #ff4500, 0 0 10px #ffffff',
             pointerEvents: 'none',
             zIndex: 1008,
           }}
@@ -214,7 +307,7 @@ const LetThereBeLight = ({ handleToggleDim, dimmed }) => {
         }}
       >
         {/* Horizontal Label on the Side */}
-        {!dimmed && !isDead && (
+        {!mosquitoDimmed && !isDead && (
           <Typography
             sx={{
               position: 'absolute',
@@ -281,7 +374,9 @@ const LetThereBeLight = ({ handleToggleDim, dimmed }) => {
               alt="Hanging Lamp"
               draggable={false}
               onDragStart={(e) => e.preventDefault()}
+              onAnimationEnd={() => setBulbStriking(false)}
               style={{
+                animation: bulbStriking ? LAMP_STRIKE : 'none',
                 borderTop: '5px solid #333333',
                 width: '100%',
                 height: '100%',
@@ -295,7 +390,7 @@ const LetThereBeLight = ({ handleToggleDim, dimmed }) => {
             />
 
             <AnimatePresence>
-              {!dimmed && (
+              {!mosquitoDimmed && (
                 <Box
                   component={motion.div}
                   style={{ y: scrollFollowY }}

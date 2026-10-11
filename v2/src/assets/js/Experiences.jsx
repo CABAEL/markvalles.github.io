@@ -5,13 +5,10 @@ import Chip from '@mui/material/Chip';
 import { motion as Motion } from 'framer-motion';
 import { getAccent } from './designTokens';
 
-const MotionTypography = Motion(Typography);
-
 const ExpList = ({ dimmed }) => {
-  const textShadowStyle = '0px 2px 6px rgba(0, 0, 0, 0.95)';
-  const companyTextColor = '#ffffff'; // Bright pure white for company names
-  const roleTextColor = '#cbd5e1';    // Distinct lighter gray-silver for roles/titles
-  const dateTextColor = '#444445';    // Solid blackish-blue for dates (without shadow)
+  const companyTextColor = '#FFFFFF'; // Crisp Pure White
+  const roleTextColor = '#7DD3FC';    // Bright Sky/Cyan Blue
+  const dateTextColor = '#E2E8F0';    // High-contrast Light Slate
 
   const experiences = [
     {
@@ -23,7 +20,7 @@ const ExpList = ({ dimmed }) => {
     },
     {
       company: "DYNAMIC STRATEGY SOLUTIONS EXPERTS CORPORATION",
-      link: "https://dsseservices.com/about",
+      link: "https://www.linkedin.com/company/dynamic-strategy-solutions-experts-corporation/home/",
       role: "Intermediate PHP Developer",
       dates: "Nov 28, 2022 - May 31, 2024"
     },
@@ -54,7 +51,7 @@ const ExpList = ({ dimmed }) => {
     {
       company: "7rivers Frontend Developer (Project Based)",
       link: "https://7rivers.ph/",
-      role: "",
+      role: "Frontend Developer",
       dates: "July 8, 2020 – Aug 31, 2020"
     },
     {
@@ -73,144 +70,144 @@ const ExpList = ({ dimmed }) => {
       dates: "June 30, 2017 – Aug 31, 2017"
     },
     {
-      company: "Freelance Web Developer since 2017"
+      company: "Freelance Web Developer and consultant (since 2017)"
     }
   ];
 
   return (
     <Box
       sx={{
-        pl: 1,
+        p: 3,
         width: '100%',
-        columnCount: { xs: 1, md: 2 }, // 1 column on small screens, 2 on desktop
-        columnGap: 5, // space between left and right column
+        bgcolor: 'rgba(0, 0, 0, 0.3)',
+        backdropFilter: 'blur(8px)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        boxSizing: 'border-box',
       }}
     >
-      {experiences.map((exp, i) => {
-        const accent = getAccent(i);
+      <Box
+        sx={{
+          width: '100%',
+          columnCount: { xs: 1, md: 2 },
+          columnGap: 4,
+        }}
+      >
+        {experiences.map((exp, i) => {
+          const accent = getAccent(i);
+          const isClickable = Boolean(exp.link);
 
-        return (
-          <MotionTypography
-            key={i}
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.4, delay: i * 0.04 }}
-            sx={{
-              py: 1.1,
-              px: 1,
-              mb: 0.75,
-              width: '100%',
-              display: 'inline-block', // Prevents card breaking across column boundaries
-              breakInside: 'avoid',
-              boxSizing: 'border-box',
-              borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-              transition: 'transform 0.2s ease',
-              '&:hover': {
-                transform: 'translateX(4px)',
-              },
-            }}
-          >
-            {/* Top Content */}
-            <Box sx={{ width: '100%' }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
-                <MotionTypography
-                  variant="subtitle1"
-                  sx={{
-                    fontWeight: 700,
-                    color: companyTextColor,
-                    fontSize: '0.9rem',
-                    lineHeight: 1.3,
-                    textShadow: textShadowStyle,
-                    wordBreak: 'break-word',
-                    letterSpacing: '0.3px',
-                  }}
-                  animate={{
-                    textShadow: [
-                      '5px 4px 8px #444',
-                      '-5px 4px 8px #444',
-                      '5px 4px 8px #444',
-                    ],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    repeatType: 'loop',
-                    ease: 'easeInOut',
-                  }}
-                >
-                  {exp.link ? (
-                    <a
-                      href={exp.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        color: companyTextColor,
-                        textDecoration: 'none',
-                        borderBottom: '1.5px solid rgba(255, 255, 255, 0.5)',
-                      }}
-                    >
-                      {exp.company}
-                    </a>
-                  ) : (
-                    exp.company
-                  )}
-                </MotionTypography>
-
-                {exp.current && (
-                  <Chip
-                    label="Current"
-                    size="small"
+          return (
+            <Box
+              key={i}
+              component={Motion.div}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.4, delay: i * 0.04 }}
+              sx={{
+                py: 1.25,
+                px: 1,
+                mb: 1,
+                width: '100%',
+                display: 'inline-block',
+                breakInside: 'avoid',
+                boxSizing: 'border-box',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+                transition: 'transform 0.2s ease-in-out',
+                ...(isClickable && {
+                  '&:hover': {
+                    transform: 'translateX(4px)',
+                  },
+                }),
+              }}
+            >
+              {/* Top Content */}
+              <Box sx={{ width: '100%' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
+                  <Typography
+                    variant="subtitle1"
                     sx={{
-                      fontSize: '0.65rem',
                       fontWeight: 700,
-                      color: '#FFFFFF',
-                      bgcolor: `${accent}44`,
-                      borderColor: accent,
-                      borderWidth: 1,
-                      borderStyle: 'solid',
-                      textShadow: textShadowStyle,
-                      flexShrink: 0,
+                      color: companyTextColor,
+                      fontSize: '0.925rem',
+                      lineHeight: 1.3,
+                      wordBreak: 'break-word',
+                      letterSpacing: '0.3px',
                     }}
-                  />
+                  >
+                    {isClickable ? (
+                      <a
+                        href={exp.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          color: companyTextColor,
+                          textDecoration: 'none',
+                          borderBottom: '1px solid rgba(255, 255, 255, 0.4)',
+                        }}
+                      >
+                        {exp.company}
+                      </a>
+                    ) : (
+                      exp.company
+                    )}
+                  </Typography>
+
+                  {exp.current && (
+                    <Chip
+                      label="Current"
+                      size="small"
+                      sx={{
+                        fontSize: '0.65rem',
+                        fontWeight: 700,
+                        color: '#FFFFFF',
+                        bgcolor: `${accent}44`,
+                        borderColor: accent,
+                        borderWidth: 1,
+                        borderStyle: 'solid',
+                        borderRadius: 0,
+                        flexShrink: 0,
+                      }}
+                    />
+                  )}
+                </Box>
+
+                {exp.role && (
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: roleTextColor,
+                      fontWeight: 600,
+                      fontSize: '0.875rem',
+                      fontStyle: 'italic',
+                      mt: 0.35,
+                    }}
+                  >
+                    {exp.role}
+                  </Typography>
                 )}
               </Box>
 
-              {exp.role && (
+              {/* Bottom Dates */}
+              {exp.dates && (
                 <Typography
-                  variant="body2"
+                  variant="caption"
                   sx={{
-                    color: roleTextColor,
-                    fontWeight: 60,
-                    fontSize: '0.9rem',
-                    fontStyle: 'italic',
+                    display: 'block',
+                    color: dateTextColor,
+                    fontWeight: 500,
+                    fontSize: '0.8rem',
                     mt: 0.35,
+                    opacity: 0.9,
                   }}
                 >
-                  {exp.role}
+                  {exp.dates}
                 </Typography>
               )}
             </Box>
-
-            {/* Bottom Dates */}
-            {exp.dates && (
-              <Typography
-                variant="caption"
-                sx={{
-                  display: 'block',
-                  color: dateTextColor,
-                  textShadow: 'none', // Shadow removed here
-                  fontWeight: 600,
-                  fontSize: '0.8rem',
-                  mt: 0.35,
-                }}
-              >
-                {exp.dates}
-              </Typography>
-            )}
-          </MotionTypography>
-        );
-      })}
+          );
+        })}
+      </Box>
     </Box>
   );
 };

@@ -162,33 +162,33 @@ function App() {
             {/* Right Column: Work Experiences */}
             <Grid size={{ xs: 12, md: 12, lg: 7 }} pt={{ lg: 2, xs: 2 }} pb={{ xs: 2, lg: 0 }}>
               <Box sx={{ px: { xs: 2, md: 4 } }}>
-              <MotionTypography
-                variant="h1"
-                sx={{
-                  fontSize: { xs: '3vh', sm: '4vh', md: '5vh', lg: '2vw' },
-                  textAlign: 'center',
-                  fontFamily: 'Tahoma',
-                  color: 'rgb(190, 190, 190)',
-                  mb: 1.5,
-                  pt: 1,
-                  pb: 3,
-                }}
-                animate={{
-                  textShadow: [
-                    '5px 4px 8px #050505',
-                    '-5px 4px 8px #050505',
-                    '5px 4px 8px #050505',
-                  ],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  repeatType: 'loop',
-                  ease: 'easeInOut',
-                }}
-              >
-                WORK EXPERIENCES
-              </MotionTypography>
+                <MotionTypography
+                  variant="h1"
+                  sx={{
+                    fontSize: { xs: '3vh', sm: '4vh', md: '5vh', lg: '2vw' },
+                    textAlign: 'center',
+                    fontFamily: 'Tahoma',
+                    color: 'rgb(190, 190, 190)',
+                    mb: 1.5,
+                    pt: 1,
+                    pb: 3,
+                  }}
+                  animate={{
+                    textShadow: [
+                      '5px 4px 8px #050505',
+                      '-5px 4px 8px #050505',
+                      '5px 4px 8px #050505',
+                    ],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    repeatType: 'loop',
+                    ease: 'easeInOut',
+                  }}
+                >
+                  WORK EXPERIENCES
+                </MotionTypography>
 
                 <Box id="experience">
                   <ExpList dimmed={dimmed} />
@@ -196,17 +196,15 @@ function App() {
               </Box>
             </Grid>
 
-            <Grid size={12} sx={{pt:3}}>
-              
-            </Grid>
+            <Grid size={12} sx={{ pt: 3 }} />
 
-            {/* Side-by-Side Equated Grid Row: Featured Projects & Technical Skills */}
+            {/* Side-by-Side Grid Row: Featured Projects & Certification Board */}
             <Grid container spacing={2.5} size={12} sx={{ px: { xs: 2, md: 4 }, pb: 2, alignItems: 'stretch', pt: 3 }}>
               <Grid size={{ xs: 12, lg: 6 }} id="projects" sx={{ display: 'flex', flexDirection: 'column' }}>
                 <ProjectsSection dimmed={dimmed} />
               </Grid>
-              <Grid size={{ xs: 12, lg: 6 }} id="skills" sx={{ display: 'flex', flexDirection: 'column' }}>
-                <Skills dimmed={dimmed} />
+              <Grid size={{ xs: 12, lg: 6 }} id="certifications" sx={{ display: 'flex', flexDirection: 'column' }}>
+                <CertificationBoard dimmed={dimmed} />
               </Grid>
             </Grid>
 
@@ -214,16 +212,14 @@ function App() {
               <SectionDivider />
             </Grid>
 
-            <Grid size={12} id="certifications" sx={{ px: 2, pb: 2 }}>
-              <CertificationBoard dimmed={dimmed} />
-            </Grid>
-
-            <Grid size={12}>
-              <SectionDivider />
-            </Grid>
-
-            <Grid size={12} id="gallery" sx={{ px: 2, pb: 2 }}>
-              <Gallery />
+            {/* Side-by-Side Grid Row: Technical Skills & Photo Gallery */}
+            <Grid container spacing={2.5} size={12} sx={{ px: { xs: 2, md: 4 }, pb: 2, alignItems: 'stretch' }}>
+              <Grid size={{ xs: 12, lg: 6 }} id="skills" sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Skills dimmed={dimmed} />
+              </Grid>
+              <Grid size={{ xs: 12, lg: 6 }} id="gallery" sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Gallery />
+              </Grid>
             </Grid>
 
             <Footer data={[walking, walkingpng]} dimmed={dimmed} />
